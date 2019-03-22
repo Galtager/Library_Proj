@@ -7,8 +7,6 @@ class Main
     // Prints "Hello, World" to the terminal window. 
     public static void main(String args[]) 
     { 
-    	int i =0;
-    	i++;
         System.out.println("Hello, World"); 
     } 
-} 
+}
