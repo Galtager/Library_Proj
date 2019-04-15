@@ -1,12 +1,13 @@
 package Entities;
 
-public class Manager extends User 
+public class Manager extends Staff 
 {
 	public Manager(String id, String name,
-			String address, String email,
-			String phone_no, String password) 
+				   String address, String email,
+				   String phone_no, String password,
+				   double salary)
 	{
-		super(id, name, address, email, phone_no, password);
+		super(id, name, address, email, phone_no, password, salary);
 	}
 
 }
