@@ -21,14 +21,18 @@ public class Borrower extends User
 	int PLACE_HOLDER = 5;
 	public void loanBook(Book book)
 	{
-		if(m_loaned_books.size() < PLACE_HOLDER)
+		if(m_loaned_books.size() > PLACE_HOLDER)
 		{
-			m_loaned_books.add(book);
-			book.loan(this);
+			System.out.println("Exceeds amount of books per borrower!");
+		}
+		else if(!book.isAvailable())
+		{
+			System.out.println("Book unavailable");
 		}
 		else
 		{
-			System.out.println("Exceeds amount of books per borrower!"); 
+			m_loaned_books.add(book);
+			book.loan(this);	 
 		}
 	}
 	
