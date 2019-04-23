@@ -1,9 +1,18 @@
 package Book;
+import java.util.Date;
+import Entities.Borrower;
 
-public class HoldRequest {
+public class HoldRequest 
+{
 
-	public HoldRequest() {
-		// TODO Auto-generated constructor stub
+	private Borrower m_borrower;
+	private Date m_request_date;
+	
+	public HoldRequest(Borrower borrower,
+					   Date request_date) 
+	{
+		m_borrower = borrower;
+		m_request_date = request_date;
 	}
 
 }

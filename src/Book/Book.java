@@ -1,6 +1,9 @@
 package Book;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+import Entities.Borrower;
 
 public class Book 
 {
@@ -11,7 +14,11 @@ public class Book
     private String m_author;    
     private String m_publisher; 
     private Date m_publishing_date; 
-    private boolean m_is_issued;    
+    private boolean m_is_issued;  
+    
+    private ArrayList<HoldRequest> m_hold_requests; 
+    private Loan m_current_loan;
+
     
 	static int s_current_ID_number = 0; 
 	
@@ -27,8 +34,12 @@ public class Book
 		m_author = author;   	
 		m_publisher = publisher;  
 		m_is_issued = is_issued;  
+		
+		m_hold_requests = new ArrayList<>();
 	}
 
+	/***************   Getters   ***************/
+	
 	public Date getPublishingDate() 
 	{
 		return m_publishing_date;
@@ -67,5 +78,17 @@ public class Book
 	public static int getCurrentIdNumber() 
 	{
 		return s_current_ID_number;
+	}
+	
+	/***************   Functionality   ***************/
+	
+	public void addHoldRequrest(Borrower borrower) 
+	{
+		m_hold_requests.add(new HoldRequest(borrower, new Date()));
+	}
+	
+	public void loan(Borrower borrower) 
+	{
+		m_current_loan = new Loan(borrower, new Date());
 	}
 }
