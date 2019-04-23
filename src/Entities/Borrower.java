@@ -3,10 +3,14 @@ package Entities;
 import java.util.ArrayList;
 
 import Book.Book;
+import Book.HoldRequest;
 
 public class Borrower extends User 
 {
-	ArrayList<Book> m_loaned_books;
+	static private int s_max_books_issued = 1;
+
+	private ArrayList<Book> m_issued_books;
+	private ArrayList<HoldRequest> m_hold_requests;
 
 	public Borrower(String id, String name,
 					String address, String email,
@@ -14,14 +18,22 @@ public class Borrower extends User
 	{
 		super(id, name, address, email, phone_no, password);
 		
-		m_loaned_books = new ArrayList<>();
+		m_issued_books = new ArrayList<>();
+		m_hold_requests = new ArrayList<>();
+	}
+	
+	/***************   Setters   ***************/
+	
+	public static void maxBooksIssued(int max_books_issued) 
+	{
+		s_max_books_issued = max_books_issued;
 	}
 	
 	/***************   Functionality   ***************/
-	int PLACE_HOLDER = 5;
-	public void loanBook(Book book)
+
+	public void assignBook(Book book)
 	{
-		if(m_loaned_books.size() > PLACE_HOLDER)
+		if(m_issued_books.size() > s_max_books_issued)
 		{
 			System.out.println("Exceeds amount of books per borrower!");
 		}
@@ -31,17 +43,15 @@ public class Borrower extends User
 		}
 		else
 		{
-			m_loaned_books.add(book);
-			book.loan(this);	 
+			m_issued_books.add(book);	 
 		}
 	}
 	
-	public void returnBook(Book book)
+	public void unassignBook(Book book)
 	{
-		if(m_loaned_books.contains(book))
+		if(m_issued_books.contains(book))
 		{
-			m_loaned_books.remove(book);
-			book.finishLoan();
+			m_issued_books.remove(book);
 		}
 		else
 		{

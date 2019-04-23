@@ -16,11 +16,10 @@ public class Book
     private Date m_publishing_date;  
     
     private ArrayList<HoldRequest> m_hold_requests; 
-    private Loan m_current_loan;
-
+    private Borrower m_current_borrower;
     
-	static int s_current_ID_number = 0; 
-	
+	static private int s_current_ID_number = 0; 
+
 	public Book(String title, String genre,
 				String author, String publisher,
 				Date m_publishing_date) 
@@ -34,7 +33,7 @@ public class Book
 		m_publisher = publisher;   
 		
 		m_hold_requests = new ArrayList<>();
-		m_current_loan = null;
+		m_current_borrower = null;
 	}
 
 	/***************   Getters   ***************/
@@ -42,6 +41,11 @@ public class Book
 	public Date getPublishingDate() 
 	{
 		return m_publishing_date;
+	}
+	
+	public Borrower getCurrentBorrower() 
+	{
+		return m_current_borrower;
 	}
 
 	public int getBookID() 
@@ -81,18 +85,8 @@ public class Book
 		m_hold_requests.add(new HoldRequest(borrower, new Date()));
 	}
 	
-	public void loan(Borrower borrower) 
-	{
-		m_current_loan = new Loan(borrower, new Date());
-	}
-	
-	public void finishLoan() 
-	{
-		m_current_loan = null;
-	}
-	
 	public boolean isAvailable() 
 	{
-		return (m_current_loan == null);
+		return (m_current_borrower == null);
 	}
 }

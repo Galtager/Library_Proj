@@ -7,6 +7,7 @@ public class HoldRequest
 
 	private Borrower m_borrower;
 	private Date m_request_date;
+	private Date m_expire_date;
 	
 	public HoldRequest(Borrower borrower,
 					   Date request_date) 
