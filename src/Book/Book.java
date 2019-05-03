@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import Entities.Borrower;
+import FileHandler.IEntryToString;
 
-public class Book 
+public class Book implements IEntryToString
 {
 
     private int m_book_ID;         
@@ -78,6 +79,10 @@ public class Book
 		return s_current_ID_number;
 	}
 	
+	public void setBorrower(Borrower b) {
+		this.m_current_borrower = b;
+	}
+	
 	/***************   Functionality   ***************/
 	
 	public void addHoldRequrest(Borrower borrower) 
@@ -89,4 +94,19 @@ public class Book
 	{
 		return (m_current_borrower == null);
 	}
+	
+
+	@Override
+	public String entityReportEntry() {
+		String entry = "";
+		entry += this.getBookID() + "\t";
+		entry += this.getTitle() + "\t";
+		entry += this.getGenre() + "\t";
+		entry += this.getAuthor() + "\t";
+		entry += this.getPublisher() + "\t";
+		entry += this.getPublishingDate() + "\t";
+		
+		return entry;
+	}
+	
 }
