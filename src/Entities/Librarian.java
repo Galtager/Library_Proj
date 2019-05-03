@@ -1,5 +1,6 @@
 package Entities;
 
+
 public class Librarian extends Staff 
 {
 
@@ -9,6 +10,7 @@ public class Librarian extends Staff
 					 double salary) 
 	{
 		super(id, name, address, email, phone_no, password, salary);
+		
 		
 	}
 
