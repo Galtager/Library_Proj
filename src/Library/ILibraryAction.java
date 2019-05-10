@@ -5,12 +5,13 @@ import java.util.List;
 import Book.Book;
 import Entities.Borrower;
 
-public interface ILibraryAction {
+public interface ILibraryAction 
+{
 	
-	public boolean IssueBook(Book book, Borrower borrower);
-	public Book GetBook(int bookId);
-	public List<Book> GetAllBooks();
-	public List<Book> GetIssuedBooks();
+	public boolean issueBook(Book book, Borrower borrower);
+	public Book getBook(int bookId);
+	public List<Book> getAllBooks();
+	public List<Book> getIssuedBooks();
 	
 
 }
