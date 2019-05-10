@@ -20,7 +20,7 @@ public class LibraryCollection
 	// get book by bookId
 	public Book getBook(int bookId) 
 	{
-		return m_books.stream()
+		return s_books.stream()
 				.filter(book -> bookId == book.getBookID())
 				.findAny()
 				.orElse(null);
@@ -28,18 +28,18 @@ public class LibraryCollection
 	
 	public List<Book> getAllBooks()
 	{
-		return m_books;
+		return s_books;
 	}
 	
 	public boolean addBook(Book b) 
 	{
-		return m_books.add(b);
+		return s_books.add(b);
 	}
 	
 	public boolean deleteBook(int bookId) 
 	{
 		Book bookToRemove = getBook(bookId);
-		return m_books.remove(bookToRemove);
+		return s_books.remove(bookToRemove);
 	}
 	
 	public boolean IssueBook(int bookId, Borrower b)
@@ -54,7 +54,7 @@ public class LibraryCollection
 	
 	public List<Book> GetIssuedBooks()
 	{
-		return m_books.stream()
+		return s_books.stream()
 				.filter(book -> book.getCurrentBorrower() != null)
 				.collect(Collectors.toList());
 
