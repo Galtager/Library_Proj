@@ -4,20 +4,24 @@ import java.util.Calendar;
 import java.util.Date;
 
 import Entities.Borrower;
+import Entities.Librarian;
 
 public class Loan 
 {
 	static private int s_max_days = 1;
 	
 	private Borrower m_borrower;
+	private Librarian m_librarian;
 	private Date m_expiring_date;
 	private Book m_book;
 	
 	public Loan(Borrower borrower,
+			    Librarian librarian,
 				Date issue_date,
 				Book book) 
 	{
 		m_borrower = borrower;
+		m_librarian = librarian;
 		m_book = book;
 		
 		Calendar cal = Calendar.getInstance();
@@ -31,6 +35,11 @@ public class Loan
 	public Borrower getBorrower() 
 	{
 		return m_borrower;
+	}
+	
+	public Librarian getLibrarian() 
+	{
+		return m_librarian;
 	}
 
 	public Date getExpiringDate() 
