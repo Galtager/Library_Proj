@@ -1,7 +1,7 @@
 
 /* This is a simple Java program. 
    FileName : "HelloWorld.java". */
-class Main 
+/*class Main 
 { 
     // Your program begins with a call to main(). 
     // Prints "Hello, World" to the terminal window. 
@@ -9,4 +9,4 @@ class Main
     { 
         System.out.println("Hello, World"); 
     } 
-}
+}*/
