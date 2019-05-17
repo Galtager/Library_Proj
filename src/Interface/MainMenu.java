@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -300,8 +302,23 @@ public class MainMenu {
 		lock_button.setBounds(314, 11, 100, 127);
 		frmLibrary.getContentPane().add(lock_button);
 		
-
-
+		JPanel panel = new JPanel();
+		panel.setBounds(20, 149, 1054, 401);
+		frmLibrary.getContentPane().add(panel);
 		
+		JMenuBar menuBar = new JMenuBar();
+		frmLibrary.setJMenuBar(menuBar);
+		
+		JMenu Options_MenuBar = new JMenu("Options");
+		menuBar.add(Options_MenuBar);
+		
+		JButton NewButton_Settings = new JButton("Settings");
+		NewButton_Settings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				SystemSettings nw= new SystemSettings();
+				nw.NewScreen();
 			}
+		});
+		Options_MenuBar.add(NewButton_Settings);
 	}
