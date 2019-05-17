@@ -9,10 +9,13 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JScrollPane;
@@ -67,8 +70,17 @@ public class MainMenu {
 		frmLibrary.setBackground(new Color(240, 240, 240));
 		frmLibrary.setTitle("Library");
 		frmLibrary.setResizable(false);
-		frmLibrary.setBounds(100, 100, 1118, 636);
-		frmLibrary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLibrary.setBounds(100, 100, 1090, 590);
+		frmLibrary.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frmLibrary.addWindowListener( new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                JFrame frame = (JFrame)e.getSource();
+
+                int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to close the application?", "Please Confirm",JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION)
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+            });
 		frmLibrary.getContentPane().setLayout(null);
 		
 		JButton exit_button = new JButton("Exit");
