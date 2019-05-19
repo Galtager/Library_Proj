@@ -59,7 +59,7 @@ public class SystemSettings {
 		frameClass.getContentPane().setBackground(new Color(0, 153, 153));
 		frameClass.setTitle("SystemSettings");
 		frameClass.setBounds(100, 100, 888, 610);
-		frameClass.dispose();
+		frameClass.dispose();//exit
 		frameClass.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frameClass.addWindowListener( new WindowAdapter(){
             public void windowClosing(WindowEvent e){

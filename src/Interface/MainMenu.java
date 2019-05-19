@@ -18,6 +18,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import java.awt.Font;
+import javax.swing.JCheckBox;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -66,11 +71,14 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		frmLibrary = new JFrame();
-		frmLibrary.setFont(null);
-		frmLibrary.setBackground(new Color(240, 240, 240));
+		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
+		frmLibrary.setForeground(new Color(255, 255, 255));
+		frmLibrary.setBackground(new Color(255, 255, 255));
+		frmLibrary.getContentPane().setForeground(new Color(255, 255, 255));
 		frmLibrary.setTitle("Library");
 		frmLibrary.setResizable(false);
 		frmLibrary.setBounds(100, 100, 1090, 590);
+		frmLibrary.dispose();
 		frmLibrary.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frmLibrary.addWindowListener( new WindowAdapter(){
             public void windowClosing(WindowEvent e){
@@ -315,22 +323,104 @@ public class MainMenu {
 		frmLibrary.getContentPane().add(lock_button);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(20, 149, 1054, 401);
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setForeground(new Color(255, 255, 255));
+		panel.setBounds(0, 139, 1084, 380);
 		frmLibrary.getContentPane().add(panel);
+		
+		JLabel lblNewLabel = new JLabel("Computer Library");
+		lblNewLabel.setBackground(new Color(255, 255, 255));
+		lblNewLabel.setForeground(new Color(0, 0, 128));
+		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/library-books.jpg")));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 48));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panel.setLayout(gl_panel);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmLibrary.setJMenuBar(menuBar);
 		
-		JMenu Options_MenuBar = new JMenu("Options");
-		menuBar.add(Options_MenuBar);
+		JMenu jm_Options = new JMenu("Options");
+		jm_Options.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuBar.add(jm_Options);
 		
-		JButton NewButton_Settings = new JButton("Settings");
-		NewButton_Settings.addActionListener(new ActionListener() {
+		JButton jb_Settings = new JButton("Settings                     F6");
+		jb_Settings.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jb_Settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				SystemSettings nw= new SystemSettings();
 				nw.NewScreen();
 			}
 		});
-		Options_MenuBar.add(NewButton_Settings);
+		
+		JButton jb_LibraryInformation = new JButton("Library Information    F1");
+		jb_LibraryInformation.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(jb_LibraryInformation);
+		
+		JButton btnWaitFormFor = new JButton("Wait form for title      F5");
+		btnWaitFormFor.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnWaitFormFor);
+		jm_Options.add(jb_Settings);
+		
+		JButton btnBackUpTo = new JButton("Back up to a folder     F2");
+		btnBackUpTo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnBackUpTo);
+		
+		JButton btnUsers = new JButton("Users                         F3");
+		btnUsers.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnUsers);
+		
+		JButton btnSwitchUser = new JButton("Switch user                F4");
+		btnSwitchUser.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnSwitchUser);
+		
+		JButton btnImportExcelLists = new JButton("Import Excel Lists       F9");
+		btnImportExcelLists.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnImportExcelLists);
+		
+		JButton btnExit = new JButton("Exit                     Ctrl+Q");
+		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frmLibrary.dispose();
+                }
+        });
+		
+		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnExit);
+		
+		JMenu jm_Edit = new JMenu("Edit");
+		jm_Edit.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuBar.add(jm_Edit);
+		
+		JButton btnEditTitleDetails = new JButton("Edit title details                F7");
+		btnEditTitleDetails.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Edit.add(btnEditTitleDetails);
+		
+		JButton btnEditStudentInforamtion = new JButton("Edit student inforamtion   F8");
+		btnEditStudentInforamtion.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Edit.add(btnEditStudentInforamtion);
+		
+		JMenu jm_Help = new JMenu("Help");
+		jm_Help.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuBar.add(jm_Help);
+		
+		JButton btnAbout = new JButton("About");
+		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Help.add(btnAbout);
 	}
