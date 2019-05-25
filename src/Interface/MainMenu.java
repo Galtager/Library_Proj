@@ -39,6 +39,8 @@ import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 
 public class MainMenu {
 
@@ -76,78 +78,18 @@ public class MainMenu {
 				System.exit(0);
 			}
 		});
-		exit_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/red-delete-button-png-5.png")));
-		exit_button.setBackground(Color.LIGHT_GRAY);
-		exit_button.setBounds(10, 11, 100, 127);
-		frmLibrary.getContentPane().add(exit_button);
 		
-		JButton search_button = new JButton("Search");
-		search_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		search_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		search_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/search-icon-clip-art_299613.png")));
-		search_button.setBackground(Color.LIGHT_GRAY);
-		search_button.setBounds(974, 11, 100, 127);
-		frmLibrary.getContentPane().add(search_button);
-		
-		JButton clients_button = new JButton("Clients");
-		clients_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		clients_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		clients_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/-human-male-man-people-person-profile-red-user-icon--icon--23.png")));
-		clients_button.setBackground(Color.LIGHT_GRAY);
-		clients_button.setBounds(864, 11, 100, 127);
-		frmLibrary.getContentPane().add(clients_button);
-		
-		JButton books_button = new JButton("Books");
-		books_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		books_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		books_button.setVerticalAlignment(SwingConstants.TOP);
-		books_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/books-icon--circle-iconset--martz90-18.png")));
-		books_button.setBackground(Color.LIGHT_GRAY);
-		books_button.setBounds(754, 11, 100, 127);
-		frmLibrary.getContentPane().add(books_button);
-		
-		JButton borrow_button = new JButton("Borrow");
-		borrow_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/\u200F\u200Fsvg-red-circle-left-arrow-icon-1 - \u05E2\u05D5\u05EA\u05E7.png")));
-		borrow_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		borrow_button.setVerticalAlignment(SwingConstants.TOP);
-		borrow_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		borrow_button.setBackground(Color.LIGHT_GRAY);
-		borrow_button.setBounds(644, 11, 100, 127);
-		frmLibrary.getContentPane().add(borrow_button);
-		
-		JButton return_button = new JButton("Return");
-		return_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/svg-red-circle-left-arrow-icon-1.png")));
-		return_button.setVerticalAlignment(SwingConstants.TOP);
-		return_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		return_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		return_button.setBackground(Color.LIGHT_GRAY);
-		return_button.setBounds(534, 11, 100, 127);
-		frmLibrary.getContentPane().add(return_button);
-		
-		JButton home_button = new JButton("Return");
-		home_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/ndldl-th.png")));
-		home_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		home_button.setVerticalAlignment(SwingConstants.TOP);
-		home_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		home_button.setBackground(Color.LIGHT_GRAY);
-		home_button.setBounds(424, 11, 100, 127);
-		frmLibrary.getContentPane().add(home_button);
-		
-		JButton lock_button = new JButton("Lock");
-		lock_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/redpad-lock-th.png")));
-		lock_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		lock_button.setVerticalAlignment(SwingConstants.TOP);
-		lock_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		lock_button.setBackground(Color.LIGHT_GRAY);
-		lock_button.setBounds(314, 11, 100, 127);
-		frmLibrary.getContentPane().add(lock_button);
+		JPanel cards = new JPanel();
+		cards.setBounds(0, 149, 1112, 459);
+		frmLibrary.getContentPane().add(cards);
+		CardLayout card_layout = new CardLayout(0, 0); 
+		cards.setLayout(card_layout);
 		
 		JPanel student_panel = new JPanel();
+		cards.add(student_panel, "name_531361761719609");
 		student_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
 		student_panel.setFocusTraversalKeysEnabled(false);
 		student_panel.setBackground(new Color(204, 204, 255));
-		student_panel.setBounds(-20, 149, 1122, 459);
-		frmLibrary.getContentPane().add(student_panel);
 		
 		student_table = new JTable();
 		student_table.setForeground(new Color(0, 0, 0));
@@ -349,6 +291,93 @@ public class MainMenu {
 					.addGap(3))
 		);
 		student_panel.setLayout(gl_student_panel);
+		
+		JPanel Dummy = new JPanel();
+		cards.add(Dummy, "name_531441462974997");
+		Dummy.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(296, 146, 89, 23);
+		Dummy.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(599, 201, 89, 23);
+		Dummy.add(btnNewButton);
+		exit_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/red-delete-button-png-5.png")));
+		exit_button.setBackground(Color.LIGHT_GRAY);
+		exit_button.setBounds(10, 11, 100, 127);
+		frmLibrary.getContentPane().add(exit_button);
+		
+		JButton search_button = new JButton("Search");
+		search_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		search_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		search_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/search-icon-clip-art_299613.png")));
+		search_button.setBackground(Color.LIGHT_GRAY);
+		search_button.setBounds(974, 11, 100, 127);
+		frmLibrary.getContentPane().add(search_button);
+		
+		JButton clients_button = new JButton("Clients");
+		clients_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card_layout.show(cards, "name_531361761719609");
+			}
+		});
+		clients_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		clients_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		clients_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/-human-male-man-people-person-profile-red-user-icon--icon--23.png")));
+		clients_button.setBackground(Color.LIGHT_GRAY);
+		clients_button.setBounds(864, 11, 100, 127);
+		frmLibrary.getContentPane().add(clients_button);
+		
+		JButton books_button = new JButton("Books");
+		books_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card_layout.show(cards, "name_531441462974997");
+			}
+		});
+		books_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		books_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		books_button.setVerticalAlignment(SwingConstants.TOP);
+		books_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/books-icon--circle-iconset--martz90-18.png")));
+		books_button.setBackground(Color.LIGHT_GRAY);
+		books_button.setBounds(754, 11, 100, 127);
+		frmLibrary.getContentPane().add(books_button);
+		
+		JButton borrow_button = new JButton("Borrow");
+		borrow_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/\u200F\u200Fsvg-red-circle-left-arrow-icon-1 - \u05E2\u05D5\u05EA\u05E7.png")));
+		borrow_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		borrow_button.setVerticalAlignment(SwingConstants.TOP);
+		borrow_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		borrow_button.setBackground(Color.LIGHT_GRAY);
+		borrow_button.setBounds(644, 11, 100, 127);
+		frmLibrary.getContentPane().add(borrow_button);
+		
+		JButton return_button = new JButton("Return");
+		return_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/svg-red-circle-left-arrow-icon-1.png")));
+		return_button.setVerticalAlignment(SwingConstants.TOP);
+		return_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		return_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		return_button.setBackground(Color.LIGHT_GRAY);
+		return_button.setBounds(534, 11, 100, 127);
+		frmLibrary.getContentPane().add(return_button);
+		
+		JButton home_button = new JButton("Return");
+		home_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/ndldl-th.png")));
+		home_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		home_button.setVerticalAlignment(SwingConstants.TOP);
+		home_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		home_button.setBackground(Color.LIGHT_GRAY);
+		home_button.setBounds(424, 11, 100, 127);
+		frmLibrary.getContentPane().add(home_button);
+		
+		JButton lock_button = new JButton("Lock");
+		lock_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/redpad-lock-th.png")));
+		lock_button.setVerticalTextPosition(SwingConstants.BOTTOM);
+		lock_button.setVerticalAlignment(SwingConstants.TOP);
+		lock_button.setHorizontalTextPosition(SwingConstants.CENTER);
+		lock_button.setBackground(Color.LIGHT_GRAY);
+		lock_button.setBounds(314, 11, 100, 127);
+		frmLibrary.getContentPane().add(lock_button);
 		
 
 
