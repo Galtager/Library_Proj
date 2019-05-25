@@ -16,16 +16,25 @@ import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class SystemSettings {
 
 	private JFrame frameClass;
+	private JTextField textContent;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -56,7 +65,7 @@ public class SystemSettings {
 	 */
 	private void initialize() {
 		frameClass = new JFrame();
-		frameClass.getContentPane().setBackground(new Color(0, 153, 153));
+		frameClass.getContentPane().setBackground(Color.RED);
 		frameClass.setTitle("SystemSettings");
 		frameClass.setBounds(100, 100, 888, 610);
 		frameClass.dispose();//exit
@@ -99,109 +108,208 @@ public class SystemSettings {
 		tabbedPane.addTab("System Options", null, jp_SystemOptions, null);
 		
 		JCheckBox jcb_1 = new JCheckBox("Canceling a delay message Returns a title");
+		jcb_1.setBounds(213, 53, 407, 33);
 		jcb_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JCheckBox jcb_2 = new JCheckBox("Enable automatic numbering for student code in addition");
+		jcb_2.setBounds(213, 129, 539, 33);
 		jcb_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JCheckBox jcb_3 = new JCheckBox("Enable automatic numbering for title code in addition");
+		jcb_3.setBounds(213, 201, 507, 33);
 		jcb_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel jl_LoanDaysValue = new JLabel("Default value for loan days Title");
+		JLabel jl_LoanDaysValue = new JLabel("- Default value for loan days Title");
+		jl_LoanDaysValue.setBounds(78, 269, 315, 25);
 		jl_LoanDaysValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel jl_PaymentValue = new JLabel("Default payment value");
+		JLabel jl_PaymentValue = new JLabel("- Default payment value");
+		jl_PaymentValue.setBounds(78, 321, 225, 25);
 		jl_PaymentValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JFormattedTextField jtf_1 = new JFormattedTextField();
-		
-		JFormattedTextField jtf_2 = new JFormattedTextField();
+		jtf_1.setBounds(395, 264, 41, 39);
 		
 		JButton jb_Save = new JButton("Save");
+		jb_Save.setBounds(681, 366, 75, 33);
+		jb_Save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		jb_Save.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JButton jb_Close = new JButton("Close");
+		jb_Close.setBounds(591, 366, 81, 33);
 		jb_Close.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jb_Close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 frameClass.dispose();
                 }
         });
+		jp_SystemOptions.setLayout(null);
+		jp_SystemOptions.add(jcb_2);
+		jp_SystemOptions.add(jcb_1);
+		jp_SystemOptions.add(jcb_3);
+		jp_SystemOptions.add(jl_LoanDaysValue);
+		jp_SystemOptions.add(jl_PaymentValue);
+		jp_SystemOptions.add(jtf_1);
+		jp_SystemOptions.add(jb_Close);
+		jp_SystemOptions.add(jb_Save);
 		
-		GroupLayout gl_jp_SystemOptions = new GroupLayout(jp_SystemOptions);
-		gl_jp_SystemOptions.setHorizontalGroup(
-			gl_jp_SystemOptions.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_jp_SystemOptions.createSequentialGroup()
-					.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_jp_SystemOptions.createSequentialGroup()
-							.addGap(213)
-							.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.LEADING)
-								.addComponent(jcb_2)
-								.addComponent(jcb_1)
-								.addComponent(jcb_3)))
-						.addGroup(gl_jp_SystemOptions.createSequentialGroup()
-							.addGap(78)
-							.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.LEADING)
-								.addComponent(jl_LoanDaysValue)
-								.addComponent(jl_PaymentValue, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(jtf_2)
-								.addComponent(jtf_1, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))))
-					.addContainerGap(109, Short.MAX_VALUE))
-				.addGroup(gl_jp_SystemOptions.createSequentialGroup()
-					.addContainerGap(557, Short.MAX_VALUE)
-					.addComponent(jb_Close)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(jb_Save)
-					.addGap(105))
-		);
-		gl_jp_SystemOptions.setVerticalGroup(
-			gl_jp_SystemOptions.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_jp_SystemOptions.createSequentialGroup()
-					.addGap(53)
-					.addComponent(jcb_1)
-					.addGap(43)
-					.addComponent(jcb_2)
-					.addGap(39)
-					.addComponent(jcb_3)
-					.addGap(30)
-					.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jl_LoanDaysValue)
-						.addComponent(jtf_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jl_PaymentValue)
-						.addComponent(jtf_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_jp_SystemOptions.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jb_Save)
-						.addComponent(jb_Close))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		jp_SystemOptions.setLayout(gl_jp_SystemOptions);
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(302, 310, 41, 39);
+		jp_SystemOptions.add(formattedTextField);
 		
 		JPanel jp_Backup = new JPanel();
 		jp_Backup.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tabbedPane.addTab("Backup", null, jp_Backup, null);
+		jp_Backup.setLayout(null);
+		
+		JLabel lblDataSize = new JLabel("Database size:");
+		lblDataSize.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDataSize.setBounds(166, 58, 118, 32);
+		jp_Backup.add(lblDataSize);
+		
+		JButton btnFolderBackup = new JButton("Folder backup");
+		btnFolderBackup.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnFolderBackup.setBounds(162, 116, 262, 84);
+		jp_Backup.add(btnFolderBackup);
+		
+		JButton btnBackupAndCompression = new JButton("Backup and compression");
+		btnBackupAndCompression.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBackupAndCompression.setBounds(457, 116, 262, 84);
+		jp_Backup.add(btnBackupAndCompression);
+		
+		JButton button_4 = new JButton("Close");
+		button_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button_4.setBounds(555, 349, 93, 33);
+		jp_Backup.add(button_4);
+		
+		JButton button_5 = new JButton("Save");
+		button_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button_5.setBounds(657, 349, 85, 33);
+		jp_Backup.add(button_5);
+		
+		JLabel lblNewLabel = new JLabel("It is recommended to perform once a week compression");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setBounds(166, 216, 553, 20);
+		jp_Backup.add(lblNewLabel);
+		
+		JLabel lblPermanentLocationTo = new JLabel("Permanent location to backup the database");
+		lblPermanentLocationTo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblPermanentLocationTo.setBounds(162, 252, 553, 20);
+		jp_Backup.add(lblPermanentLocationTo);
+		
+		textField = new JTextField();
+		textField.setBounds(162, 280, 469, 26);
+		jp_Backup.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnDelete_1 = new JButton("Delete");
+		btnDelete_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnDelete_1.setBounds(634, 280, 106, 27);
+		jp_Backup.add(btnDelete_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(283, 62, 436, 26);
+		jp_Backup.add(textField_1);
+		textField_1.setColumns(10);
 		
 		JPanel jp_DeleteData = new JPanel();
 		jp_DeleteData.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tabbedPane.addTab("Delete Data", null, jp_DeleteData, null);
+		jp_DeleteData.setLayout(null);
+		
+		JCheckBox chckbxDeleteTitels = new JCheckBox("Deleting titles");
+		chckbxDeleteTitels.setBounds(192, 135, 407, 33);
+		chckbxDeleteTitels.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jp_DeleteData.add(chckbxDeleteTitels);
+		
+		JCheckBox chckbx_DelStudAndBorrow = new JCheckBox("Delete students and borrow books");
+		chckbx_DelStudAndBorrow.setBounds(192, 49, 407, 33);
+		chckbx_DelStudAndBorrow.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jp_DeleteData.add(chckbx_DelStudAndBorrow);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnDelete.setBounds(321, 255, 128, 33);
+		jp_DeleteData.add(btnDelete);
+		
+		JButton button = new JButton("Save");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button.setBounds(694, 349, 75, 33);
+		jp_DeleteData.add(button);
+		
+		JButton button_1 = new JButton("Close");
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button_1.setBounds(598, 349, 81, 33);
+		jp_DeleteData.add(button_1);
 		
 		JPanel jp_Logo = new JPanel();
 		tabbedPane.addTab("Logo", null, jp_Logo, null);
-		GroupLayout gl_jp_Logo = new GroupLayout(jp_Logo);
-		gl_jp_Logo.setHorizontalGroup(
-			gl_jp_Logo.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 863, Short.MAX_VALUE)
-		);
-		gl_jp_Logo.setVerticalGroup(
-			gl_jp_Logo.createParallelGroup(Alignment.TRAILING)
-				.addGap(0, 398, Short.MAX_VALUE)
-		);
-		jp_Logo.setLayout(gl_jp_Logo);
+		
+		JLabel lbl_logo = new JLabel("A logo image that will appear in all reports");
+		lbl_logo.setBounds(134, 272, 335, 22);
+		lbl_logo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JButton btnOpen = new JButton("Choose \r\nLogo");
+		btnOpen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fs=new JFileChooser(new File("c:\\"));
+				fs.setDialogTitle("Open a File");
+				fs.setFileFilter(new FileTypeFilter(".txt","Text File"));
+				fs.setFileFilter(new FileTypeFilter(".doc","Word File"));
+				fs.setFileFilter(new FileTypeFilter(".docx","Word File"));
+				fs.setFileFilter(new FileTypeFilter(".jpg","JPEG File"));
+				int result= fs.showSaveDialog(null);
+				if (result==JFileChooser.APPROVE_OPTION) {
+					try {
+						File fi = fs.getSelectedFile();
+						BufferedReader br = new BufferedReader (new FileReader(
+								fi.getPath()));
+						String line = "";
+						String s = "";
+						while ((line=br.readLine())!=null){
+							s += line;
+						}
+						textContent.setText(s);
+						if (br!=null) 
+							br.close();
+					} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
+					}
+				}
+			}
+		});
+		btnOpen.setBounds(539, 97, 161, 84);
+		btnOpen.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		JButton btnDeleteLogo = new JButton("Delete Logo");
+		btnDeleteLogo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnDeleteLogo.setBounds(539, 210, 161, 84);
+		btnDeleteLogo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jp_Logo.setLayout(null);
+		jp_Logo.add(lbl_logo);
+		jp_Logo.add(btnDeleteLogo);
+		jp_Logo.add(btnOpen);
+		
+		JButton button_2 = new JButton("Close");
+		button_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button_2.setBounds(584, 349, 93, 33);
+		jp_Logo.add(button_2);
+		
+		JButton button_3 = new JButton("Save");
+		button_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button_3.setBounds(686, 349, 85, 33);
+		jp_Logo.add(button_3);
+		
+		textContent = new JTextField();
+		textContent.setBounds(134, 83, 335, 182);
+		jp_Logo.add(textContent);
+		textContent.setColumns(10);
 		frameClass.getContentPane().setLayout(groupLayout);
 	}
-
 }
