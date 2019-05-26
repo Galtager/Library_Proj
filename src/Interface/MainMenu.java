@@ -77,7 +77,7 @@ public class MainMenu {
 		frmLibrary.getContentPane().setForeground(new Color(255, 255, 255));
 		frmLibrary.setTitle("Library");
 		frmLibrary.setResizable(false);
-		frmLibrary.setBounds(100, 100, 1090, 590);
+		frmLibrary.setBounds(100, 100, 1112, 661);
 		frmLibrary.dispose();
 		frmLibrary.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frmLibrary.addWindowListener( new WindowAdapter(){
@@ -160,24 +160,24 @@ public class MainMenu {
 		Scroll.setBounds(27, 58, 1079, 305);
 		
 		student_search_txt = new JTextField();
-		student_search_txt.setBounds(781, 25, 115, 20);
+		student_search_txt.setBounds(675, 25, 115, 20);
 		student_search_txt.setColumns(10);
 		
 		JComboBox student_sort_comboBox = new JComboBox();
-		student_sort_comboBox.setBounds(906, 26, 83, 18);
+		student_sort_comboBox.setBounds(800, 26, 116, 18);
 		student_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		student_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
 		
 		JLabel student_search_lbl = new JLabel(":Search\r\n");
-		student_search_lbl.setBounds(1007, 28, 71, 14);
+		student_search_lbl.setBounds(926, 28, 71, 14);
 		student_search_lbl.setBackground(Color.WHITE);
 		
 		JComboBox student_filter_comboBox = new JComboBox();
-		student_filter_comboBox.setBounds(656, 25, 97, 20);
+		student_filter_comboBox.setBounds(568, 25, 97, 20);
 		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		
 		JButton student_search_button = new JButton("Search");
-		student_search_button.setBounds(526, 24, 103, 23);
+		student_search_button.setBounds(455, 24, 103, 23);
 		
 		JLabel student_num_lbl = new JLabel("Num of Clients:");
 		student_num_lbl.setBounds(27, 26, 116, 18);
@@ -424,3 +424,4 @@ public class MainMenu {
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jm_Help.add(btnAbout);
 	}
+}
