@@ -131,45 +131,43 @@ public class MainMenu {
 				{null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				 "תשלום", "תאריך סיום", "ניצול", "הגבלת כותרות", "ישוב", "כיתה", "ת_ז", "שם_פרטי", "שם_משפחה", "קוד_תלמיד"
+					"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"
 			}
 		));
 		JScrollPane Scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		Scroll.setBounds(27, 58, 1079, 305);
 		
 		student_search_txt = new JTextField();
+		student_search_txt.setBounds(781, 25, 115, 20);
 		student_search_txt.setColumns(10);
 		
 		JComboBox student_sort_comboBox = new JComboBox();
+		student_sort_comboBox.setBounds(906, 26, 83, 18);
 		student_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		student_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u05E7\u05D5\u05D3_\u05EA\u05DC\u05DE\u05D9\u05D3", "\u05E9\u05DD_\u05DE\u05E9\u05E4\u05D7\u05D4", "\u05E9\u05DD_\u05E4\u05E8\u05D8\u05D9", "\u05EA_\u05D6", "\u05DB\u05D9\u05EA\u05D4", "\u05D9\u05E9\u05D5\u05D1", "\u05D4\u05D2\u05D1\u05DC\u05EA_\u05DB\u05D5\u05EA\u05E8\u05D5\u05EA", "\u05E0\u05D9\u05E6\u05D5\u05DC", "\u05EA\u05D0\u05E8\u05D9\u05DA \u05E1\u05D9\u05D5\u05DD", "\u05EA\u05E9\u05DC\u05D5\u05DD"}));
+		student_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
 		
 		JLabel student_search_lbl = new JLabel(":Search\r\n");
+		student_search_lbl.setBounds(1007, 28, 71, 14);
 		student_search_lbl.setBackground(Color.WHITE);
 		
 		JComboBox student_filter_comboBox = new JComboBox();
-		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"\u05E1\u05D3\u05E8 \u05E2\u05D5\u05DC\u05D4", "\u05E1\u05D3\u05E8 \u05D9\u05D5\u05E8\u05D3"}));
+		student_filter_comboBox.setBounds(656, 25, 97, 20);
+		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		
 		JButton student_search_button = new JButton("Search");
-		
-		JCheckBox student_externalsearch_chckbx = new JCheckBox("External search");
-		student_externalsearch_chckbx.setBorder(new CompoundBorder(null, UIManager.getBorder("CheckBoxMenuItem.border")));
-		student_externalsearch_chckbx.setBackground(SystemColor.activeCaptionBorder);
+		student_search_button.setBounds(526, 24, 103, 23);
 		
 		JLabel student_num_lbl = new JLabel("Num of Clients:");
+		student_num_lbl.setBounds(27, 26, 116, 18);
 		student_num_lbl.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		student_num_lbl.setFocusCycleRoot(true);
 		student_num_lbl.setBackground(SystemColor.inactiveCaptionText);
 		
 		JButton student_information_button = new JButton("?\r\n");
-		
-		JButton student_close_button = new JButton("Close\r\n");
-		student_close_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		student_close_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		student_information_button.setBounds(44, 369, 55, 23);
 		
 		JButton student_edit_button = new JButton("Edit");
+		student_edit_button.setBounds(962, 398, 60, 45);
 		student_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		student_edit_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -177,9 +175,11 @@ public class MainMenu {
 		});
 		
 		JButton student_delete_button = new JButton("Delete");
+		student_delete_button.setBounds(850, 398, 102, 45);
 		student_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		JButton student_insert_button = new JButton("Insert");
+		student_insert_button.setBounds(775, 398, 65, 45);
 		student_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		student_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -187,110 +187,31 @@ public class MainMenu {
 		});
 		
 		JButton student_card_button = new JButton("Card");
+		student_card_button.setBounds(709, 398, 60, 45);
 		student_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		JButton student_excel_button = new JButton("Excel");
+		student_excel_button.setBounds(639, 398, 60, 45);
 		student_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		JButton student_report_button = new JButton("Report");
+		student_report_button.setBounds(552, 398, 77, 45);
 		student_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		
-		JCheckBox student_borrowrep_chcbx = new JCheckBox("\u05D4\u05E6\u05D2 \u05D3\u05D5\u05D7 \u05D4\u05E9\u05D0\u05DC\u05D5\u05EA \u05D2\u05D5\u05E8\u05E3.\r\n");
-		student_borrowrep_chcbx.setBorder(new CompoundBorder(null, UIManager.getBorder("CheckBoxMenuItem.border")));
-		student_borrowrep_chcbx.setToolTipText("");
-		student_borrowrep_chcbx.setBackground(SystemColor.activeCaptionBorder);
-		
-		JCheckBox student_studentsort_chcbx = new JCheckBox("\u05D4\u05E4\u05E8\u05D3 \u05D3\u05E4\u05D9\u05DD \u05DC\u05DB\u05DC \u05EA\u05DC\u05DE\u05D9\u05D3.");
-		student_studentsort_chcbx.setBorder(new CompoundBorder(null, UIManager.getBorder("CheckBoxMenuItem.border")));
-		student_studentsort_chcbx.setBackground(SystemColor.activeCaptionBorder);
-		student_studentsort_chcbx.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		GroupLayout gl_student_panel = new GroupLayout(student_panel);
-		gl_student_panel.setHorizontalGroup(
-			gl_student_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_student_panel.createSequentialGroup()
-					.addGap(260)
-					.addComponent(student_num_lbl, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-					.addGap(117)
-					.addComponent(student_externalsearch_chckbx)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(student_search_button, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(student_filter_comboBox, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
-					.addComponent(student_search_txt, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(student_sort_comboBox, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(student_search_lbl)
-					.addGap(123))
-				.addGroup(gl_student_panel.createSequentialGroup()
-					.addGap(38)
-					.addComponent(student_information_button, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(1068, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_student_panel.createSequentialGroup()
-					.addGroup(gl_student_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(student_borrowrep_chcbx)
-						.addGroup(gl_student_panel.createSequentialGroup()
-							.addContainerGap(422, Short.MAX_VALUE)
-							.addComponent(student_studentsort_chcbx)))
-					.addGap(10)
-					.addComponent(student_report_button, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(student_excel_button, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(student_card_button, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addGap(21)
-					.addComponent(student_insert_button)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(student_delete_button, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(student_edit_button, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(student_close_button, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addGap(49))
-				.addGroup(gl_student_panel.createSequentialGroup()
-					.addGap(21)
-					.addComponent(Scroll, GroupLayout.PREFERRED_SIZE, 1079, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(61, Short.MAX_VALUE))
-		);
-		gl_student_panel.setVerticalGroup(
-			gl_student_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_student_panel.createSequentialGroup()
-					.addGap(8)
-					.addGroup(gl_student_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(student_search_txt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(student_sort_comboBox, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addComponent(student_search_lbl)
-						.addComponent(student_search_button)
-						.addComponent(student_externalsearch_chckbx)
-						.addComponent(student_num_lbl)
-						.addComponent(student_filter_comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(Scroll, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_student_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_student_panel.createSequentialGroup()
-							.addGap(38)
-							.addGroup(gl_student_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(student_excel_button, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(student_card_button, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(student_insert_button, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(student_delete_button, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(student_edit_button, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(student_close_button, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(student_report_button, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-							.addGap(19))
-						.addGroup(gl_student_panel.createSequentialGroup()
-							.addGap(6)
-							.addComponent(student_information_button)
-							.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-							.addComponent(student_borrowrep_chcbx)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(student_studentsort_chcbx)
-							.addGap(18)))
-					.addGap(3))
-		);
-		student_panel.setLayout(gl_student_panel);
+		student_panel.setLayout(null);
+		student_panel.add(student_num_lbl);
+		student_panel.add(student_search_button);
+		student_panel.add(student_filter_comboBox);
+		student_panel.add(student_search_txt);
+		student_panel.add(student_sort_comboBox);
+		student_panel.add(student_search_lbl);
+		student_panel.add(student_information_button);
+		student_panel.add(student_report_button);
+		student_panel.add(student_excel_button);
+		student_panel.add(student_card_button);
+		student_panel.add(student_insert_button);
+		student_panel.add(student_delete_button);
+		student_panel.add(student_edit_button);
+		student_panel.add(Scroll);
 		
 		JPanel Dummy = new JPanel();
 		cards.add(Dummy, "name_531441462974997");
