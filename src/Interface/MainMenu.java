@@ -13,10 +13,41 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollBar;
+import javax.swing.UIManager;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.Font;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 
 public class MainMenu {
 
 	JFrame frmLibrary;
+	private JTable table;
+	private JTable student_table;
+	private JTextField student_search_txt;
 
 	/**
 	 * Create the application.
@@ -30,9 +61,11 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		frmLibrary = new JFrame();
+		frmLibrary.setFont(null);
+		frmLibrary.setBackground(new Color(240, 240, 240));
 		frmLibrary.setTitle("Library");
 		frmLibrary.setResizable(false);
-		frmLibrary.setBounds(100, 100, 1090, 590);
+		frmLibrary.setBounds(100, 100, 1118, 636);
 		frmLibrary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLibrary.getContentPane().setLayout(null);
 		
@@ -45,6 +78,152 @@ public class MainMenu {
 				System.exit(0);
 			}
 		});
+		
+		JPanel cards = new JPanel();
+		cards.setBounds(0, 149, 1112, 459);
+		frmLibrary.getContentPane().add(cards);
+		CardLayout card_layout = new CardLayout(0, 0); 
+		cards.setLayout(card_layout);
+		
+		JPanel student_panel = new JPanel();
+		cards.add(student_panel, "name_531361761719609");
+		student_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		student_panel.setFocusTraversalKeysEnabled(false);
+		student_panel.setBackground(new Color(204, 204, 255));
+		
+		student_table = new JTable();
+		student_table.setForeground(new Color(0, 0, 0));
+		student_table.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		student_table.setBackground(new Color(255, 255, 255));
+		student_table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+					"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"
+			}
+		));
+		JScrollPane Scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		Scroll.setBounds(27, 58, 1079, 305);
+		
+		student_search_txt = new JTextField();
+		student_search_txt.setBounds(781, 25, 115, 20);
+		student_search_txt.setColumns(10);
+		
+		JComboBox student_sort_comboBox = new JComboBox();
+		student_sort_comboBox.setBounds(906, 26, 83, 18);
+		student_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		student_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
+		
+		JLabel student_search_lbl = new JLabel(":Search\r\n");
+		student_search_lbl.setBounds(1007, 28, 71, 14);
+		student_search_lbl.setBackground(Color.WHITE);
+		
+		JComboBox student_filter_comboBox = new JComboBox();
+		student_filter_comboBox.setBounds(656, 25, 97, 20);
+		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
+		
+		JButton student_search_button = new JButton("Search");
+		student_search_button.setBounds(526, 24, 103, 23);
+		
+		JLabel student_num_lbl = new JLabel("Num of Clients:");
+		student_num_lbl.setBounds(27, 26, 116, 18);
+		student_num_lbl.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		student_num_lbl.setFocusCycleRoot(true);
+		student_num_lbl.setBackground(SystemColor.inactiveCaptionText);
+		
+		JButton student_information_button = new JButton("?\r\n");
+		student_information_button.setBounds(44, 369, 55, 23);
+		
+		JButton student_edit_button = new JButton("Edit");
+		student_edit_button.setBounds(962, 398, 60, 45);
+		student_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		student_edit_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton student_delete_button = new JButton("Delete");
+		student_delete_button.setBounds(850, 398, 102, 45);
+		student_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		
+		JButton student_insert_button = new JButton("Insert");
+		student_insert_button.setBounds(775, 398, 65, 45);
+		student_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		student_insert_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton student_card_button = new JButton("Card");
+		student_card_button.setBounds(709, 398, 60, 45);
+		student_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		
+		JButton student_excel_button = new JButton("Excel");
+		student_excel_button.setBounds(639, 398, 60, 45);
+		student_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		
+		JButton student_report_button = new JButton("Report");
+		student_report_button.setBounds(552, 398, 77, 45);
+		student_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		student_panel.setLayout(null);
+		student_panel.add(student_num_lbl);
+		student_panel.add(student_search_button);
+		student_panel.add(student_filter_comboBox);
+		student_panel.add(student_search_txt);
+		student_panel.add(student_sort_comboBox);
+		student_panel.add(student_search_lbl);
+		student_panel.add(student_information_button);
+		student_panel.add(student_report_button);
+		student_panel.add(student_excel_button);
+		student_panel.add(student_card_button);
+		student_panel.add(student_insert_button);
+		student_panel.add(student_delete_button);
+		student_panel.add(student_edit_button);
+		student_panel.add(Scroll);
+		
+		JPanel Dummy = new JPanel();
+		cards.add(Dummy, "name_531441462974997");
+		Dummy.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(296, 146, 89, 23);
+		Dummy.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(599, 201, 89, 23);
+		Dummy.add(btnNewButton);
 		exit_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/red-delete-button-png-5.png")));
 		exit_button.setBackground(Color.LIGHT_GRAY);
 		exit_button.setBounds(10, 11, 100, 127);
@@ -59,6 +238,11 @@ public class MainMenu {
 		frmLibrary.getContentPane().add(search_button);
 		
 		JButton clients_button = new JButton("Clients");
+		clients_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card_layout.show(cards, "name_531361761719609");
+			}
+		});
 		clients_button.setVerticalTextPosition(SwingConstants.BOTTOM);
 		clients_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		clients_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/-human-male-man-people-person-profile-red-user-icon--icon--23.png")));
@@ -67,6 +251,11 @@ public class MainMenu {
 		frmLibrary.getContentPane().add(clients_button);
 		
 		JButton books_button = new JButton("Books");
+		books_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card_layout.show(cards, "name_531441462974997");
+			}
+		});
 		books_button.setVerticalTextPosition(SwingConstants.BOTTOM);
 		books_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		books_button.setVerticalAlignment(SwingConstants.TOP);
@@ -111,8 +300,8 @@ public class MainMenu {
 		lock_button.setBounds(314, 11, 100, 127);
 		frmLibrary.getContentPane().add(lock_button);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(20, 149, 1054, 401);
-		frmLibrary.getContentPane().add(panel);
+
+
+		
+			}
 	}
-}
