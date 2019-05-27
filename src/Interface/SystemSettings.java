@@ -7,11 +7,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Window;
-
+import java.awt.Image;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -22,20 +21,22 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SystemSettings {
 
 	private JFrame frameClass;
-	private JTextField textContent;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	private JTextField JTextFieldl;
+	private JLabel jLable1;
+	byte[] image;
+	String imagepath="";
+	ImageIcon myimage;
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +60,19 @@ public class SystemSettings {
 	public SystemSettings() {
 		initialize();
 	}
+	public ImageIcon seticon (String m, byte[] image) {
+		if (m!=null) {
+			myimage=new ImageIcon(m);
+		}else {
+			myimage=new ImageIcon(image);
+		}
+        Image img1 = myimage.getImage();
+        Image img2 = img1.getScaledInstance(jLable1.getWidth(), jLable1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon i=new ImageIcon(img2);
+		return i;
+	}
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -235,10 +249,10 @@ public class SystemSettings {
 		btnDelete.setBounds(321, 255, 128, 33);
 		jp_DeleteData.add(btnDelete);
 		
-		JButton button = new JButton("Save");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button.setBounds(694, 349, 75, 33);
-		jp_DeleteData.add(button);
+		JButton btnsave_deletedata = new JButton("Save");
+		btnsave_deletedata.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnsave_deletedata.setBounds(694, 349, 75, 33);
+		jp_DeleteData.add(btnsave_deletedata);
 		
 		JButton button_1 = new JButton("Close");
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -248,41 +262,67 @@ public class SystemSettings {
 		JPanel jp_Logo = new JPanel();
 		tabbedPane.addTab("Logo", null, jp_Logo, null);
 		
+		JLabel jLabel1 = new JLabel("*******Picture*******");
+		jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		jLabel1.setToolTipText("");
+		jLabel1.setBounds(114, 74, 385, 182);
+		jp_Logo.add(jLabel1);
+		frameClass.getContentPane().setLayout(groupLayout);
+		
 		JLabel lbl_logo = new JLabel("A logo image that will appear in all reports");
+		lbl_logo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_logo.setBounds(134, 272, 335, 22);
 		lbl_logo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JButton btnOpen = new JButton("Choose \r\nLogo");
-		btnOpen.addActionListener(new ActionListener() {
+		JTextFieldl = new JTextField();
+		JTextFieldl.setBounds(84, 298, 401, 26);
+		jp_Logo.add(JTextFieldl);
+		JTextFieldl.setColumns(10);
+		
+		JButton button = new JButton("Choose \r\nLogo");
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fs=new JFileChooser(new File("c:\\"));
-				fs.setDialogTitle("Open a File");
-				fs.setFileFilter(new FileTypeFilter(".txt","Text File"));
-				fs.setFileFilter(new FileTypeFilter(".doc","Word File"));
-				fs.setFileFilter(new FileTypeFilter(".docx","Word File"));
-				fs.setFileFilter(new FileTypeFilter(".jpg","JPEG File"));
-				int result= fs.showSaveDialog(null);
-				if (result==JFileChooser.APPROVE_OPTION) {
-					try {
-						File fi = fs.getSelectedFile();
-						BufferedReader br = new BufferedReader (new FileReader(
-								fi.getPath()));
-						String line = "";
-						String s = "";
-						while ((line=br.readLine())!=null){
-							s += line;
-						}
-						textContent.setText(s);
-						if (br!=null) 
-							br.close();
-					} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, e2.getMessage());
-					}
-				}
+				JFileChooser file=new JFileChooser();
+				file.setCurrentDirectory(new File ("user.dir"));
+		          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg","gif","png","jpeg" );
+		          file.addChoosableFileFilter(filter);
+		          int result = file.showSaveDialog(null);
+		          if(result == JFileChooser.APPROVE_OPTION)
+		          {
+		        	  File f=file.getSelectedFile();
+		        	  String p =f.getAbsolutePath();
+		        	  JTextFieldl.setText(file.getSelectedFile().getAbsolutePath());
+		        	  jLabel1.setIcon(seticon(p,null));
+		          }
+//				JFileChooser fs=new JFileChooser(new File("c:\\"));
+//				fs.setDialogTitle("Open a File");
+//				fs.setFileFilter(new FileTypeFilter(".txt","Text File"));
+//				fs.setFileFilter(new FileTypeFilter(".doc","Word File"));
+//				fs.setFileFilter(new FileTypeFilter(".docx","Word File"));
+//				fs.setFileFilter(new FileTypeFilter(".jpg","JPEG File"));
+//				int result= fs.showSaveDialog(null);
+//				if (result==JFileChooser.APPROVE_OPTION) {
+//					try {
+//						File fi = fs.getSelectedFile();
+//						BufferedReader br = new BufferedReader (new FileReader(
+//								fi.getPath()));
+//						String line = "";
+//						String s = "";
+//						while ((line=br.readLine())!=null){
+//							s += line;
+//						}
+//						textContent.setText(s);
+//						if (br!=null) 
+//							br.close();
+//					} catch (Exception e2) {
+//					JOptionPane.showMessageDialog(null, e2.getMessage());
+//					}
+//				}
 			}
 		});
-		btnOpen.setBounds(539, 97, 161, 84);
-		btnOpen.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button.setBounds(539, 97, 161, 84);
+		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
 		
 		JButton btnDeleteLogo = new JButton("Delete Logo");
 		btnDeleteLogo.addActionListener(new ActionListener() {
@@ -294,7 +334,7 @@ public class SystemSettings {
 		jp_Logo.setLayout(null);
 		jp_Logo.add(lbl_logo);
 		jp_Logo.add(btnDeleteLogo);
-		jp_Logo.add(btnOpen);
+		jp_Logo.add(button);
 		
 		JButton button_2 = new JButton("Close");
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -306,10 +346,12 @@ public class SystemSettings {
 		button_3.setBounds(686, 349, 85, 33);
 		jp_Logo.add(button_3);
 		
-		textContent = new JTextField();
-		textContent.setBounds(134, 83, 335, 182);
-		jp_Logo.add(textContent);
-		textContent.setColumns(10);
-		frameClass.getContentPane().setLayout(groupLayout);
+		JLabel lblPath = new JLabel("path");
+		lblPath.setBounds(29, 301, 40, 20);
+		jp_Logo.add(lblPath);
+		
+
+		
+
 	}
 }
