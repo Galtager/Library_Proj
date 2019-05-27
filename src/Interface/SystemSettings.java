@@ -289,10 +289,10 @@ public class SystemSettings {
 		          int result = file.showSaveDialog(null);
 		          if(result == JFileChooser.APPROVE_OPTION)
 		          {
-		        	  File f=file.getSelectedFile();
-		        	  String p =f.getAbsolutePath();
+		        	  File f = file.getSelectedFile();
+		        	  String p = f.getAbsolutePath();
 		        	  JTextFieldl.setText(file.getSelectedFile().getAbsolutePath());
-		        	  jLabel1.setIcon(seticon(p,null));
+		        	  jLabel1.setIcon(new ImageIcon(p));
 		          }
 //				JFileChooser fs=new JFileChooser(new File("c:\\"));
 //				fs.setDialogTitle("Open a File");
