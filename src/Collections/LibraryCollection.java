@@ -52,6 +52,7 @@ public class LibraryCollection
 		
 	}
 	
+	
 	public List<Book> GetIssuedBooks()
 	{
 		return s_books.stream()

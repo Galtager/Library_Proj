@@ -21,6 +21,13 @@ public class LibraryActionsImpl implements ILibraryAction
 		return !m_libDB.IssueBook(book.getBookID(), borrower);
 		
 	}
+	
+	@Override
+	public boolean refundBook(Book book) {
+		// TODO refundBook should set the borrower to the next user in borrow list
+		
+		return true;
+	}
 
 	
 	@Override

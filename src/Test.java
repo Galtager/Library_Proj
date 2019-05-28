@@ -16,7 +16,7 @@ public class Test implements IEntryToString
 	public String entityReportEntry() 
 	{
 		// TODO Auto-generated method stub
-		return this.hi + "\t" + this.wow;
+		return this.hi + "," + this.wow;
 	}
 
 }
