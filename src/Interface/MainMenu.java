@@ -215,7 +215,25 @@ public class MainMenu {
 		student_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		student_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ClientRegistration window = new ClientRegistration();
+							window.frmClientRegistration.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				dispose();
 			}
+
+			private void dispose() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			
 		});
 		
 		JButton student_card_button = new JButton("Card");
