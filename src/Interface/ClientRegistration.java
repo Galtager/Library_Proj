@@ -72,7 +72,7 @@ public class ClientRegistration {
 		frmClientRegistration.setBounds(new Rectangle(0, 0, 0, 0));
 		frmClientRegistration.setTitle("Client Registration");
 		frmClientRegistration.setBounds(100, 100, 450, 600);
-		frmClientRegistration.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmClientRegistration.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(204, 204, 255));
