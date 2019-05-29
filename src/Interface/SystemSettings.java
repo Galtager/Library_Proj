@@ -30,9 +30,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SystemSettings {
 
 	private JFrame frameClass;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField JTextFieldl;
+	private JTextField textField_backup;
+	private JTextField textField_DataSize;
+	private JTextField JTextFiel_Path;
 	private JLabel jLable1;
 	byte[] image;
 	String imagepath="";
@@ -83,7 +83,7 @@ public class SystemSettings {
 		frameClass.setTitle("SystemSettings");
 		frameClass.setBounds(100, 100, 888, 610);
 		frameClass.dispose();//exit
-		frameClass.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frameClass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameClass.addWindowListener( new WindowAdapter(){
             public void windowClosing(WindowEvent e){
                 JFrame frame = (JFrame)e.getSource();
@@ -93,9 +93,9 @@ public class SystemSettings {
                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
             });
-		JLabel jl_SystemSettings = new JLabel("System Settings");
-		jl_SystemSettings.setForeground(new Color(0, 0, 0));
-		jl_SystemSettings.setFont(new Font("Tahoma", Font.BOLD, 48));
+		JLabel JLabel_SystemSettings = new JLabel("System Settings");
+		JLabel_SystemSettings.setForeground(new Color(0, 0, 0));
+		JLabel_SystemSettings.setFont(new Font("Tahoma", Font.BOLD, 48));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -105,25 +105,21 @@ public class SystemSettings {
 				.addComponent(tabbedPane, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 758, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(220)
-					.addComponent(jl_SystemSettings, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
+					.addComponent(JLabel_SystemSettings, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(241, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(jl_SystemSettings, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+					.addComponent(JLabel_SystemSettings, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
 					.addGap(4)
 					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 443, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(63, Short.MAX_VALUE))
 		);
 		
-		JPanel jp_SystemOptions = new JPanel();
-		jp_SystemOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tabbedPane.addTab("System Options", null, jp_SystemOptions, null);
-		
-		JCheckBox jcb_1 = new JCheckBox("Canceling a delay message Returns a title");
-		jcb_1.setBounds(213, 53, 407, 33);
-		jcb_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JPanel Tab_SystemOptions = new JPanel();
+		Tab_SystemOptions.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tabbedPane.addTab("System Options", null, Tab_SystemOptions, null);
 		
 		JCheckBox jcb_2 = new JCheckBox("Enable automatic numbering for student code in addition");
 		jcb_2.setBounds(213, 129, 539, 33);
@@ -133,154 +129,168 @@ public class SystemSettings {
 		jcb_3.setBounds(213, 201, 507, 33);
 		jcb_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel jl_LoanDaysValue = new JLabel("- Default value for loan days Title");
-		jl_LoanDaysValue.setBounds(78, 269, 315, 25);
-		jl_LoanDaysValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JLabel JLable_LoanDaysValue = new JLabel("- Default value for loan days Title");
+		JLable_LoanDaysValue.setBounds(78, 269, 315, 25);
+		JLable_LoanDaysValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel jl_PaymentValue = new JLabel("- Default payment value");
-		jl_PaymentValue.setBounds(78, 321, 225, 25);
-		jl_PaymentValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JLabel JLable_PaymentValue = new JLabel("- Default payment value");
+		JLable_PaymentValue.setBounds(78, 321, 225, 25);
+		JLable_PaymentValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JFormattedTextField jtf_1 = new JFormattedTextField();
-		jtf_1.setBounds(395, 264, 41, 39);
+		JFormattedTextField jtf_LoanDaysValue = new JFormattedTextField();
+		jtf_LoanDaysValue.setBounds(395, 264, 41, 39);
 		
-		JButton jb_Save = new JButton("Save");
-		jb_Save.setBounds(681, 366, 75, 33);
-		jb_Save.addActionListener(new ActionListener() {
+		JButton jb_Save1 = new JButton("Save");
+		jb_Save1.setBounds(786, 365, 75, 33);
+		jb_Save1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		jb_Save.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jb_Save1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JButton jb_Close = new JButton("Close");
-		jb_Close.setBounds(591, 366, 81, 33);
-		jb_Close.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jb_Close.addActionListener(new java.awt.event.ActionListener() {
+		JButton jb_Close1 = new JButton("Close");
+		jb_Close1.setBounds(696, 365, 81, 33);
+		jb_Close1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Close1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 frameClass.dispose();
                 }
         });
-		jp_SystemOptions.setLayout(null);
-		jp_SystemOptions.add(jcb_2);
-		jp_SystemOptions.add(jcb_1);
-		jp_SystemOptions.add(jcb_3);
-		jp_SystemOptions.add(jl_LoanDaysValue);
-		jp_SystemOptions.add(jl_PaymentValue);
-		jp_SystemOptions.add(jtf_1);
-		jp_SystemOptions.add(jb_Close);
-		jp_SystemOptions.add(jb_Save);
+		Tab_SystemOptions.setLayout(null);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(302, 310, 41, 39);
-		jp_SystemOptions.add(formattedTextField);
+		JCheckBox jcb_1 = new JCheckBox("Canceling a delay message Returns a title");
+		jcb_1.setBounds(213, 53, 407, 33);
+		jcb_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Tab_SystemOptions.add(jcb_1);
+		Tab_SystemOptions.add(jcb_2);
+		Tab_SystemOptions.add(jcb_3);
+		Tab_SystemOptions.add(JLable_LoanDaysValue);
+		Tab_SystemOptions.add(JLable_PaymentValue);
+		Tab_SystemOptions.add(jtf_LoanDaysValue);
 		
-		JPanel jp_Backup = new JPanel();
-		jp_Backup.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tabbedPane.addTab("Backup", null, jp_Backup, null);
-		jp_Backup.setLayout(null);
+		JFormattedTextField jtf_PaymentValue = new JFormattedTextField();
+		jtf_PaymentValue.setBounds(302, 310, 41, 39);
+		Tab_SystemOptions.add(jtf_PaymentValue);
+		Tab_SystemOptions.add(jb_Close1);
+		Tab_SystemOptions.add(jb_Save1);
 		
-		JLabel lblDataSize = new JLabel("Database size:");
-		lblDataSize.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDataSize.setBounds(166, 58, 118, 32);
-		jp_Backup.add(lblDataSize);
+		JPanel Tab_Backup = new JPanel();
+		Tab_Backup.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tabbedPane.addTab("Backup", null, Tab_Backup, null);
+		Tab_Backup.setLayout(null);
+		
+		JLabel jl_lDataSize = new JLabel("Database size:");
+		jl_lDataSize.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jl_lDataSize.setBounds(166, 58, 118, 32);
+		Tab_Backup.add(jl_lDataSize);
 		
 		JButton btnFolderBackup = new JButton("Folder backup");
 		btnFolderBackup.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnFolderBackup.setBounds(162, 116, 262, 84);
-		jp_Backup.add(btnFolderBackup);
+		Tab_Backup.add(btnFolderBackup);
 		
 		JButton btnBackupAndCompression = new JButton("Backup and compression");
 		btnBackupAndCompression.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnBackupAndCompression.setBounds(457, 116, 262, 84);
-		jp_Backup.add(btnBackupAndCompression);
+		Tab_Backup.add(btnBackupAndCompression);
 		
-		JButton button_4 = new JButton("Close");
-		button_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button_4.setBounds(555, 349, 93, 33);
-		jp_Backup.add(button_4);
+		JButton jb_Close2 = new JButton("Close");
+		jb_Close2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Close2.setBounds(674, 365, 93, 33);
+		jb_Close2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frameClass.dispose();
+                }
+        });
+		Tab_Backup.add(jb_Close2);
 		
-		JButton button_5 = new JButton("Save");
-		button_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button_5.setBounds(657, 349, 85, 33);
-		jp_Backup.add(button_5);
+		JButton jb_Save2 = new JButton("Save");
+		jb_Save2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Save2.setBounds(776, 365, 85, 33);
+		Tab_Backup.add(jb_Save2);
 		
-		JLabel lblNewLabel = new JLabel("It is recommended to perform once a week compression");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(166, 216, 553, 20);
-		jp_Backup.add(lblNewLabel);
+		JLabel lbl_recommend = new JLabel("It is recommended to perform once a week compression");
+		lbl_recommend.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbl_recommend.setBounds(166, 216, 553, 20);
+		Tab_Backup.add(lbl_recommend);
 		
-		JLabel lblPermanentLocationTo = new JLabel("Permanent location to backup the database");
-		lblPermanentLocationTo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPermanentLocationTo.setBounds(162, 252, 553, 20);
-		jp_Backup.add(lblPermanentLocationTo);
+		JLabel lbl_backup = new JLabel("Permanent location to backup the database");
+		lbl_backup.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbl_backup.setBounds(162, 252, 553, 20);
+		Tab_Backup.add(lbl_backup);
 		
-		textField = new JTextField();
-		textField.setBounds(162, 280, 469, 26);
-		jp_Backup.add(textField);
-		textField.setColumns(10);
+		textField_backup = new JTextField();
+		textField_backup.setBounds(162, 280, 469, 26);
+		Tab_Backup.add(textField_backup);
+		textField_backup.setColumns(10);
 		
-		JButton btnDelete_1 = new JButton("Delete");
-		btnDelete_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete_1.setBounds(634, 280, 106, 27);
-		jp_Backup.add(btnDelete_1);
+		JButton btn_Delete1 = new JButton("Delete");
+		btn_Delete1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btn_Delete1.setBounds(634, 280, 106, 27);
+		Tab_Backup.add(btn_Delete1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(283, 62, 436, 26);
-		jp_Backup.add(textField_1);
-		textField_1.setColumns(10);
+		textField_DataSize = new JTextField();
+		textField_DataSize.setBounds(283, 62, 436, 26);
+		Tab_Backup.add(textField_DataSize);
+		textField_DataSize.setColumns(10);
 		
-		JPanel jp_DeleteData = new JPanel();
-		jp_DeleteData.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tabbedPane.addTab("Delete Data", null, jp_DeleteData, null);
-		jp_DeleteData.setLayout(null);
+		JPanel Tab_DeleteData = new JPanel();
+		Tab_DeleteData.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tabbedPane.addTab("Delete Data", null, Tab_DeleteData, null);
+		Tab_DeleteData.setLayout(null);
 		
-		JCheckBox chckbxDeleteTitels = new JCheckBox("Deleting titles");
-		chckbxDeleteTitels.setBounds(192, 135, 407, 33);
-		chckbxDeleteTitels.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jp_DeleteData.add(chckbxDeleteTitels);
+		JCheckBox chckbx_DeleteTitels = new JCheckBox("Deleting titles");
+		chckbx_DeleteTitels.setBounds(192, 135, 407, 33);
+		chckbx_DeleteTitels.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Tab_DeleteData.add(chckbx_DeleteTitels);
 		
 		JCheckBox chckbx_DelStudAndBorrow = new JCheckBox("Delete students and borrow books");
 		chckbx_DelStudAndBorrow.setBounds(192, 49, 407, 33);
 		chckbx_DelStudAndBorrow.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jp_DeleteData.add(chckbx_DelStudAndBorrow);
+		Tab_DeleteData.add(chckbx_DelStudAndBorrow);
 		
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnDelete.setBounds(321, 255, 128, 33);
-		jp_DeleteData.add(btnDelete);
+		JButton btn_Delete2 = new JButton("Delete");
+		btn_Delete2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btn_Delete2.setBounds(321, 255, 128, 33);
+		Tab_DeleteData.add(btn_Delete2);
 		
-		JButton btnsave_deletedata = new JButton("Save");
-		btnsave_deletedata.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnsave_deletedata.setBounds(694, 349, 75, 33);
-		jp_DeleteData.add(btnsave_deletedata);
+		JButton jb_Save3 = new JButton("Save");
+		jb_Save3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Save3.setBounds(786, 365, 75, 33);
+		Tab_DeleteData.add(jb_Save3);
 		
-		JButton button_1 = new JButton("Close");
-		button_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button_1.setBounds(598, 349, 81, 33);
-		jp_DeleteData.add(button_1);
+		JButton jb_Close3 = new JButton("Close");
+		jb_Close3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Close3.setBounds(690, 365, 81, 33);
+		jb_Close3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frameClass.dispose();
+                }
+        });
+		Tab_DeleteData.add(jb_Close3);
 		
-		JPanel jp_Logo = new JPanel();
-		tabbedPane.addTab("Logo", null, jp_Logo, null);
+		JPanel Tab_Logo = new JPanel();
+		tabbedPane.addTab("Logo", null, Tab_Logo, null);
 		
-		JLabel jLabel1 = new JLabel("*******Picture*******");
-		jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-		jLabel1.setToolTipText("");
-		jLabel1.setBounds(114, 74, 385, 182);
-		jp_Logo.add(jLabel1);
+		JLabel jLabel_Pic = new JLabel("*******Picture*******");
+		jLabel_Pic.setHorizontalAlignment(SwingConstants.CENTER);
+		jLabel_Pic.setToolTipText("");
+		jLabel_Pic.setBounds(114, 74, 385, 182);
+		Tab_Logo.add(jLabel_Pic);
 		frameClass.getContentPane().setLayout(groupLayout);
 		
-		JLabel lbl_logo = new JLabel("A logo image that will appear in all reports");
-		lbl_logo.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_logo.setBounds(134, 272, 335, 22);
-		lbl_logo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		JLabel lbl_comment = new JLabel("A logo image that will appear in all reports");
+		lbl_comment.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_comment.setBounds(134, 272, 335, 22);
+		lbl_comment.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JTextFieldl = new JTextField();
-		JTextFieldl.setBounds(84, 298, 401, 26);
-		jp_Logo.add(JTextFieldl);
-		JTextFieldl.setColumns(10);
+		JTextFiel_Path = new JTextField();
+		JTextFiel_Path.setBounds(84, 298, 401, 26);
+		Tab_Logo.add(JTextFiel_Path);
+		JTextFiel_Path.setColumns(10);
 		
-		JButton button = new JButton("Choose \r\nLogo");
-		button.addActionListener(new ActionListener() {
+		JButton btn_ChooseLogo = new JButton("Choose \r\nLogo");
+		btn_ChooseLogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser file=new JFileChooser();
 				file.setCurrentDirectory(new File ("user.dir"));
@@ -291,64 +301,49 @@ public class SystemSettings {
 		          {
 		        	  File f = file.getSelectedFile();
 		        	  String p = f.getAbsolutePath();
-		        	  JTextFieldl.setText(file.getSelectedFile().getAbsolutePath());
-		        	  jLabel1.setIcon(new ImageIcon(p));
+		        	  JTextFiel_Path.setText(file.getSelectedFile().getAbsolutePath());
+		        	  jLabel_Pic.setIcon(new ImageIcon(p));
 		          }
-//				JFileChooser fs=new JFileChooser(new File("c:\\"));
-//				fs.setDialogTitle("Open a File");
-//				fs.setFileFilter(new FileTypeFilter(".txt","Text File"));
-//				fs.setFileFilter(new FileTypeFilter(".doc","Word File"));
-//				fs.setFileFilter(new FileTypeFilter(".docx","Word File"));
-//				fs.setFileFilter(new FileTypeFilter(".jpg","JPEG File"));
-//				int result= fs.showSaveDialog(null);
-//				if (result==JFileChooser.APPROVE_OPTION) {
-//					try {
-//						File fi = fs.getSelectedFile();
-//						BufferedReader br = new BufferedReader (new FileReader(
-//								fi.getPath()));
-//						String line = "";
-//						String s = "";
-//						while ((line=br.readLine())!=null){
-//							s += line;
-//						}
-//						textContent.setText(s);
-//						if (br!=null) 
-//							br.close();
-//					} catch (Exception e2) {
-//					JOptionPane.showMessageDialog(null, e2.getMessage());
-//					}
-//				}
 			}
 		});
-		button.setBounds(539, 97, 161, 84);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btn_ChooseLogo.setBounds(539, 97, 161, 84);
+		btn_ChooseLogo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		
-		JButton btnDeleteLogo = new JButton("Delete Logo");
-		btnDeleteLogo.addActionListener(new ActionListener() {
+		JButton btn_DeleteLogo = new JButton("Delete Logo");
+		btn_DeleteLogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    // Remove icon when button is clicked.
+				jLabel_Pic.setIcon(null); 
+				JTextFiel_Path.setText(null);
 			}
 		});
-		btnDeleteLogo.setBounds(539, 210, 161, 84);
-		btnDeleteLogo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jp_Logo.setLayout(null);
-		jp_Logo.add(lbl_logo);
-		jp_Logo.add(btnDeleteLogo);
-		jp_Logo.add(button);
 		
-		JButton button_2 = new JButton("Close");
-		button_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button_2.setBounds(584, 349, 93, 33);
-		jp_Logo.add(button_2);
+		btn_DeleteLogo.setBounds(539, 210, 161, 84);
+		btn_DeleteLogo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Tab_Logo.setLayout(null);
+		Tab_Logo.add(lbl_comment);
+		Tab_Logo.add(btn_DeleteLogo);
+		Tab_Logo.add(btn_ChooseLogo);
 		
-		JButton button_3 = new JButton("Save");
-		button_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button_3.setBounds(686, 349, 85, 33);
-		jp_Logo.add(button_3);
+		JButton jb_Close4 = new JButton("Close");
+		jb_Close4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Close4.setBounds(674, 365, 93, 33);
+		jb_Close4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frameClass.dispose();
+                }
+        });
+		Tab_Logo.add(jb_Close4);
 		
-		JLabel lblPath = new JLabel("path");
-		lblPath.setBounds(29, 301, 40, 20);
-		jp_Logo.add(lblPath);
+		JButton jb_Save4 = new JButton("Save");
+		jb_Save4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		jb_Save4.setBounds(776, 365, 85, 33);
+		Tab_Logo.add(jb_Save4);
+		
+		JLabel lbl_Path = new JLabel("path");
+		lbl_Path.setBounds(29, 301, 40, 20);
+		Tab_Logo.add(lbl_Path);
 		
 
 		
