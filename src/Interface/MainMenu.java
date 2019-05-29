@@ -9,10 +9,20 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import java.awt.Font;
+import javax.swing.JCheckBox;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -61,12 +71,24 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		frmLibrary = new JFrame();
-		frmLibrary.setFont(null);
-		frmLibrary.setBackground(new Color(240, 240, 240));
+		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
+		frmLibrary.setForeground(new Color(255, 255, 255));
+		frmLibrary.setBackground(new Color(255, 255, 255));
+		frmLibrary.getContentPane().setForeground(new Color(255, 255, 255));
 		frmLibrary.setTitle("Library");
 		frmLibrary.setResizable(false);
-		frmLibrary.setBounds(100, 100, 1118, 636);
-		frmLibrary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLibrary.setBounds(100, 100, 1112, 661);
+		frmLibrary.dispose();
+		frmLibrary.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frmLibrary.addWindowListener( new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                JFrame frame = (JFrame)e.getSource();
+
+                int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to close the application?", "Please Confirm",JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION)
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+            });
 		frmLibrary.getContentPane().setLayout(null);
 		
 		JButton exit_button = new JButton("Exit");
@@ -138,24 +160,24 @@ public class MainMenu {
 		Scroll.setBounds(27, 58, 1079, 305);
 		
 		student_search_txt = new JTextField();
-		student_search_txt.setBounds(781, 25, 115, 20);
+		student_search_txt.setBounds(675, 25, 115, 20);
 		student_search_txt.setColumns(10);
 		
 		JComboBox student_sort_comboBox = new JComboBox();
-		student_sort_comboBox.setBounds(906, 26, 83, 18);
+		student_sort_comboBox.setBounds(800, 26, 116, 18);
 		student_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		student_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
 		
 		JLabel student_search_lbl = new JLabel(":Search\r\n");
-		student_search_lbl.setBounds(1007, 28, 71, 14);
+		student_search_lbl.setBounds(926, 28, 71, 14);
 		student_search_lbl.setBackground(Color.WHITE);
 		
 		JComboBox student_filter_comboBox = new JComboBox();
-		student_filter_comboBox.setBounds(656, 25, 97, 20);
+		student_filter_comboBox.setBounds(568, 25, 97, 20);
 		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		
 		JButton student_search_button = new JButton("Search");
-		student_search_button.setBounds(526, 24, 103, 23);
+		student_search_button.setBounds(455, 24, 103, 23);
 		
 		JLabel student_num_lbl = new JLabel("Num of Clients:");
 		student_num_lbl.setBounds(27, 26, 116, 18);
@@ -300,8 +322,106 @@ public class MainMenu {
 		lock_button.setBounds(314, 11, 100, 127);
 		frmLibrary.getContentPane().add(lock_button);
 		
-
-
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setForeground(new Color(255, 255, 255));
+		panel.setBounds(0, 139, 1084, 380);
+		frmLibrary.getContentPane().add(panel);
 		
+		JLabel lblNewLabel = new JLabel("Computer Library");
+		lblNewLabel.setBackground(new Color(255, 255, 255));
+		lblNewLabel.setForeground(new Color(0, 0, 128));
+		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/library-books.jpg")));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 48));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panel.setLayout(gl_panel);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmLibrary.setJMenuBar(menuBar);
+		
+		JMenu jm_Options = new JMenu("Options");
+		jm_Options.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuBar.add(jm_Options);
+		
+		JButton jb_Settings = new JButton("Settings                     F6");
+		jb_Settings.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jb_Settings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				SystemSettings nw= new SystemSettings();
+				nw.NewScreen();
 			}
+		});
+		
+		JButton jb_LibraryInformation = new JButton("Library Information    F1");
+		jb_LibraryInformation.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(jb_LibraryInformation);
+		
+		JButton btnWaitFormFor = new JButton("Wait form for title      F5");
+		btnWaitFormFor.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnWaitFormFor);
+		jm_Options.add(jb_Settings);
+		
+		JButton btnBackUpTo = new JButton("Back up to a folder     F2");
+		btnBackUpTo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnBackUpTo);
+		
+		JButton btnUsers = new JButton("Users                         F3");
+		btnUsers.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnUsers);
+		
+		JButton btnSwitchUser = new JButton("Switch user                F4");
+		btnSwitchUser.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnSwitchUser);
+		
+		JButton btnImportExcelLists = new JButton("Import Excel Lists       F9");
+		btnImportExcelLists.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnImportExcelLists);
+		
+		JButton btnExit = new JButton("Exit                     Ctrl+Q");
+		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                frmLibrary.dispose();
+                }
+        });
+		
+		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Options.add(btnExit);
+		
+		JMenu jm_Edit = new JMenu("Edit");
+		jm_Edit.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuBar.add(jm_Edit);
+		
+		JButton btnEditTitleDetails = new JButton("Edit title details                F7");
+		btnEditTitleDetails.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Edit.add(btnEditTitleDetails);
+		
+		JButton btnEditStudentInforamtion = new JButton("Edit student inforamtion   F8");
+		btnEditStudentInforamtion.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Edit.add(btnEditStudentInforamtion);
+		
+		JMenu jm_Help = new JMenu("Help");
+		jm_Help.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuBar.add(jm_Help);
+		
+		JButton btnAbout = new JButton("About");
+		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		jm_Help.add(btnAbout);
 	}
+}
