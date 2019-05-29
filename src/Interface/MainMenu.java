@@ -58,6 +58,8 @@ public class MainMenu {
 	private JTable table;
 	private JTable student_table;
 	private JTextField student_search_txt;
+	private SystemSettings nw;
+
 
 	/**
 	 * Create the application.
@@ -70,6 +72,7 @@ public class MainMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		nw = new SystemSettings();
 		frmLibrary = new JFrame();
 		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
 		frmLibrary.setForeground(new Color(255, 255, 255));
@@ -358,13 +361,19 @@ public class MainMenu {
 		jm_Options.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(jm_Options);
 		
+		
 		JButton jb_Settings = new JButton("Settings                     F6");
 		jb_Settings.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jb_Settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				SystemSettings nw= new SystemSettings();
-				nw.NewScreen();
+				try {
+					if(!nw.frameClass.isVisible())
+					{
+						nw.frameClass.setVisible(true);
+					}	
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}		
 			}
 		});
 		

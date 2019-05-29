@@ -26,10 +26,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Window.Type;
 
 public class SystemSettings {
 
-	private JFrame frameClass;
+	JFrame frameClass;
 	private JTextField textField_backup;
 	private JTextField textField_DataSize;
 	private JTextField JTextFiel_Path;
@@ -37,21 +38,6 @@ public class SystemSettings {
 	byte[] image;
 	String imagepath="";
 	ImageIcon myimage;
-	/**
-	 * Launch the application.
-	 */
-	public static void NewScreen() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SystemSettings window = new SystemSettings();
-					window.frameClass.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 
 	/**
@@ -79,20 +65,13 @@ public class SystemSettings {
 	 */
 	private void initialize() {
 		frameClass = new JFrame();
+		frameClass.setType(Type.POPUP);
 		frameClass.getContentPane().setBackground(Color.RED);
-		frameClass.setTitle("SystemSettings");
+		frameClass.setTitle("System Settings");
 		frameClass.setBounds(100, 100, 888, 610);
 		frameClass.dispose();//exit
 		frameClass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frameClass.addWindowListener( new WindowAdapter(){
-            public void windowClosing(WindowEvent e){
-                JFrame frame = (JFrame)e.getSource();
 
-                int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to close the window?", "Please Confirm",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION)
-                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            }
-            });
 		JLabel JLabel_SystemSettings = new JLabel("System Settings");
 		JLabel_SystemSettings.setForeground(new Color(0, 0, 0));
 		JLabel_SystemSettings.setFont(new Font("Tahoma", Font.BOLD, 48));
@@ -272,7 +251,7 @@ public class SystemSettings {
 		JPanel Tab_Logo = new JPanel();
 		tabbedPane.addTab("Logo", null, Tab_Logo, null);
 		
-		JLabel jLabel_Pic = new JLabel("*******Picture*******");
+		JLabel jLabel_Pic = new JLabel("Your Logo Here");
 		jLabel_Pic.setHorizontalAlignment(SwingConstants.CENTER);
 		jLabel_Pic.setToolTipText("");
 		jLabel_Pic.setBounds(114, 74, 385, 182);
@@ -303,6 +282,7 @@ public class SystemSettings {
 		        	  String p = f.getAbsolutePath();
 		        	  JTextFiel_Path.setText(file.getSelectedFile().getAbsolutePath());
 		        	  jLabel_Pic.setIcon(new ImageIcon(p));
+		        	  jLabel_Pic.setText("");
 		          }
 			}
 		});
@@ -315,6 +295,7 @@ public class SystemSettings {
 			public void actionPerformed(ActionEvent e) {
 			    // Remove icon when button is clicked.
 				jLabel_Pic.setIcon(null); 
+				jLabel_Pic.setText("Your Logo Here");
 				JTextFiel_Path.setText(null);
 			}
 		});
