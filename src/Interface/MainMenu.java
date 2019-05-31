@@ -40,6 +40,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
@@ -362,6 +363,18 @@ public class MainMenu {
 		frmLibrary.getContentPane().add(home_button);
 		
 		JButton lock_button = new JButton("Lock");
+		lock_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					LoginDialog login_dialog = new LoginDialog();
+					login_dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					login_dialog.setVisible(true);
+					frmLibrary.dispose();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		lock_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/redpad-lock-th.png")));
 		lock_button.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lock_button.setVerticalAlignment(SwingConstants.TOP);
