@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
@@ -51,6 +52,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.JTextPane;
 
 public class MainMenu {
 
@@ -59,6 +62,7 @@ public class MainMenu {
 	private JTable student_table;
 	private JTextField student_search_txt;
 	private SystemSettings nw;
+	private JTextField book_code_text;
 
 
 	/**
@@ -249,6 +253,42 @@ public class MainMenu {
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(599, 201, 89, 23);
 		Dummy.add(btnNewButton);
+		
+		JPanel return_panel = new JPanel();
+		return_panel.setLayout(null);
+		return_panel.setFocusTraversalKeysEnabled(false);
+		return_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		return_panel.setBackground(new Color(204, 204, 255));
+		cards.add(return_panel, "name_1009959647905836");
+		
+		JButton return_book_button = new JButton("Return");
+		return_book_button.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		return_book_button.setBounds(494, 161, 102, 45);
+		return_panel.add(return_book_button);
+		
+		JLabel book_code_lable = new JLabel("Book Code:");
+		book_code_lable.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		book_code_lable.setBounds(343, 127, 102, 20);
+		return_panel.add(book_code_lable);
+		
+		book_code_text = new JTextField() {
+			 public void processKeyEvent(KeyEvent ev) {
+				    char c = ev.getKeyChar();
+				    try {
+				      // Ignore all non-printable characters. Just check the printable ones.
+				      if (c > 31 && c < 127) {
+				        Integer.parseInt(c + "");
+				      }
+				      super.processKeyEvent(ev);
+				    }
+				    catch (NumberFormatException nfe) {
+				      // Do nothing. Character inputted is not a number, so ignore it.
+				    }
+				  }
+		};
+		book_code_text.setBounds(441, 130, 229, 20);
+		return_panel.add(book_code_text);
+		book_code_text.setColumns(10);
 		exit_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/red-delete-button-png-5.png")));
 		exit_button.setBackground(Color.LIGHT_GRAY);
 		exit_button.setBounds(10, 11, 100, 127);
@@ -299,6 +339,11 @@ public class MainMenu {
 		frmLibrary.getContentPane().add(borrow_button);
 		
 		JButton return_button = new JButton("Return");
+		return_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				card_layout.show(cards, "name_1009959647905836");
+			}
+		});
 		return_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/svg-red-circle-left-arrow-icon-1.png")));
 		return_button.setVerticalAlignment(SwingConstants.TOP);
 		return_button.setVerticalTextPosition(SwingConstants.BOTTOM);
