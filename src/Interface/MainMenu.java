@@ -358,7 +358,6 @@ public class MainMenu {
 		scrollPane.setViewportView(books_table);
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(599, 201, 89, 23);
-		Dummy.add(btnNewButton);
 		
 		JPanel return_panel = new JPanel();
 		return_panel.setLayout(null);
