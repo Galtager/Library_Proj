@@ -1,10 +1,8 @@
 package Interface;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -13,61 +11,56 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.JSplitPane;
 import javax.swing.JPanel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Font;
-import javax.swing.JCheckBox;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JScrollBar;
-import javax.swing.UIManager;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.Font;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.SystemColor;
-import javax.swing.border.LineBorder;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.SoftBevelBorder;
 import java.awt.CardLayout;
-import java.awt.FlowLayout;
 import java.awt.Component;
-import javax.swing.JTextPane;
 
 public class MainMenu {
 
 	JFrame frmLibrary;
-	private JTable table;
 	private JTable student_table;
 	private JTextField student_search_txt;
 	private SystemSettings nw;
-	private ClientRegistration cr;
-
+	private StudentSearch ss;
 	private JTextField textField;
 	private JTable books_table;
 	private JTextField book_code_text;
+	private JTable table_1;
+	private JTable table_2;
+	private JTable table_3;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTextField textField_11;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	private JTextField textField_14;
 
 
 	/**
@@ -82,7 +75,7 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		nw = new SystemSettings();
-		cr = new ClientRegistration();
+		ss = new StudentSearch();
 		frmLibrary = new JFrame();
 		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
 		frmLibrary.setForeground(new Color(255, 255, 255));
@@ -190,6 +183,10 @@ public class MainMenu {
 		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		
 		JButton student_search_button = new JButton("Search");
+		student_search_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		student_search_button.setBounds(455, 24, 103, 23);
 		
 		JLabel student_num_lbl = new JLabel("Num of Clients:");
@@ -218,20 +215,14 @@ public class MainMenu {
 		student_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		student_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					if(!cr.frmClientRegistration.isVisible())
-					{
-						cr.frmClientRegistration.setVisible(true);
-					}	
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				
 			}
-
-			
-			}});
+		});
 		
 		JButton student_card_button = new JButton("Card");
+		student_card_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		student_card_button.setBounds(709, 398, 60, 45);
 		student_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
@@ -258,6 +249,379 @@ public class MainMenu {
 		student_panel.add(student_edit_button);
 		student_panel.add(Scroll);
 		
+		JPanel borrow_panel = new JPanel();
+		borrow_panel.setLayout(null);
+		borrow_panel.setFocusTraversalKeysEnabled(false);
+		borrow_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "borrow", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		borrow_panel.setBackground(new Color(204, 204, 255));
+		cards.add(borrow_panel, "name_64416355333680");
+		
+
+		table_1 = new JTable();
+		table_1.setForeground(new Color(0, 0, 0));
+		table_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		table_1.setBackground(new Color(255, 255, 255));
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+					"Titles loaned"
+			}
+		));
+
+		JScrollPane scrollPane_titlesloaned = new JScrollPane(table_1,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_titlesloaned.setBounds(15, 26, 670, 134);
+		scrollPane_titlesloaned.setViewportView(table_1);
+		borrow_panel.add(scrollPane_titlesloaned);
+
+		table_2 = new JTable();
+		table_2.setForeground(new Color(0, 0, 0));
+		table_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		table_2.setBackground(new Color(255, 255, 255));
+		table_2.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+					"History of lateness"
+			}
+		));
+		
+		JScrollPane scrollPane_History = new JScrollPane(table_2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_History.setBounds(15, 161, 670, 134);
+		scrollPane_History.setViewportView(table_2);
+		borrow_panel.add(scrollPane_History);
+		
+		table_3 = new JTable();
+		table_3.setForeground(new Color(0, 0, 0));
+		table_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		table_3.setBackground(new Color(255, 255, 255));
+		table_3.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+					"Renewals"
+			}
+		));
+		
+		JScrollPane scrollPane_Renewals = new JScrollPane(table_3,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_Renewals.setBounds(15, 296, 670, 134);
+		scrollPane_Renewals.setViewportView(table_3);
+		borrow_panel.add(scrollPane_Renewals);
+		
+		JPanel panel_borrow1 = new JPanel();
+		panel_borrow1.setBounds(700, 16, 302, 255);
+		panel_borrow1.setBackground(new Color(204, 204, 255)); 
+		borrow_panel.add(panel_borrow1);
+		panel_borrow1.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Student Code");
+		lblNewLabel_1.setBounds(0, 0, 103, 22);
+		lblNewLabel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblNewLabel_1.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblNewLabel_1);
+		
+		JLabel lblStudentName = new JLabel("Student name");
+		lblStudentName.setBounds(0, 38, 103, 24);
+		lblStudentName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblStudentName.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblStudentName);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setBounds(0, 66, 103, 20);
+		lblId.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblId.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblId);
+		
+		JLabel lblLimitTitles = new JLabel("Limit titles");
+		lblLimitTitles.setBounds(0, 92, 103, 23);
+		lblLimitTitles.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblLimitTitles.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblLimitTitles);
+		
+		JLabel lblDelays = new JLabel("Delays");
+		lblDelays.setBounds(0, 120, 103, 23);
+		lblDelays.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblDelays.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblDelays);
+		
+		JLabel lblTitlesNotReturned = new JLabel("Titles not returned");
+		lblTitlesNotReturned.setBounds(0, 147, 144, 23);
+		lblTitlesNotReturned.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblTitlesNotReturned.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblTitlesNotReturned);
+		
+		JLabel lblGrade = new JLabel("Grade");
+		lblGrade.setBounds(0, 204, 103, 23);
+		lblGrade.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblGrade.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblGrade);
+		
+		JLabel lblUtilization = new JLabel("Utilization");
+		lblUtilization.setBounds(0, 176, 103, 23);
+		lblUtilization.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblUtilization.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblUtilization);
+		
+		JLabel lblEndDate = new JLabel("End date");
+		lblEndDate.setBounds(0, 231, 103, 23);
+		lblEndDate.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		lblEndDate.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(lblEndDate);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(147, -1, 146, 25);
+		panel_borrow1.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(147, 38, 146, 23);
+		textField_2.setColumns(10);
+		textField_2.setBackground(new Color(153, 153, 204));
+		panel_borrow1.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBackground(new Color(153, 153, 204));
+		textField_3.setBounds(147, 66, 146, 23);
+		panel_borrow1.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBackground(new Color(153, 153, 204));
+		textField_4.setBounds(147, 93, 146, 23);
+		panel_borrow1.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBackground(new Color(153, 153, 204));
+		textField_5.setBounds(147, 121, 146, 23);
+		panel_borrow1.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBackground(new Color(153, 153, 204));
+		textField_6.setBounds(147, 148, 146, 23);
+		panel_borrow1.add(textField_6);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBackground(new Color(153, 153, 204));
+		textField_7.setBounds(147, 175, 146, 23);
+		panel_borrow1.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBackground(new Color(153, 153, 204));
+		textField_8.setBounds(147, 203, 146, 23);
+		panel_borrow1.add(textField_8);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBackground(new Color(153, 153, 204));
+		textField_9.setBounds(147, 230, 146, 23);
+		panel_borrow1.add(textField_9);
+		
+		JPanel panel_borrow2 = new JPanel();
+		panel_borrow2.setBackground(new Color(204, 204, 255));
+		panel_borrow2.setBounds(700, 274, 302, 159);
+		borrow_panel.add(panel_borrow2);
+		panel_borrow2.setLayout(null);
+		
+		JLabel lblDaysOfBorrow = new JLabel("Days of borrow");
+		lblDaysOfBorrow.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblDaysOfBorrow.setBackground(new Color(224, 255, 255));
+		lblDaysOfBorrow.setBounds(0, 130, 132, 24);
+		panel_borrow2.add(lblDaysOfBorrow);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBackground(new Color(153, 153, 204));
+		textField_10.setBounds(147, 130, 146, 23);
+		panel_borrow2.add(textField_10);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBackground(new Color(153, 153, 204));
+		textField_11.setBounds(147, 104, 146, 23);
+		panel_borrow2.add(textField_11);
+		
+		JLabel lblTitleType = new JLabel("Title type");
+		lblTitleType.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblTitleType.setBackground(new Color(224, 255, 255));
+		lblTitleType.setBounds(0, 104, 103, 24);
+		panel_borrow2.add(lblTitleType);
+		
+		JLabel lblCategory = new JLabel("Category");
+		lblCategory.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblCategory.setBackground(new Color(224, 255, 255));
+		lblCategory.setBounds(0, 75, 103, 24);
+		panel_borrow2.add(lblCategory);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBackground(new Color(153, 153, 204));
+		textField_12.setBounds(147, 75, 146, 23);
+		panel_borrow2.add(textField_12);
+		
+		JLabel lblTitleName = new JLabel("Title Name");
+		lblTitleName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblTitleName.setBackground(new Color(224, 255, 255));
+		lblTitleName.setBounds(0, 46, 103, 24);
+		panel_borrow2.add(lblTitleName);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBackground(new Color(153, 153, 204));
+		textField_13.setBounds(147, 46, 146, 23);
+		panel_borrow2.add(textField_13);
+		
+		JLabel lblTitleCode = new JLabel("Title Code");
+		lblTitleCode.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblTitleCode.setBackground(new Color(224, 255, 255));
+		lblTitleCode.setBounds(0, 19, 103, 24);
+		panel_borrow2.add(lblTitleCode);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBackground(new Color(255, 255, 255));
+		textField_14.setBounds(147, 19, 146, 23);
+		panel_borrow2.add(textField_14);
+		
+		JLabel lblNewLabel_2 = new JLabel("To execute borrow CTRL+C");
+		lblNewLabel_2.setBounds(83, 0, 210, 20);
+		panel_borrow2.add(lblNewLabel_2);
+		
+		JButton btn_borrow = new JButton("Borrow");
+		btn_borrow.setBounds(1006, 257, 91, 29);
+		borrow_panel.add(btn_borrow);
+		
+		JButton btn_Help = new JButton("Help");
+		btn_Help.setBounds(1006, 325, 91, 29);
+		borrow_panel.add(btn_Help);
+		
+		JButton btn_Report = new JButton("Report");
+		btn_Report.setBounds(1006, 291, 91, 29);
+		borrow_panel.add(btn_Report);
+		
+		JButton button_Close = new JButton("Close");
+		button_Close.setBounds(1006, 391, 91, 29);
+		borrow_panel.add(button_Close);
+		
+		JButton button_search = new JButton("");
+		button_search.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						if(!ss.frmStudentSearch.isVisible())
+						{
+							ss.frmStudentSearch.setVisible(true);
+						}	
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}	
+			}
+		});
+		button_search.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
+		button_search.setBounds(1005, 16, 26, 25);
+		borrow_panel.add(button_search);
+		
+		
+				
 		JPanel books_panel = new JPanel();
 		books_panel.setLayout(null);
 		books_panel.setFocusTraversalKeysEnabled(false);
@@ -448,6 +812,11 @@ public class MainMenu {
 		frmLibrary.getContentPane().add(books_button);
 		
 		JButton borrow_button = new JButton("Borrow");
+		borrow_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card_layout.show(cards, "name_64416355333680");
+			}
+		});
 		borrow_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/\u200F\u200Fsvg-red-circle-left-arrow-icon-1 - \u05E2\u05D5\u05EA\u05E7.png")));
 		borrow_button.setVerticalTextPosition(SwingConstants.BOTTOM);
 		borrow_button.setVerticalAlignment(SwingConstants.TOP);
