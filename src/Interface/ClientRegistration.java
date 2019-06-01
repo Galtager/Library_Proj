@@ -31,6 +31,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
+import com.toedter.calendar.JDateChooser;
 
 public class ClientRegistration {
 
@@ -43,7 +44,6 @@ public class ClientRegistration {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
-	private JTextField textField_8;
 	private JTextField textField_10;
 	private JTextField textField_11;
 	private JTextField textField_12;
@@ -244,11 +244,6 @@ public class ClientRegistration {
 		textField_7.setBounds(120, 170, 96, 20);
 		panel.add(textField_7);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(120, 190, 96, 20);
-		panel.add(textField_8);
-		
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
 		textField_10.setBounds(120, 240, 96, 20);
@@ -282,10 +277,6 @@ public class ClientRegistration {
 		email_button.setBounds(316, 149, 46, 23);
 		panel.add(email_button);
 		
-		JComboBox ending_day_comboBox = new JComboBox();
-		ending_day_comboBox.setBounds(120, 209, 96, 22);
-		panel.add(ending_day_comboBox);
-		
 		JLabel payment_lbl = new JLabel("Payment");
 		payment_lbl.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		payment_lbl.setBounds(10, 300, 106, 20);
@@ -318,6 +309,14 @@ public class ClientRegistration {
         adress_label.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         adress_label.setBounds(10, 110, 106, 20);
         panel.add(adress_label);
+        
+        JDateChooser ending_date_chooser = new JDateChooser();
+        ending_date_chooser.setBounds(120, 211, 142, 19);
+        panel.add(ending_date_chooser);
+        
+        JDateChooser registration_date_chooser = new JDateChooser();
+        registration_date_chooser.setBounds(120, 191, 142, 19);
+        panel.add(registration_date_chooser);
         
 		frmClientRegistration.getContentPane().setLayout(groupLayout);
 		

@@ -63,6 +63,8 @@ public class MainMenu {
 	private JTable student_table;
 	private JTextField student_search_txt;
 	private SystemSettings nw;
+	private ClientRegistration cr;
+
 	private JTextField textField;
 	private JTable books_table;
 	private JTextField book_code_text;
@@ -80,6 +82,7 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		nw = new SystemSettings();
+		cr = new ClientRegistration();
 		frmLibrary = new JFrame();
 		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
 		frmLibrary.setForeground(new Color(255, 255, 255));
@@ -215,26 +218,18 @@ public class MainMenu {
 		student_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		student_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							ClientRegistration window = new ClientRegistration();
-							window.frmClientRegistration.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				dispose();
-			}
-
-			private void dispose() {
-				// TODO Auto-generated method stub
+				try {
+					if(!cr.frmClientRegistration.isVisible())
+					{
+						cr.frmClientRegistration.setVisible(true);
+					}	
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				
 			}
 
 			
-		});
+			}});
 		
 		JButton student_card_button = new JButton("Card");
 		student_card_button.setBounds(709, 398, 60, 45);
