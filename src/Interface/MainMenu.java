@@ -61,10 +61,11 @@ public class MainMenu {
 	JFrame frmLibrary;
 	private JTable table;
 	private JTable student_table;
-	private JTextField student_search_txt;
+	private JTextField client_search_txt;
 	private SystemSettings nw;
 	private ClientRegistration cr;
-
+	private InsertBooks ib;
+	
 	private JTextField textField;
 	private JTable books_table;
 	private JTextField book_code_text;
@@ -75,7 +76,7 @@ public class MainMenu {
 	 */
 	public MainMenu() {
 		initialize();
-	}
+		}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -83,6 +84,7 @@ public class MainMenu {
 	private void initialize() {
 		nw = new SystemSettings();
 		cr = new ClientRegistration();
+		ib = new InsertBooks();
 		frmLibrary = new JFrame();
 		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
 		frmLibrary.setForeground(new Color(255, 255, 255));
@@ -120,11 +122,11 @@ public class MainMenu {
 		CardLayout card_layout = new CardLayout(0, 0); 
 		cards.setLayout(card_layout);
 		
-		JPanel student_panel = new JPanel();
-		cards.add(student_panel, "name_531361761719609");
-		student_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
-		student_panel.setFocusTraversalKeysEnabled(false);
-		student_panel.setBackground(new Color(204, 204, 255));
+		JPanel client_panel = new JPanel();
+		cards.add(client_panel, "name_531361761719609");
+		client_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		client_panel.setFocusTraversalKeysEnabled(false);
+		client_panel.setBackground(new Color(204, 204, 255));
 		
 		student_table = new JTable();
 		student_table.setForeground(new Color(0, 0, 0));
@@ -172,51 +174,51 @@ public class MainMenu {
 		JScrollPane Scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		Scroll.setBounds(27, 58, 1079, 305);
 		
-		student_search_txt = new JTextField();
-		student_search_txt.setBounds(675, 25, 115, 20);
-		student_search_txt.setColumns(10);
+		client_search_txt = new JTextField();
+		client_search_txt.setBounds(675, 25, 115, 20);
+		client_search_txt.setColumns(10);
 		
-		JComboBox student_sort_comboBox = new JComboBox();
-		student_sort_comboBox.setBounds(800, 26, 116, 18);
-		student_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		student_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
+		JComboBox client_sort_comboBox = new JComboBox();
+		client_sort_comboBox.setBounds(800, 26, 116, 18);
+		client_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		client_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
 		
-		JLabel student_search_lbl = new JLabel(":Search\r\n");
-		student_search_lbl.setBounds(926, 28, 71, 14);
-		student_search_lbl.setBackground(Color.WHITE);
+		JLabel client_search_lbl = new JLabel(":Search\r\n");
+		client_search_lbl.setBounds(926, 28, 71, 14);
+		client_search_lbl.setBackground(Color.WHITE);
 		
-		JComboBox student_filter_comboBox = new JComboBox();
-		student_filter_comboBox.setBounds(568, 25, 97, 20);
-		student_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
+		JComboBox client_filter_comboBox = new JComboBox();
+		client_filter_comboBox.setBounds(568, 25, 97, 20);
+		client_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		
-		JButton student_search_button = new JButton("Search");
-		student_search_button.setBounds(455, 24, 103, 23);
+		JButton client_search_button = new JButton("Search");
+		client_search_button.setBounds(455, 24, 103, 23);
 		
-		JLabel student_num_lbl = new JLabel("Num of Clients:");
-		student_num_lbl.setBounds(27, 26, 116, 18);
-		student_num_lbl.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		student_num_lbl.setFocusCycleRoot(true);
-		student_num_lbl.setBackground(SystemColor.inactiveCaptionText);
+		JLabel client_num_lbl = new JLabel("Num of Clients:");
+		client_num_lbl.setBounds(27, 26, 116, 18);
+		client_num_lbl.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		client_num_lbl.setFocusCycleRoot(true);
+		client_num_lbl.setBackground(SystemColor.inactiveCaptionText);
 		
-		JButton student_information_button = new JButton("?\r\n");
-		student_information_button.setBounds(44, 369, 55, 23);
+		JButton client_information_button = new JButton("?\r\n");
+		client_information_button.setBounds(44, 369, 55, 23);
 		
-		JButton student_edit_button = new JButton("Edit");
-		student_edit_button.setBounds(962, 398, 60, 45);
-		student_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		student_edit_button.addActionListener(new ActionListener() {
+		JButton client_edit_button = new JButton("Edit");
+		client_edit_button.setBounds(962, 398, 60, 45);
+		client_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		client_edit_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		JButton student_delete_button = new JButton("Delete");
-		student_delete_button.setBounds(850, 398, 102, 45);
-		student_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		JButton client_delete_button = new JButton("Delete");
+		client_delete_button.setBounds(850, 398, 102, 45);
+		client_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
-		JButton student_insert_button = new JButton("Insert");
-		student_insert_button.setBounds(775, 398, 65, 45);
-		student_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		student_insert_button.addActionListener(new ActionListener() {
+		JButton client_insert_button = new JButton("Insert");
+		client_insert_button.setBounds(775, 398, 65, 45);
+		client_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		client_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(!cr.frmClientRegistration.isVisible())
@@ -231,32 +233,32 @@ public class MainMenu {
 			
 			}});
 		
-		JButton student_card_button = new JButton("Card");
-		student_card_button.setBounds(709, 398, 60, 45);
-		student_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		JButton client_card_button = new JButton("Card");
+		client_card_button.setBounds(709, 398, 60, 45);
+		client_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
-		JButton student_excel_button = new JButton("Excel");
-		student_excel_button.setBounds(639, 398, 60, 45);
-		student_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		JButton client_excel_button = new JButton("Excel");
+		client_excel_button.setBounds(639, 398, 60, 45);
+		client_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
-		JButton student_report_button = new JButton("Report");
-		student_report_button.setBounds(552, 398, 77, 45);
-		student_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		student_panel.setLayout(null);
-		student_panel.add(student_num_lbl);
-		student_panel.add(student_search_button);
-		student_panel.add(student_filter_comboBox);
-		student_panel.add(student_search_txt);
-		student_panel.add(student_sort_comboBox);
-		student_panel.add(student_search_lbl);
-		student_panel.add(student_information_button);
-		student_panel.add(student_report_button);
-		student_panel.add(student_excel_button);
-		student_panel.add(student_card_button);
-		student_panel.add(student_insert_button);
-		student_panel.add(student_delete_button);
-		student_panel.add(student_edit_button);
-		student_panel.add(Scroll);
+		JButton client_report_button = new JButton("Report");
+		client_report_button.setBounds(552, 398, 77, 45);
+		client_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		client_panel.setLayout(null);
+		client_panel.add(client_num_lbl);
+		client_panel.add(client_search_button);
+		client_panel.add(client_filter_comboBox);
+		client_panel.add(client_search_txt);
+		client_panel.add(client_sort_comboBox);
+		client_panel.add(client_search_lbl);
+		client_panel.add(client_information_button);
+		client_panel.add(client_report_button);
+		client_panel.add(client_excel_button);
+		client_panel.add(client_card_button);
+		client_panel.add(client_insert_button);
+		client_panel.add(client_delete_button);
+		client_panel.add(client_edit_button);
+		client_panel.add(Scroll);
 		
 		JPanel books_panel = new JPanel();
 		books_panel.setLayout(null);
@@ -322,6 +324,19 @@ public class MainMenu {
 		button_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		button_5.setBounds(775, 398, 65, 45);
 		books_panel.add(button_5);
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(!ib.frmInsertBooks.isVisible())
+					{
+						ib.frmInsertBooks.setVisible(true);
+					}	
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				
+			}
+			}});
+		
 		
 		JButton button_6 = new JButton("Delete");
 		button_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -608,4 +623,4 @@ public class MainMenu {
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jm_Help.add(btnAbout);
 	}
-}
+		}
