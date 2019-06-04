@@ -2,15 +2,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import Book.Book;
 import Entities.Librarian;
-import FileHandler.Reader;
-import FileHandler.Writer;
+import FileHandler.FileNameDeclrations;
+import FileHandler.Reader.Reader;
+import FileHandler.Writer.Writer;
 
 /* This is a simple Java program. 
    FileName : "HelloWorld.java". */
-/*class Main 
+class Main 
 { 
     // Your program begins with a call to main(). 
     // Prints "Hello, World" to the terminal window. 
@@ -22,14 +22,15 @@ import FileHandler.Writer;
     	
     	
     	try {
-			Writer<Book> w = new Writer<Book>();
+    		
+			Writer<Book> w = new Writer<Book>(FileNameDeclrations.REPORT_FILE_EXTENSION, FileNameDeclrations.REPORT_FILE_PREFIX);
 			w.writeToFile(b);
-			Reader r = new Reader("report_28");
-			System.out.println(r.ReadString());
+			//Reader r = new Reader("report_28");
+			//System.out.println(r.ReadString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         System.out.println("done"); 
     } 
-}*/
+}

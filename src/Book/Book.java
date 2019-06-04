@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import Entities.Borrower;
-import FileHandler.IEntityParser;
-import FileHandler.IEntryToString;
-import FileHandler.IPropertyWriter;
+import FileHandler.Reader.IEntityParser;
+import FileHandler.Writer.IEntryToString;
+import FileHandler.Writer.IPropertyWriter;
 
-public class Book implements IEntryToString, IEntityParser<Book> {
+public class Book implements IEntryToString {
 	enum PropertyIndex {
-		BOOK_ID, TITLE, GENER, AUTHOR, PUBLISHER, PUBLISHING_DATE
+		BOOK_ID, TITLE, GENER, AUTHOR, PUBLISHER, PUBLISHING_DATE, HOLD_REQUESTS, CURRENT_BORROWER
 	};
 
 	@IPropertyWriter(FieldName="BookID")
@@ -29,12 +29,12 @@ public class Book implements IEntryToString, IEntityParser<Book> {
 	@IPropertyWriter(FieldName="Publishsing Date")
 	private Date m_publishing_date;
 	
-	@IPropertyWriter(WriteToFile=false)
+	@IPropertyWriter(FieldName = "Hold Request", WriteToReport=false, WriteToDB = true)
 	private ArrayList<HoldRequest> m_hold_requests;
-	@IPropertyWriter(WriteToFile=false)
+	@IPropertyWriter(FieldName = "Current Borrower ID", WriteToReport=false, WriteToDB = true )
 	private Borrower m_current_borrower;
 
-	@IPropertyWriter(WriteToFile=false)
+	@IPropertyWriter(WriteToReport=false)
 	static private int s_current_ID_number = 0;
 
 	public Book(String title, String genre, String author, String publisher, Date m_publishing_date) {
@@ -48,6 +48,14 @@ public class Book implements IEntryToString, IEntityParser<Book> {
 
 		m_hold_requests = new ArrayList<>();
 		m_current_borrower = null;
+	}
+	
+	public Book (int id,String title, String genre, String author, String publisher, Date m_publishing_date) {
+		this.m_book_ID = id;
+		m_title = title;
+		m_genre = genre;
+		m_author = author;
+		m_publisher = publisher;
 	}
 	
 	/*************** Getters ***************/
@@ -93,6 +101,17 @@ public class Book implements IEntryToString, IEntityParser<Book> {
 	public void addHoldRequrest(Borrower borrower) {
 		m_hold_requests.add(new HoldRequest(borrower, new Date()));
 	}
+	
+	public Borrower getNextBorrower() {
+		if(m_hold_requests.isEmpty()){
+			return null;
+		}
+		else {
+			HoldRequest holder = m_hold_requests.get(0);
+			m_hold_requests.remove(holder);
+			return holder.getBorrower();
+		}
+	}
 
 	public boolean isAvailable() {
 		return (m_current_borrower == null);
@@ -111,11 +130,6 @@ public class Book implements IEntryToString, IEntityParser<Book> {
 		return entry;
 	}
 
-	@Override
-	public Book parse(String entity, String seperator) {
-		return parseString(entity, seperator);
-
-	}
 	
 	private static Book parseString(String entity, String seperator) {
 		String args[] = entity.split(seperator);

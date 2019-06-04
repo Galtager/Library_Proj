@@ -9,7 +9,6 @@ public interface ILibraryAction
 {
 	
 	public boolean issueBook(Book book, Borrower borrower);
-	public boolean refundBook(Book book);
 	public Book getBook(int bookId);
 	public List<Book> getAllBooks();
 	public List<Book> getIssuedBooks();

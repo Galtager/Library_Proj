@@ -1,4 +1,4 @@
-package FileHandler;
+package FileHandler.Writer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,17 +11,25 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
 public class Writer<E extends IEntryToString> 
 {
+
+	
 	private BufferedWriter m_bw = null;
 	private File m_report;
-	private final String m_path = System.getProperty("user.dir") + "/Reports";
+	private final String m_path = System.getProperty("user.dir") + "Files/Reports";
 	private final String m_default_seperator = ",";
-	private final String m_file_extension = ".csv";
+	private final String m_file_extension;
+	private final String m_file_name;
 	
-	public Writer() throws IOException
+	
+	public Writer(String fileExtension, String fileNamePrefix) throws IOException
 	{
+		this.m_file_extension = fileExtension;
+		this.m_file_name = fileNamePrefix;
 		initBufferedWriter(generateFileName());
+		
 	}
 	
 	private void initBufferedWriter(String fileName) throws IOException 
@@ -39,7 +47,7 @@ public class Writer<E extends IEntryToString>
 		
 		for(Field field : fields) 
 		{
-			if(field.getAnnotation(IPropertyWriter.class).WriteToFile())
+			if(field.getAnnotation(IPropertyWriter.class).WriteToReport())
 				m_bw.write(field.getAnnotation(IPropertyWriter.class).FieldName() + m_default_seperator);
 		}
 		
@@ -57,7 +65,7 @@ public class Writer<E extends IEntryToString>
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		
-		return "report_" + cal.get(Calendar.DAY_OF_MONTH);
+		return this.m_file_name + cal.get(Calendar.DAY_OF_MONTH);
 	}
 	
 	public void writeToFile(E entity) 

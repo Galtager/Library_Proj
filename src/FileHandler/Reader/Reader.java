@@ -1,4 +1,4 @@
-package FileHandler;
+package FileHandler.Reader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,13 +10,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Reader<E extends IEntityParser> {
-	private BufferedReader m_file_reader = null;
-	private final String m_default_seperator = ",";
-	private final String m_file_extension = ".csv";
-	private final String m_path = System.getProperty("user.dir") + "/Reports/";
+public abstract class Reader implements IEntityParser {
+	protected BufferedReader m_file_reader = null;
+	protected final String m_default_seperator = ",";
+	protected final String m_file_extension = ".csv";
+	protected final String m_path;
 	
-	public Reader(String fileName) throws IOException {
+	public abstract Object parse(String entity);
+	
+	public Reader(String path, String fileName) throws IOException {
+		// example "Files/Reports/"
+		this.m_path = System.getProperty("user.dir") + path;
 		initScanner(fileName);
 	}
 
@@ -29,7 +33,7 @@ public class Reader<E extends IEntityParser> {
 		
 	}
 	
-	public String ReadString() throws IOException {
+	protected String ReadString() throws IOException {
 		 
 		String line;
 		 while ((line = m_file_reader.readLine()) != null) {
@@ -39,10 +43,5 @@ public class Reader<E extends IEntityParser> {
 		 
 	}
 	
-	private E ProcessLine(String entity) {
-		
-		
-		return null;
-	}
 
 }

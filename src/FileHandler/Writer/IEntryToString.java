@@ -1,4 +1,4 @@
-package FileHandler;
+package FileHandler.Writer;
 
 public interface IEntryToString 
 {

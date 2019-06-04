@@ -1,4 +1,4 @@
-import FileHandler.IEntryToString;
+import FileHandler.Writer.IEntryToString;
 
 public class Test implements IEntryToString 
 {

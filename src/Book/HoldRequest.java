@@ -15,5 +15,9 @@ public class HoldRequest
 		m_borrower = borrower;
 		m_request_date = request_date;
 	}
+	
+	public Borrower getBorrower() {
+		return this.m_borrower;
+	}
 
 }

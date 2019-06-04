@@ -1,4 +1,4 @@
-package FileHandler;
+package FileHandler.Writer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface IPropertyWriter {
-	public boolean WriteToFile() default true;
+	public boolean WriteToReport() default true;
+	public boolean WriteToDB() default false;
 	public String FieldName() default "";
 }
