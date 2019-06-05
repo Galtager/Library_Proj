@@ -66,7 +66,7 @@ public class MainMenu {
 	private ClientRegistration cr;
 	private InsertBooks ib;
 	
-	private JTextField textField;
+	private JTextField books_textfield;
 	private JTable books_table;
 	private JTextField book_code_text;
 
@@ -171,25 +171,25 @@ public class MainMenu {
 					"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"
 			}
 		));
-		JScrollPane Scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		Scroll.setBounds(27, 58, 1079, 305);
+		JScrollPane clients_scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		clients_scroll.setBounds(27, 58, 1079, 305);
 		
 		client_search_txt = new JTextField();
 		client_search_txt.setBounds(675, 25, 115, 20);
 		client_search_txt.setColumns(10);
 		
-		JComboBox client_sort_comboBox = new JComboBox();
-		client_sort_comboBox.setBounds(800, 26, 116, 18);
-		client_sort_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		client_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
+		JComboBox client_filter_comboBox = new JComboBox();
+		client_filter_comboBox.setBounds(800, 26, 116, 18);
+		client_filter_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		client_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
 		
 		JLabel client_search_lbl = new JLabel(":Search\r\n");
 		client_search_lbl.setBounds(926, 28, 71, 14);
 		client_search_lbl.setBackground(Color.WHITE);
 		
-		JComboBox client_filter_comboBox = new JComboBox();
-		client_filter_comboBox.setBounds(568, 25, 97, 20);
-		client_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
+		JComboBox client_sort_comboBox = new JComboBox();
+		client_sort_comboBox.setBounds(568, 25, 97, 20);
+		client_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		
 		JButton client_search_button = new JButton("Search");
 		client_search_button.setBounds(455, 24, 103, 23);
@@ -247,9 +247,9 @@ public class MainMenu {
 		client_panel.setLayout(null);
 		client_panel.add(client_num_lbl);
 		client_panel.add(client_search_button);
-		client_panel.add(client_filter_comboBox);
-		client_panel.add(client_search_txt);
 		client_panel.add(client_sort_comboBox);
+		client_panel.add(client_search_txt);
+		client_panel.add(client_filter_comboBox);
 		client_panel.add(client_search_lbl);
 		client_panel.add(client_information_button);
 		client_panel.add(client_report_button);
@@ -258,7 +258,7 @@ public class MainMenu {
 		client_panel.add(client_insert_button);
 		client_panel.add(client_delete_button);
 		client_panel.add(client_edit_button);
-		client_panel.add(Scroll);
+		client_panel.add(clients_scroll);
 		
 		JPanel books_panel = new JPanel();
 		books_panel.setLayout(null);
@@ -274,57 +274,53 @@ public class MainMenu {
 		num_of_books_lable.setBounds(27, 26, 116, 18);
 		books_panel.add(num_of_books_lable);
 		
-		JButton button = new JButton("Search");
-		button.setBounds(455, 24, 103, 23);
-		books_panel.add(button);
+		JButton books_search_button = new JButton("Search");
+		books_search_button.setBounds(455, 24, 103, 23);
+		books_panel.add(books_search_button);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
-		comboBox.setSelectedIndex(0);
-		comboBox.setBounds(568, 25, 97, 20);
-		books_panel.add(comboBox);
+		JComboBox books_sort_combobox = new JComboBox();
+		books_sort_combobox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
+		books_sort_combobox.setSelectedIndex(0);
+		books_sort_combobox.setBounds(568, 25, 97, 20);
+		books_panel.add(books_sort_combobox);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(675, 25, 115, 20);
-		books_panel.add(textField);
+		books_textfield = new JTextField();
+		books_textfield.setColumns(10);
+		books_textfield.setBounds(675, 25, 115, 20);
+		books_panel.add(books_textfield);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Author", "Genre", "Release Date", "Publisher"}));
-		comboBox_1.setSelectedIndex(0);
-		comboBox_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		comboBox_1.setBounds(800, 26, 116, 18);
-		books_panel.add(comboBox_1);
+		JComboBox books_filter_combobox = new JComboBox();
+		books_filter_combobox.setModel(new DefaultComboBoxModel(new String[] {"Author", "Genre", "Release Date", "Publisher"}));
+		books_filter_combobox.setSelectedIndex(0);
+		books_filter_combobox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		books_filter_combobox.setBounds(800, 26, 116, 18);
+		books_panel.add(books_filter_combobox);
 		
-		JLabel label_1 = new JLabel(":Search\r\n");
-		label_1.setBackground(Color.WHITE);
-		label_1.setBounds(926, 28, 71, 14);
-		books_panel.add(label_1);
+		JLabel books_search_label = new JLabel(":Search\r\n");
+		books_search_label.setBackground(Color.WHITE);
+		books_search_label.setBounds(926, 28, 71, 14);
+		books_panel.add(books_search_label);
 		
-		JButton button_1 = new JButton("?\r\n");
-		button_1.setBounds(44, 369, 55, 23);
-		books_panel.add(button_1);
+		JButton books_report_button = new JButton("Report");
+		books_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_report_button.setBounds(552, 398, 77, 45);
+		books_panel.add(books_report_button);
 		
-		JButton button_2 = new JButton("Report");
-		button_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_2.setBounds(552, 398, 77, 45);
-		books_panel.add(button_2);
+		JButton books_excel_button = new JButton("Excel");
+		books_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_excel_button.setBounds(639, 398, 60, 45);
+		books_panel.add(books_excel_button);
 		
-		JButton button_3 = new JButton("Excel");
-		button_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_3.setBounds(639, 398, 60, 45);
-		books_panel.add(button_3);
+		JButton books_card_button = new JButton("Card");
+		books_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_card_button.setBounds(709, 398, 60, 45);
+		books_panel.add(books_card_button);
 		
-		JButton button_4 = new JButton("Card");
-		button_4.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_4.setBounds(709, 398, 60, 45);
-		books_panel.add(button_4);
-		
-		JButton button_5 = new JButton("Insert");
-		button_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_5.setBounds(775, 398, 65, 45);
-		books_panel.add(button_5);
-		button_5.addActionListener(new ActionListener() {
+		JButton books_insert_button = new JButton("Insert");
+		books_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_insert_button.setBounds(775, 398, 65, 45);
+		books_panel.add(books_insert_button);
+		books_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(!ib.frmInsertBooks.isVisible())
@@ -338,19 +334,19 @@ public class MainMenu {
 			}});
 		
 		
-		JButton button_6 = new JButton("Delete");
-		button_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_6.setBounds(850, 398, 102, 45);
-		books_panel.add(button_6);
+		JButton books_delete_button = new JButton("Delete");
+		books_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_delete_button.setBounds(850, 398, 102, 45);
+		books_panel.add(books_delete_button);
 		
-		JButton button_7 = new JButton("Edit");
-		button_7.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_7.setBounds(962, 398, 60, 45);
-		books_panel.add(button_7);
+		JButton books_edit_button = new JButton("Edit");
+		books_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_edit_button.setBounds(962, 398, 60, 45);
+		books_panel.add(books_edit_button);
 		
-		JScrollPane scrollPane = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(27, 58, 1079, 305);
-		books_panel.add(scrollPane);
+		JScrollPane books_scroll = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		books_scroll.setBounds(27, 58, 1079, 305);
+		books_panel.add(books_scroll);
 		
 		books_table = new JTable();
 		books_table.setModel(new DefaultTableModel(
@@ -383,7 +379,7 @@ public class MainMenu {
 		books_table.setForeground(Color.BLACK);
 		books_table.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		books_table.setBackground(Color.WHITE);
-		scrollPane.setViewportView(books_table);
+		books_scroll.setViewportView(books_table);
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(599, 201, 89, 23);
 		
