@@ -69,7 +69,6 @@ public class SystemSettings {
 		frameClass.getContentPane().setBackground(Color.RED);
 		frameClass.setTitle("System Settings");
 		frameClass.setBounds(100, 100, 888, 610);
-		frameClass.dispose();//exit
 		frameClass.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JLabel JLabel_SystemSettings = new JLabel("System Settings");

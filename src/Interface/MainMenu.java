@@ -601,7 +601,13 @@ public class MainMenu {
 		
 		JButton button_Close = new JButton("Close");
 		button_Close.setBounds(1006, 391, 91, 29);
+		button_Close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	frmLibrary.dispose();
+                }
+        });
 		borrow_panel.add(button_Close);
+		
 		
 		JButton button_search = new JButton("");
 		button_search.addActionListener(new ActionListener() {

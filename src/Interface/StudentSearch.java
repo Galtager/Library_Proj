@@ -39,7 +39,7 @@ public class StudentSearch {
 		frmStudentSearch.setBounds(new Rectangle(0, 0, 0, 0)); 
 		frmStudentSearch.setTitle("Student Search"); 
 		frmStudentSearch.setBounds(100, 100, 785, 424); 
-		frmStudentSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmStudentSearch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmStudentSearch.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
