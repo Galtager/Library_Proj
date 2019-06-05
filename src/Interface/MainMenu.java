@@ -587,26 +587,17 @@ public class MainMenu {
 		lblNewLabel_2.setBounds(83, 0, 210, 20);
 		panel_borrow2.add(lblNewLabel_2);
 		
-		JButton btn_borrow = new JButton("Borrow");
-		btn_borrow.setBounds(1006, 257, 91, 29);
-		borrow_panel.add(btn_borrow);
+		JButton internal_borrow_button = new JButton("Borrow");
+		internal_borrow_button.setBounds(1006, 257, 91, 29);
+		borrow_panel.add(internal_borrow_button);
 		
-		JButton btn_Help = new JButton("Help");
-		btn_Help.setBounds(1006, 325, 91, 29);
-		borrow_panel.add(btn_Help);
+		JButton help_button = new JButton("Help");
+		help_button.setBounds(1006, 325, 91, 29);
+		borrow_panel.add(help_button);
 		
-		JButton btn_Report = new JButton("Report");
-		btn_Report.setBounds(1006, 291, 91, 29);
-		borrow_panel.add(btn_Report);
-		
-		JButton button_Close = new JButton("Close");
-		button_Close.setBounds(1006, 391, 91, 29);
-		button_Close.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-            	frmLibrary.dispose();
-                }
-        });
-		borrow_panel.add(button_Close);
+		JButton report_button = new JButton("Report");
+		report_button.setBounds(1006, 291, 91, 29);
+		borrow_panel.add(report_button);
 		
 		
 		JButton button_search = new JButton("");
