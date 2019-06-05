@@ -40,7 +40,7 @@ public class MainMenu {
 	private JTable student_table;
 	private JTextField student_search_txt;
 	private SystemSettings nw;
-	private StudentSearch ss;
+	private ClientSearch client_search_form;
 	private JTextField textField;
 	private JTable books_table;
 	private JTextField book_code_text;
@@ -75,7 +75,7 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		nw = new SystemSettings();
-		ss = new StudentSearch();
+		client_search_form = new ClientSearch();
 		frmLibrary = new JFrame();
 		frmLibrary.getContentPane().setBackground(new Color(255, 255, 255));
 		frmLibrary.setForeground(new Color(255, 255, 255));
@@ -604,9 +604,9 @@ public class MainMenu {
 		button_search.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						if(!ss.frmStudentSearch.isVisible())
+						if(!client_search_form.frmStudentSearch.isVisible())
 						{
-							ss.frmStudentSearch.setVisible(true);
+							client_search_form.frmStudentSearch.setVisible(true);
 						}	
 					} catch (Exception e1) {
 						e1.printStackTrace();

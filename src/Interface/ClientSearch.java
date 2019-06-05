@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane; 
 import javax.swing.JTable; 
  
-public class StudentSearch { 
+public class ClientSearch { 
  
 	JFrame frmStudentSearch; 
 	private JTextField textField_Search;
@@ -27,7 +27,7 @@ public class StudentSearch {
 	/** 
 	 * Create the application. 
 	 */ 
-	public StudentSearch() { 
+	public ClientSearch() { 
 		initialize(); 
 	} 
  
