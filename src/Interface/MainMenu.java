@@ -866,35 +866,6 @@ public class MainMenu {
 		lock_button.setBounds(314, 11, 100, 127);
 		frmLibrary.getContentPane().add(lock_button);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setForeground(new Color(255, 255, 255));
-		panel.setBounds(0, 139, 1084, 380);
-		frmLibrary.getContentPane().add(panel);
-		
-		JLabel lblNewLabel = new JLabel("Computer Library");
-		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setForeground(new Color(0, 0, 128));
-		lblNewLabel.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/library-books.jpg")));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 48));
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		panel.setLayout(gl_panel);
-		
 		JMenuBar menuBar = new JMenuBar();
 		frmLibrary.setJMenuBar(menuBar);
 		
