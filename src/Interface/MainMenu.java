@@ -47,20 +47,20 @@ public class MainMenu {
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
+	private JTextField student_code_textfield;
+	private JTextField student_name_textfield;
+	private JTextField student_id_textfield;
+	private JTextField student_limit_titles_textfield;
+	private JTextField student_delays_textfield;
+	private JTextField student_not_returned_textfield;
+	private JTextField student_utilization_textfield;
+	private JTextField student_grade_textfield;
+	private JTextField student_end_date_textfield;
+	private JTextField student_days_textfield;
+	private JTextField student_type_textfield;
+	private JTextField student_category_textfield;
+	private JTextField student_title_name_textfield;
+	private JTextField student_title_code_textfield;
 
 
 	/**
@@ -464,58 +464,58 @@ public class MainMenu {
 		lblEndDate.setBackground(new Color(224, 255, 255));
 		panel_borrow1.add(lblEndDate);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(147, -1, 146, 25);
-		panel_borrow1.add(textField_1);
-		textField_1.setColumns(10);
+		student_code_textfield = new JTextField();
+		student_code_textfield.setBounds(147, -1, 146, 25);
+		panel_borrow1.add(student_code_textfield);
+		student_code_textfield.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(147, 38, 146, 23);
-		textField_2.setColumns(10);
-		textField_2.setBackground(new Color(153, 153, 204));
-		panel_borrow1.add(textField_2);
+		student_name_textfield = new JTextField();
+		student_name_textfield.setBounds(147, 38, 146, 23);
+		student_name_textfield.setColumns(10);
+		student_name_textfield.setBackground(new Color(153, 153, 204));
+		panel_borrow1.add(student_name_textfield);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBackground(new Color(153, 153, 204));
-		textField_3.setBounds(147, 66, 146, 23);
-		panel_borrow1.add(textField_3);
+		student_id_textfield = new JTextField();
+		student_id_textfield.setColumns(10);
+		student_id_textfield.setBackground(new Color(153, 153, 204));
+		student_id_textfield.setBounds(147, 66, 146, 23);
+		panel_borrow1.add(student_id_textfield);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBackground(new Color(153, 153, 204));
-		textField_4.setBounds(147, 93, 146, 23);
-		panel_borrow1.add(textField_4);
+		student_limit_titles_textfield = new JTextField();
+		student_limit_titles_textfield.setColumns(10);
+		student_limit_titles_textfield.setBackground(new Color(153, 153, 204));
+		student_limit_titles_textfield.setBounds(147, 93, 146, 23);
+		panel_borrow1.add(student_limit_titles_textfield);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBackground(new Color(153, 153, 204));
-		textField_5.setBounds(147, 121, 146, 23);
-		panel_borrow1.add(textField_5);
+		student_delays_textfield = new JTextField();
+		student_delays_textfield.setColumns(10);
+		student_delays_textfield.setBackground(new Color(153, 153, 204));
+		student_delays_textfield.setBounds(147, 121, 146, 23);
+		panel_borrow1.add(student_delays_textfield);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBackground(new Color(153, 153, 204));
-		textField_6.setBounds(147, 148, 146, 23);
-		panel_borrow1.add(textField_6);
+		student_not_returned_textfield = new JTextField();
+		student_not_returned_textfield.setColumns(10);
+		student_not_returned_textfield.setBackground(new Color(153, 153, 204));
+		student_not_returned_textfield.setBounds(147, 148, 146, 23);
+		panel_borrow1.add(student_not_returned_textfield);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBackground(new Color(153, 153, 204));
-		textField_7.setBounds(147, 175, 146, 23);
-		panel_borrow1.add(textField_7);
+		student_utilization_textfield = new JTextField();
+		student_utilization_textfield.setColumns(10);
+		student_utilization_textfield.setBackground(new Color(153, 153, 204));
+		student_utilization_textfield.setBounds(147, 175, 146, 23);
+		panel_borrow1.add(student_utilization_textfield);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBackground(new Color(153, 153, 204));
-		textField_8.setBounds(147, 203, 146, 23);
-		panel_borrow1.add(textField_8);
+		student_grade_textfield = new JTextField();
+		student_grade_textfield.setColumns(10);
+		student_grade_textfield.setBackground(new Color(153, 153, 204));
+		student_grade_textfield.setBounds(147, 203, 146, 23);
+		panel_borrow1.add(student_grade_textfield);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBackground(new Color(153, 153, 204));
-		textField_9.setBounds(147, 230, 146, 23);
-		panel_borrow1.add(textField_9);
+		student_end_date_textfield = new JTextField();
+		student_end_date_textfield.setColumns(10);
+		student_end_date_textfield.setBackground(new Color(153, 153, 204));
+		student_end_date_textfield.setBounds(147, 230, 146, 23);
+		panel_borrow1.add(student_end_date_textfield);
 		
 		JPanel panel_borrow2 = new JPanel();
 		panel_borrow2.setBackground(new Color(204, 204, 255));
@@ -529,17 +529,17 @@ public class MainMenu {
 		lblDaysOfBorrow.setBounds(0, 130, 132, 24);
 		panel_borrow2.add(lblDaysOfBorrow);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBackground(new Color(153, 153, 204));
-		textField_10.setBounds(147, 130, 146, 23);
-		panel_borrow2.add(textField_10);
+		student_days_textfield = new JTextField();
+		student_days_textfield.setColumns(10);
+		student_days_textfield.setBackground(new Color(153, 153, 204));
+		student_days_textfield.setBounds(147, 130, 146, 23);
+		panel_borrow2.add(student_days_textfield);
 		
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBackground(new Color(153, 153, 204));
-		textField_11.setBounds(147, 104, 146, 23);
-		panel_borrow2.add(textField_11);
+		student_type_textfield = new JTextField();
+		student_type_textfield.setColumns(10);
+		student_type_textfield.setBackground(new Color(153, 153, 204));
+		student_type_textfield.setBounds(147, 104, 146, 23);
+		panel_borrow2.add(student_type_textfield);
 		
 		JLabel lblTitleType = new JLabel("Title type");
 		lblTitleType.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -553,11 +553,11 @@ public class MainMenu {
 		lblCategory.setBounds(0, 75, 103, 24);
 		panel_borrow2.add(lblCategory);
 		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBackground(new Color(153, 153, 204));
-		textField_12.setBounds(147, 75, 146, 23);
-		panel_borrow2.add(textField_12);
+		student_category_textfield = new JTextField();
+		student_category_textfield.setColumns(10);
+		student_category_textfield.setBackground(new Color(153, 153, 204));
+		student_category_textfield.setBounds(147, 75, 146, 23);
+		panel_borrow2.add(student_category_textfield);
 		
 		JLabel lblTitleName = new JLabel("Title Name");
 		lblTitleName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -565,11 +565,11 @@ public class MainMenu {
 		lblTitleName.setBounds(0, 46, 103, 24);
 		panel_borrow2.add(lblTitleName);
 		
-		textField_13 = new JTextField();
-		textField_13.setColumns(10);
-		textField_13.setBackground(new Color(153, 153, 204));
-		textField_13.setBounds(147, 46, 146, 23);
-		panel_borrow2.add(textField_13);
+		student_title_name_textfield = new JTextField();
+		student_title_name_textfield.setColumns(10);
+		student_title_name_textfield.setBackground(new Color(153, 153, 204));
+		student_title_name_textfield.setBounds(147, 46, 146, 23);
+		panel_borrow2.add(student_title_name_textfield);
 		
 		JLabel lblTitleCode = new JLabel("Title Code");
 		lblTitleCode.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -577,11 +577,11 @@ public class MainMenu {
 		lblTitleCode.setBounds(0, 19, 103, 24);
 		panel_borrow2.add(lblTitleCode);
 		
-		textField_14 = new JTextField();
-		textField_14.setColumns(10);
-		textField_14.setBackground(new Color(255, 255, 255));
-		textField_14.setBounds(147, 19, 146, 23);
-		panel_borrow2.add(textField_14);
+		student_title_code_textfield = new JTextField();
+		student_title_code_textfield.setColumns(10);
+		student_title_code_textfield.setBackground(new Color(255, 255, 255));
+		student_title_code_textfield.setBounds(147, 19, 146, 23);
+		panel_borrow2.add(student_title_code_textfield);
 		
 		JLabel lblNewLabel_2 = new JLabel("To execute borrow CTRL+C");
 		lblNewLabel_2.setBounds(83, 0, 210, 20);
