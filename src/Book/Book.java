@@ -1,5 +1,6 @@
 package Book;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +12,7 @@ import FileHandler.Reader.IEntityParser;
 import FileHandler.Writer.IEntryToString;
 import FileHandler.Writer.IPropertyWriter;
 
-public class Book implements IEntryToString {
+public class Book implements IEntryToString, Serializable {
 	enum PropertyIndex {
 		BOOK_ID, TITLE, GENER, AUTHOR, PUBLISHER, PUBLISHING_DATE, HOLD_REQUESTS, CURRENT_BORROWER
 	};
@@ -125,7 +126,7 @@ public class Book implements IEntryToString {
 		entry += this.getGenre() + ",";
 		entry += this.getAuthor() + ",";
 		entry += this.getPublisher() + ",";
-		entry += this.getPublishingDate() + ",";
+		entry += this.getPublishingDate();
 
 		return entry;
 	}

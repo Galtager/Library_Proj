@@ -1,7 +1,8 @@
 package Entities;
 
+import java.io.Serializable;
 
-public abstract class Person 
+public abstract class Person implements Serializable
 {   
     protected String m_id;         
     protected String m_name;    
@@ -73,6 +74,7 @@ public abstract class Person
     {
         return m_id;
     }
+    
     /*---------------------------*/
 
 } // Person Class Closed

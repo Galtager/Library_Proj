@@ -1,6 +1,8 @@
 package Entities;
 
-public abstract class User extends Person
+import java.io.Serializable;
+
+public abstract class User extends Person implements Serializable
 {
     protected String m_password;
     
@@ -12,5 +14,12 @@ public abstract class User extends Person
 		
 		m_password = password;
 	}
+	
+	
+	public String getPassword() {
+		return m_password;
+	}
+	
+	
 
 }

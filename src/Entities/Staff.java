@@ -1,6 +1,8 @@
 package Entities;
 
-public abstract class Staff extends User 
+import java.io.Serializable;
+
+public abstract class Staff extends User implements Serializable
 {
     protected double m_salary;
 

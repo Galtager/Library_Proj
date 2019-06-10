@@ -1,11 +1,12 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Book.Book;
 import Book.HoldRequest;
 
-public class Borrower extends User 
+public class Borrower extends User implements Serializable
 {
 	static private int s_max_books_issued = 1;
 

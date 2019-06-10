@@ -2,8 +2,10 @@ package FileHandler.Writer;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,23 +14,28 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Writer<E extends IEntryToString> 
+public class ReportWriter<E extends IEntryToString> 
 {
 
 	
 	private BufferedWriter m_bw = null;
 	private File m_report;
-	private final String m_path = System.getProperty("user.dir") + "Files/Reports";
+	private String m_path = System.getProperty("user.dir");
 	private final String m_default_seperator = ",";
 	private final String m_file_extension;
 	private final String m_file_name;
+
 	
 	
-	public Writer(String fileExtension, String fileNamePrefix) throws IOException
+	
+	public ReportWriter(String fileExtension, String fileNamePrefix, String path) throws IOException
 	{
-		this.m_file_extension = fileExtension;
+		this.m_file_extension = ".csv";
 		this.m_file_name = fileNamePrefix;
+		this.m_path += path;
 		initBufferedWriter(generateFileName());
+		
+
 		
 	}
 	
@@ -86,6 +93,7 @@ public class Writer<E extends IEntryToString>
 		}
 	}
 	
+	
 	public void writeListToFile(List<E> entities) 
 	{
 		try 
@@ -129,6 +137,10 @@ public class Writer<E extends IEntryToString>
 			e.printStackTrace();
 		}
 	}
+	
+
+	
+	
 	
 	
 

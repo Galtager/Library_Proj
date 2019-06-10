@@ -2,45 +2,54 @@ package FileHandler.Reader;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Reader implements IEntityParser {
-	protected BufferedReader m_file_reader = null;
-	protected final String m_default_seperator = ",";
-	protected final String m_file_extension = ".csv";
+public class Reader<E>  {
 	protected final String m_path;
+	protected FileInputStream fileIn = null;
+	protected ObjectInputStream in = null;
 	
-	public abstract Object parse(String entity);
+	
 	
 	public Reader(String path, String fileName) throws IOException {
 		// example "Files/Reports/"
 		this.m_path = System.getProperty("user.dir") + path;
-		initScanner(fileName);
+		//initScanner(fileName);
+		
+		this.fileIn = new FileInputStream(this.m_path + "\\test.ser");
+		this.in = new ObjectInputStream(fileIn);
 	}
 
-	private void initScanner(String fileName) throws IOException {
-		// TODO Auto-generated method stub
-		File file = new File(m_path, fileName + m_file_extension);
-		file.canRead();
-		this.m_file_reader = Files.newBufferedReader(Paths.get(m_path + fileName + m_file_extension));
-		
-		
+	
+	public E readObject() throws ClassNotFoundException, IOException {
+		return (E) this.in.readObject();
 	}
 	
-	protected String ReadString() throws IOException {
-		 
-		String line;
-		 while ((line = m_file_reader.readLine()) != null) {
-		        return line;
-		    }
-		 return null;
-		 
+	public ArrayList<E> readToList() throws IOException, ClassNotFoundException{
+		ArrayList<E> data = new ArrayList<E>();
+		while (this.fileIn.available() > 0) {
+			data.add(this.readObject());
+		}
+		
+		return data;
+	}
+	
+	public void closeStreams() {
+		try {
+			this.fileIn.close();
+			this.in.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 

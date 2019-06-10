@@ -1,7 +1,8 @@
 package Entities;
 
+import java.io.Serializable;
 
-public class Librarian extends Staff 
+public class Librarian extends Staff implements Serializable
 {
 
 	public Librarian(String id, String name,
