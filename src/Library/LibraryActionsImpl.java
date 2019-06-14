@@ -3,14 +3,14 @@ package Library;
 import java.util.List;
 
 import Book.Book;
-import Collections.LibraryCollection;
+import Collections.BookCollection;
 import Entities.Borrower;
 
 public class LibraryActionsImpl implements ILibraryAction 
 {
 
 	// instance to library db
-	private LibraryCollection m_libDB = new LibraryCollection();
+	private BookCollection m_libDB = new BookCollection();
 	
 	
 	// Loan or return a book

@@ -30,9 +30,9 @@ public class Book implements IEntryToString, Serializable {
 	@IPropertyWriter(FieldName="Publishsing Date")
 	private Date m_publishing_date;
 	
-	@IPropertyWriter(FieldName = "Hold Request", WriteToReport=false, WriteToDB = true)
+	@IPropertyWriter(FieldName = "Hold Request", WriteToReport=false)
 	private ArrayList<HoldRequest> m_hold_requests;
-	@IPropertyWriter(FieldName = "Current Borrower ID", WriteToReport=false, WriteToDB = true )
+	@IPropertyWriter(FieldName = "Current Borrower ID", WriteToReport=false)
 	private Borrower m_current_borrower;
 
 	@IPropertyWriter(WriteToReport=false)

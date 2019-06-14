@@ -28,10 +28,10 @@ public class ReportWriter<E extends IEntryToString>
 	
 	
 	
-	public ReportWriter(String fileExtension, String fileNamePrefix, String path) throws IOException
+	public ReportWriter(String path, String fileName) throws IOException
 	{
 		this.m_file_extension = ".csv";
-		this.m_file_name = fileNamePrefix;
+		this.m_file_name = fileName;
 		this.m_path += path;
 		initBufferedWriter(generateFileName());
 		
@@ -39,9 +39,13 @@ public class ReportWriter<E extends IEntryToString>
 		
 	}
 	
+	public void changeFile(String fileName) throws IOException{
+		initBufferedWriter(fileName);
+	}
+	
 	private void initBufferedWriter(String fileName) throws IOException 
 	{
-		m_report = new File(m_path, fileName + m_file_extension);
+		m_report = new File(m_path, fileName);
 		m_report.createNewFile();
 		
 		m_bw = new BufferedWriter(new FileWriter(m_report));

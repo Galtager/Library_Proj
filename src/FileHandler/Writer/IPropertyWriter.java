@@ -9,6 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface IPropertyWriter {
 	public boolean WriteToReport() default true;
-	public boolean WriteToDB() default false;
 	public String FieldName() default "";
 }

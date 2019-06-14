@@ -2,7 +2,9 @@ package Entities;
 
 import java.io.Serializable;
 
-public abstract class User extends Person implements Serializable
+import FileHandler.Writer.IEntryToString;
+
+public abstract class User extends Person implements Serializable, IEntryToString
 {
     protected String m_password;
     
