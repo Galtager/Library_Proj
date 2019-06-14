@@ -1,11 +1,8 @@
 package Interface;
 
-import java.awt.EventQueue;
-
+import Misc.Globals;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.GroupLayout;
@@ -46,19 +43,7 @@ public class SystemSettings {
 	public SystemSettings() {
 		initialize();
 	}
-	public ImageIcon seticon (String m, byte[] image) {
-		if (m!=null) {
-			myimage=new ImageIcon(m);
-		}else {
-			myimage=new ImageIcon(image);
-		}
-        Image img1 = myimage.getImage();
-        Image img2 = img1.getScaledInstance(jLable1.getWidth(), jLable1.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon i=new ImageIcon(img2);
-		return i;
-	}
-	
-	
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -263,6 +248,7 @@ public class SystemSettings {
 		lbl_comment.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JTextFiel_Path = new JTextField();
+		JTextFiel_Path.setEditable(false);
 		JTextFiel_Path.setBounds(84, 298, 401, 26);
 		Tab_Logo.add(JTextFiel_Path);
 		JTextFiel_Path.setColumns(10);
@@ -296,6 +282,7 @@ public class SystemSettings {
 				jLabel_Pic.setIcon(null); 
 				jLabel_Pic.setText("Your Logo Here");
 				JTextFiel_Path.setText(null);
+				Globals.s_global_logo_path = null;
 			}
 		});
 		
@@ -317,6 +304,15 @@ public class SystemSettings {
 		Tab_Logo.add(jb_Close4);
 		
 		JButton jb_Save4 = new JButton("Save");
+		jb_Save4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+	        	  if(!JTextFiel_Path.getText().isEmpty() )
+	        	  {
+	        		  Globals.s_global_logo_path = JTextFiel_Path.getText();
+	        	  }
+			}
+		});
 		jb_Save4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		jb_Save4.setBounds(776, 365, 85, 33);
 		Tab_Logo.add(jb_Save4);
