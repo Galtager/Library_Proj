@@ -22,7 +22,7 @@ public class Book
 
 	public Book(String title, String genre,
 				String author, String publisher,
-				Date m_publishing_date) 
+				Date publishing_date) 
 	{
 		s_current_ID_number++;
 		
@@ -30,7 +30,8 @@ public class Book
 		m_title = title;	
 		m_genre = genre;    
 		m_author = author;   	
-		m_publisher = publisher;   
+		m_publisher = publisher; 
+		m_publishing_date = publishing_date;
 		
 		m_hold_requests = new ArrayList<>();
 		m_current_borrower = null;
@@ -77,6 +78,10 @@ public class Book
 	{
 		return s_current_ID_number;
 	}
+	public ArrayList<HoldRequest> getM_hold_requests() {
+		return m_hold_requests;
+	}
+
 	
 	/***************   Functionality   ***************/
 	
