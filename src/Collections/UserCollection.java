@@ -42,7 +42,7 @@ public class UserCollection {
 	*/
 	public User checkCredentials(String username, String password) {
 		return s_db.stream()
-			.filter(user -> user.getID() == username && user.getPassword() == password)
+			.filter(user -> user.getID().compareTo(username) == 0 && user.getPassword().compareTo(password) == 0)
 			.findAny()
 			.orElse(null);
 	}
