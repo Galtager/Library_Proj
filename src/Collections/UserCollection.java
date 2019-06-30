@@ -34,6 +34,7 @@ public class UserCollection {
 		if(m_reader.getReaderState()) {
 			this.s_db = this.m_reader.readToList();
 		}
+		this.s_db.add(new Borrower("0", "root", "----", "----", "----", "0"));
 		
 	}
 	
