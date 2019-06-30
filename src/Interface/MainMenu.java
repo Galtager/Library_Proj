@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -22,6 +23,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Book.Book;
+import Book.BookActions;
+import Library.LibraryActionsImpl;
+
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
@@ -42,6 +48,8 @@ public class MainMenu {
 	private SystemSettings nw;
 	private ClientRegistration cr;
 	private InsertBooks ib;
+	private LibraryActionsImpl libActions = new LibraryActionsImpl();
+	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
 	
 	private JTextField books_textfield;
 	private ClientSearch client_search_form;
@@ -655,10 +663,6 @@ public class MainMenu {
 		num_of_books_lable.setBounds(27, 26, 116, 18);
 		books_panel.add(num_of_books_lable);
 		
-		JButton books_search_button = new JButton("Search");
-		books_search_button.setBounds(455, 24, 103, 23);
-		books_panel.add(books_search_button);
-		
 		JComboBox books_sort_combobox = new JComboBox();
 		books_sort_combobox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		books_sort_combobox.setSelectedIndex(0);
@@ -676,6 +680,22 @@ public class MainMenu {
 		books_filter_combobox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		books_filter_combobox.setBounds(800, 26, 116, 18);
 		books_panel.add(books_filter_combobox);
+		
+		JButton books_search_button = new JButton("Search");
+		books_search_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel booksModel = (DefaultTableModel) books_table.getModel();
+				String filterBy = String.valueOf(books_filter_combobox.getSelectedItem());
+				String value = books_textfield.getText();
+				books = (ArrayList<Book>) LibraryActionsImpl.filterBookList(filterBy, value);
+				
+				buildBooksTable(books, booksModel);
+			}
+		});
+		books_search_button.setBounds(455, 24, 103, 23);
+		books_panel.add(books_search_button);
+		
+
 		
 		JLabel books_search_label = new JLabel(":Search\r\n");
 		books_search_label.setBackground(Color.WHITE);
@@ -731,32 +751,17 @@ public class MainMenu {
 		
 		books_table = new JTable();
 		books_table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Name", "Author", "Genre", "Publisher", "Release Date"
-			}
-		));
+				new Object[][] {
+				},
+				new String[] {
+					"Name", "Author", "Genre", "Publisher", "Release Date"
+				}));
+		
+		DefaultTableModel booksModel = (DefaultTableModel) books_table.getModel();
+		buildBooksTable(books, booksModel);
+		
+
+		
 		books_table.setForeground(Color.BLACK);
 		books_table.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		books_table.setBackground(Color.WHITE);
@@ -976,4 +981,21 @@ public class MainMenu {
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jm_Help.add(btnAbout);
 	}
+	
+	/*******************************************************************************************************************************************/
+	
+	private void buildBooksTable(ArrayList<Book> books, DefaultTableModel model) {
+		Object rowData[]= new Object[5];
+		model.setRowCount(0);
+		
+		for(int i = 0; i < books.size(); i++) {
+			rowData[0] = books.get(i).getTitle();
+			rowData[1] = books.get(i).getAuthor();
+			rowData[2] = books.get(i).getGenre();
+			rowData[3] = books.get(i).getPublisher();
+			rowData[4] = books.get(i).getPublishingDate();
+			
+			model.addRow(rowData);
 		}
+	}
+}

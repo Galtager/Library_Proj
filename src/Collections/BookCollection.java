@@ -22,9 +22,9 @@ public class BookCollection
 	
 	public BookCollection(){
 		try {
-			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			this.m_reportWriter = new ReportWriter<Book>(FileNameDeclrations.REPORT_PATH,  "BookReport.csv");
+			//this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
+			//this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
+			//this.m_reportWriter = new ReportWriter<Book>(FileNameDeclrations.REPORT_PATH,  "BookReport.csv");
 			LoadBooks();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -34,7 +34,10 @@ public class BookCollection
 	
 	public void LoadBooks() throws ClassNotFoundException, IOException 
 	{
-		this.s_books = this.m_reader.readToList();
+		//this.s_books = this.m_reader.readToList();
+		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "blaaa", new Date(System.currentTimeMillis())));
+		s_books.add(new Book("bla1", "bla1", "bla bla", "blaaa", new Date(System.currentTimeMillis())));
+		s_books.add(new Book("bla2", "bla2", "bla bla", "blaaa", new Date(System.currentTimeMillis())));
 	}
 	
 	// get book by bookId
@@ -62,12 +65,11 @@ public class BookCollection
 				.orElse(null);
 	}
 	
-	public Book getBooksByAuthor(String author) 
+	public static List<Book> getBooksByAuthor(String author) 
 	{
-		return s_books.stream()
+		return  s_books.stream()
 				.filter(book -> book.getAuthor().contains(author))
-				.findAny()
-				.orElse(null);
+				.collect(Collectors.toList());
 	}
 	
 	public Book getBooksByPublisher(String publisher) 
@@ -121,6 +123,13 @@ public class BookCollection
 
 	}
 	
+	public static List<Book> filterBookList(String filter, String value){
+		if(filter.compareTo("Author") == 0) {
+			return getBooksByAuthor(value);
+		}
+		
+		return null;
+	}
 	
 	public void writeObject(Book b) {
 		this.m_dbWriter.writeObject(b);

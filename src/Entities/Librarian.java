@@ -15,4 +15,10 @@ public class Librarian extends Staff implements Serializable
 		
 	}
 
+	@Override
+	public String entityReportEntry() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
