@@ -16,16 +16,25 @@ public class Reader<E>  {
 	protected final String m_path;
 	protected FileInputStream fileIn = null;
 	protected ObjectInputStream in = null;
+	protected File dbFile = null;
+	protected boolean canRead = true;
 	
 	
 	
 	public Reader(String path, String fileName) throws IOException {
 		// example "Files/Reports/"
 		this.m_path = System.getProperty("user.dir") + path;
-		//initScanner(fileName);
 		
-		this.fileIn = new FileInputStream(this.m_path + "\\test.ser");
-		this.in = new ObjectInputStream(fileIn);
+		this.dbFile = new File(m_path, fileName);
+		if(!dbFile.exists() || dbFile.length() == 0) {
+			dbFile.createNewFile();
+			canRead = false;
+		}
+		else {
+			this.fileIn = new FileInputStream(dbFile);		
+			this.in = new ObjectInputStream(fileIn);
+		}
+
 	}
 
 	
@@ -34,11 +43,13 @@ public class Reader<E>  {
 	}
 	
 	public ArrayList<E> readToList() throws IOException, ClassNotFoundException{
+		openStreams();
 		ArrayList<E> data = new ArrayList<E>();
 		while (this.fileIn.available() > 0) {
 			data.add(this.readObject());
 		}
 		
+		closeStreams();
 		return data;
 	}
 	
@@ -51,6 +62,23 @@ public class Reader<E>  {
 		}
 
 	}
+	
+	public void openStreams() {
+		try {
+			this.fileIn = new FileInputStream(dbFile);		
+			this.in = new ObjectInputStream(fileIn);
+			this.canRead = true;
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public boolean getReaderState() {
+		return canRead;
+	}
+	
+	
 	
 
 }

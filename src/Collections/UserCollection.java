@@ -31,7 +31,10 @@ public class UserCollection {
 
 	
 	private void initCollection() throws ClassNotFoundException, IOException {
-		this.s_db = this.m_reader.readToList();
+		if(m_reader.getReaderState()) {
+			this.s_db = this.m_reader.readToList();
+		}
+		
 	}
 	
 	/**

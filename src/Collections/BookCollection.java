@@ -22,9 +22,9 @@ public class BookCollection
 	
 	public BookCollection(){
 		try {
-			//this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			//this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			//this.m_reportWriter = new ReportWriter<Book>(FileNameDeclrations.REPORT_PATH,  "BookReport.csv");
+			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
+			this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
+			this.m_reportWriter = new ReportWriter<Book>(FileNameDeclrations.REPORT_PATH,  "BookReport.csv");
 			LoadBooks();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -34,7 +34,10 @@ public class BookCollection
 	
 	public void LoadBooks() throws ClassNotFoundException, IOException 
 	{
-		//this.s_books = this.m_reader.readToList();
+		if(m_reader.getReaderState()) {
+			this.s_books = this.m_reader.readToList();
+		}
+		
 		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "blaaa", new Date(System.currentTimeMillis())));
 		s_books.add(new Book("bla1", "bla1", "bla bla", "blaaa", new Date(System.currentTimeMillis())));
 		s_books.add(new Book("bla2", "bla2", "bla bla", "blaaa", new Date(System.currentTimeMillis())));
