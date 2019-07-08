@@ -747,12 +747,6 @@ public class MainMenu {
 			}
 			}});
 		
-		
-		JButton books_delete_button = new JButton("Delete");
-		books_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		books_delete_button.setBounds(850, 398, 102, 45);
-		books_panel.add(books_delete_button);
-		
 		JButton books_edit_button = new JButton("Edit");
 		books_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		books_edit_button.setBounds(962, 398, 60, 45);
@@ -767,7 +761,7 @@ public class MainMenu {
 				new Object[][] {
 				},
 				new String[] {
-					"Name", "Author", "Genre", "Publisher", "Release Date"
+					"ID", "Name", "Author", "Genre", "Publisher", "Release Date"
 				}));
 		
 		DefaultTableModel booksModel = (DefaultTableModel) books_table.getModel();
@@ -781,6 +775,22 @@ public class MainMenu {
 		books_scroll.setViewportView(books_table);
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(599, 201, 89, 23);
+		
+		
+		JButton books_delete_button = new JButton("Delete");
+		books_delete_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				int book_id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
+				libActions.deleteBook(book_id);
+				
+				buildBooksTable(books, booksModel);
+			}
+		});
+		
+		books_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_delete_button.setBounds(850, 398, 102, 45);
+		books_panel.add(books_delete_button);
 		
 		JPanel return_panel = new JPanel();
 		return_panel.setLayout(null);
@@ -1004,7 +1014,7 @@ public class MainMenu {
 	/*******************************************************************************************************************************************/
 	
 	private void buildBooksTable(ArrayList<Book> books, DefaultTableModel model) {
-		Object rowData[]= new Object[5];
+		Object rowData[]= new Object[6];
 		model.setRowCount(0);
 
 		if(String.valueOf(books_sort_combobox.getSelectedItem()).trim().equals("Ascending"))
@@ -1018,11 +1028,12 @@ public class MainMenu {
 		
 		
 		for(int i = 0; i < books.size(); i++) {
-			rowData[0] = books.get(i).getTitle();
-			rowData[1] = books.get(i).getAuthor();
-			rowData[2] = books.get(i).getGenre();
-			rowData[3] = books.get(i).getPublisher();
-			rowData[4] = books.get(i).getPublishingDate();
+			rowData[0] = books.get(i).getBookID();
+			rowData[1] = books.get(i).getTitle();
+			rowData[2] = books.get(i).getAuthor();
+			rowData[3] = books.get(i).getGenre();
+			rowData[4] = books.get(i).getPublisher();
+			rowData[5] = books.get(i).getPublishingDate();
 			
 			model.addRow(rowData);
 		}

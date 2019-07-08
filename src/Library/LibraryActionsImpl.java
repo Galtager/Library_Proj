@@ -30,6 +30,12 @@ public class LibraryActionsImpl //implements ILibraryAction
 	}
 	
 	//@Override
+	public static void deleteBook(int ID) 
+	{
+		m_libDB.deleteBook(ID);
+	}
+	
+	//@Override
 	public static Book getBook(int bookId) 
 	{
 		return m_libDB.getBook(bookId);
