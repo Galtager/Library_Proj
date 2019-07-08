@@ -1,5 +1,6 @@
 package Library;
 
+import java.util.Date;
 import java.util.List;
 
 import Book.Book;
@@ -22,6 +23,11 @@ public class LibraryActionsImpl //implements ILibraryAction
 		
 	}
 
+	//@Override
+	public static void insertBook(String title, String genre, String author, String publisher, Date publishing_date) 
+	{
+		m_libDB.addBook(new Book(title, genre, author, publisher, publishing_date));
+	}
 	
 	//@Override
 	public static Book getBook(int bookId) 

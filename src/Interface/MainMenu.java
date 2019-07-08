@@ -11,6 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -49,7 +51,19 @@ public class MainMenu {
 	private InsertBooks ib;
 	private LibraryActionsImpl libActions = new LibraryActionsImpl();
 	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
+
+	static private JComboBox books_sort_combobox;
 	
+	public static JComboBox getBooks_sort_combobox() {
+		return books_sort_combobox;
+	}
+
+	static private JComboBox books_filter_combobox;
+	
+	public static JComboBox getBooks_filter_combobox() {
+		return books_filter_combobox;
+	}
+
 	private JTextField books_textfield;
 	private ClientSearch client_search_form;
 	private JTable books_table;
@@ -662,7 +676,7 @@ public class MainMenu {
 		num_of_books_lable.setBounds(27, 26, 116, 18);
 		books_panel.add(num_of_books_lable);
 		
-		JComboBox books_sort_combobox = new JComboBox();
+		books_sort_combobox = new JComboBox();
 		books_sort_combobox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		books_sort_combobox.setSelectedIndex(0);
 		books_sort_combobox.setBounds(568, 25, 97, 20);
@@ -673,8 +687,8 @@ public class MainMenu {
 		books_textfield.setBounds(675, 25, 115, 20);
 		books_panel.add(books_textfield);
 		
-		JComboBox books_filter_combobox = new JComboBox();
-		books_filter_combobox.setModel(new DefaultComboBoxModel(new String[] {"Author", "Genre", "Release Date", "Publisher"}));
+		books_filter_combobox = new JComboBox();
+		books_filter_combobox.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author", "Genre", "Release Date", "Publisher"}));
 		books_filter_combobox.setSelectedIndex(0);
 		books_filter_combobox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		books_filter_combobox.setBounds(800, 26, 116, 18);
@@ -981,11 +995,27 @@ public class MainMenu {
 		jm_Help.add(btnAbout);
 	}
 	
+	
+	
+	/*******************************************************************************************************************************************/
+
+	/**    INTERNAL BOOKS DISPLAY ACTIONS
+	
 	/*******************************************************************************************************************************************/
 	
 	private void buildBooksTable(ArrayList<Book> books, DefaultTableModel model) {
 		Object rowData[]= new Object[5];
 		model.setRowCount(0);
+
+		if(String.valueOf(books_sort_combobox.getSelectedItem()).trim().equals("Ascending"))
+		{
+			Collections.sort(books, new SortAscending());
+		}
+		else
+		{
+			Collections.sort(books, new SortDescending());
+		}
+		
 		
 		for(int i = 0; i < books.size(); i++) {
 			rowData[0] = books.get(i).getTitle();
@@ -997,4 +1027,70 @@ public class MainMenu {
 			model.addRow(rowData);
 		}
 	}
+	
+	/*******************************************************************************************************************************************/
+	
+	class SortAscending implements Comparator<Book> 
+	{ 
+	    public int compare(Book a, Book b) 
+	    { 
+	    	if(String.valueOf(books_filter_combobox.getSelectedItem()).trim().equals("Author"))
+	    	{
+	    		 return a.getAuthor().compareTo(b.getAuthor()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).trim().equals("Genre"))
+	    	{
+	    		 return a.getGenre().compareTo(b.getGenre()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).trim().equals("Title"))
+	    	{
+	    		 return a.getTitle().compareTo(b.getTitle()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).trim().equals("Publisher"))
+	    	{
+	    		 return a.getPublisher().compareTo(b.getPublisher()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).trim().equals("Release Date"))
+	    	{
+	    		 return a.getPublishingDate().compareTo(b.getPublishingDate());
+	    	}
+	    	else
+	    	{
+	    		return 0;
+	    	}
+	    }
+	} 
+	
+	/*******************************************************************************************************************************************/
+	
+	class SortDescending implements Comparator<Book> 
+	{ 
+	    public int compare(Book a, Book b) 
+	    { 
+	    	if(String.valueOf(books_filter_combobox.getSelectedItem()).equals("Author"))
+	    	{
+	    		 return b.getAuthor().compareTo(a.getAuthor()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).equals("Genre"))
+	    	{
+	    		 return b.getGenre().compareTo(a.getGenre()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).equals("Title"))
+	    	{
+	    		 return b.getTitle().compareTo(a.getTitle()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).equals("Publisher"))
+	    	{
+	    		 return b.getPublisher().compareTo(a.getPublisher()); 
+	    	}
+	    	else if(String.valueOf(books_filter_combobox.getSelectedItem()).equals("Release Date"))
+	    	{
+	    		 return b.getPublishingDate().compareTo(a.getPublishingDate());
+	    	}
+	    	else
+	    	{
+	    		return 0;
+	    	}
+	    } 
+	} 
 }

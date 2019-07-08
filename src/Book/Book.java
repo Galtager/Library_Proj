@@ -38,7 +38,7 @@ public class Book implements IEntryToString, Serializable {
 	@IPropertyWriter(WriteToReport=false)
 	static private int s_current_ID_number = 0;
 
-	public Book(String title, String genre, String author, String publisher, Date m_publishing_date) {
+	public Book(String title, String genre, String author, String publisher, Date publishing_date) {
 		s_current_ID_number++;
 
 		m_book_ID = s_current_ID_number;
@@ -46,6 +46,7 @@ public class Book implements IEntryToString, Serializable {
 		m_genre = genre;
 		m_author = author;
 		m_publisher = publisher;
+		m_publishing_date = publishing_date;
 
 		m_hold_requests = new ArrayList<>();
 		m_current_borrower = null;

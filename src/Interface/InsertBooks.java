@@ -9,8 +9,12 @@ import javax.swing.JPanel;
 import java.awt.Rectangle;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -23,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
@@ -32,6 +37,8 @@ import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 import com.toedter.calendar.JDateChooser;
+
+import Library.LibraryActionsImpl;
 
 public class InsertBooks {
 
@@ -72,41 +79,10 @@ public class InsertBooks {
 		close_button = new JButton("Close");
 		close_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmInsertBooks.dispose();
 			}
 		});
-		
-		save_button = new JButton("Save");
-		
-		clear_button = new JButton("Clear");
-		GroupLayout groupLayout = new GroupLayout(frmInsertBooks.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(clear_button)
-							.addGap(40)
-							.addComponent(save_button)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(close_button)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 478, GroupLayout.PREFERRED_SIZE)
-					.addGap(31)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(close_button, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-						.addComponent(save_button, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(clear_button, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(30, Short.MAX_VALUE))
-		);
-		
+				
 		JPanel book_details_panel = new JPanel();
 		book_details_panel.setBounds(0, 0, 412, 20);
 		book_details_panel.setBackground(UIManager.getColor("Button.background"));
@@ -196,7 +172,73 @@ public class InsertBooks {
         
         JDateChooser release_date_chooser = new JDateChooser();
         release_date_chooser.setBounds(120, 111, 142, 19);
+        release_date_chooser.setDate(new Date());
         panel.add(release_date_chooser);
+        
+		save_button = new JButton("Save");
+		save_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(genre_txt.getText() == "" || 
+					author_txt.getText() == "" ||
+					publisher_txt.getText() == "" ||
+					release_date_chooser.getDate() == null)
+				{
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame ,
+						    "Must fill in every field!.");
+				}
+				else
+				{
+					LibraryActionsImpl.insertBook(name_txt.getText(),
+							genre_txt.getText(),
+							author_txt.getText(),
+							publisher_txt.getText(),
+							release_date_chooser.getDate());
+					frmInsertBooks.dispose();
+				}
+			}
+			
+		});
+		
+		clear_button = new JButton("Clear");
+		clear_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				name_txt.setText("");
+				genre_txt.setText("");
+				author_txt.setText("");
+				publisher_txt.setText("");
+				release_date_chooser.setDate(new Date());
+			}
+		});
+		GroupLayout groupLayout = new GroupLayout(frmInsertBooks.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(clear_button)
+							.addGap(40)
+							.addComponent(save_button)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(close_button)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 478, GroupLayout.PREFERRED_SIZE)
+					.addGap(31)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(close_button, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+						.addComponent(save_button, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(clear_button, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(30, Short.MAX_VALUE))
+		);
+        
         
         frmInsertBooks.getContentPane().setLayout(groupLayout);
 		
