@@ -1,6 +1,7 @@
 package Interface;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
@@ -8,7 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Entities.User;
+import UserManager.UserActions;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -17,7 +24,7 @@ import java.awt.event.ActionEvent;
 public class LoginDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField username_text_box;
+	private JTextField userID_text_box;
 	private JTextField password_text_box;
 
 	/**
@@ -44,20 +51,20 @@ public class LoginDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("User Name:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(10, 11, 73, 26);
-		contentPanel.add(lblNewLabel);
+		JLabel lblUserID = new JLabel("User ID:");
+		lblUserID.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUserID.setBounds(10, 11, 73, 26);
+		contentPanel.add(lblUserID);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassword.setBounds(10, 42, 73, 26);
 		contentPanel.add(lblPassword);
 		
-		username_text_box = new JTextField();
-		username_text_box.setBounds(93, 16, 119, 20);
-		contentPanel.add(username_text_box);
-		username_text_box.setColumns(10);
+		userID_text_box = new JTextField();
+		userID_text_box.setBounds(93, 16, 119, 20);
+		contentPanel.add(userID_text_box);
+		userID_text_box.setColumns(10);
 		
 		password_text_box = new JTextField();
 		password_text_box.setColumns(10);
@@ -68,23 +75,33 @@ public class LoginDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
+				
+				
 				JButton ok_button = new JButton("OK");
 				ok_button.addActionListener(new ActionListener() {
-					
-					// PLACE HOLDER - HERE TO CHECK USERNAME AND PASSWORD
-					
 					public void actionPerformed(ActionEvent e) {
-						EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								try {
-									MainMenu window = new MainMenu();
-									window.frmLibrary.setVisible(true);
-								} catch (Exception e) {
-									e.printStackTrace();
+						
+						User logged = UserActions.checkIfUserExists(userID_text_box.getText().trim(), password_text_box.getText().trim());
+						if(logged == null) {
+							Component frame = null;
+							JOptionPane.showMessageDialog(frame ,
+								    "User doesnt exist.");
+						}
+						
+						else {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										MainMenu window = new MainMenu();
+										window.frmLibrary.setVisible(true);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
 								}
-							}
-						});
-						dispose();
+							});
+							dispose();
+						}
+
 					}
 				});
 				ok_button.setActionCommand("OK");

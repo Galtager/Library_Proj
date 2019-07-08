@@ -10,4 +10,10 @@ public class Manager extends Staff
 		super(id, name, address, email, phone_no, password, salary);
 	}
 
+	@Override
+	public String entityReportEntry() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

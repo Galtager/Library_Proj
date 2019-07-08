@@ -1,11 +1,13 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Book.Book;
 import Book.HoldRequest;
+import FileHandler.Writer.IEntryToString;
 
-public class Borrower extends User 
+public class Borrower extends User implements Serializable, IEntryToString
 {
 	static private int s_max_books_issued = 1;
 
@@ -57,6 +59,27 @@ public class Borrower extends User
 		{
 			System.out.println("Exceeds amount of books per borrower!"); 
 		}
+	}
+	
+	public int getMaxIssuedBooks() {
+		return this.s_max_books_issued;
+	}
+	
+	public int getIssuedBooksCount() {
+		return this.m_issued_books.size();
+	}
+
+	@Override
+	public String entityReportEntry() {
+		// TODO Auto-generated method stub
+		String str = "";
+		str += this.getID() + ",";
+		str += this.getName() + ",";
+		str += this.getAddress() + ",";
+		str += this.getEmail() + ",";
+		str += this.getPhoneNumber() + ",";
+		
+		return str;
 	}
 
 }

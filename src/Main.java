@@ -1,6 +1,13 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import Book.Book;
+import Entities.Librarian;
+import FileHandler.FileNameDeclrations;
+import FileHandler.Reader.Reader;
+import FileHandler.Writer.DBWriter;
+import FileHandler.Writer.ReportWriter;
 
 import Misc.Globals;
 import word.api.interfaces.IDocument;
@@ -17,47 +24,31 @@ class Main
 { 
     // Your program begins with a call to main(). 
     // Prints "Hello, World" to the terminal window. 
-    public static void main(String args[]) 
+    public static void main(String args[]) throws ClassNotFoundException 
     { 
-    	IDocument myDoc = new Document2004();
+    	Test t = new Test();
+    	Book b1 = new Book("title", "horror", "author", "publisher", new Date());
+    	Book b2 = new Book("title1", "romance", "author", "publisher", new Date());
     	
-    	/** logo **/
-    	if(Globals.s_global_logo_path != null)
-    	{
-	        myDoc.addEle(Paragraph
-	                .with(Image.from_FULL_LOCAL_PATHL(
-	                                Utils.getAppRoot()
-	                                        + Globals.s_global_logo_path).setHeight("40").setWidth("80").create()
-	                                .getContent()));
-    	}
+    	ArrayList<Book> data = new ArrayList<Book>();
+    	data.add(b1);
+    	data.add(b2);
     	
-    	/** title **/
-    	myDoc.addEle(Heading1.with("Letter of dealy").create());
-    	myDoc.addEle(BreakLine.times(2).create());
-    	
-    	/** paragraph **/
-        myDoc.addEle(Paragraph
-                .with("Hello " + "Asdfasd" + "," + System.lineSeparator())
-                .create());
-        
-        myDoc.addEle(Paragraph
-                .with("You didn't return your book in time." )
-                .create());
-        
-        
-        /** write the word file **/
-		File fileObj = new File("D:\\Projects\\Temp\\asdas.doc");
-		
-		PrintWriter writer = null;
-		try {
-		    writer = new PrintWriter(fileObj);
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
+    	try {
+    		
+			DBWriter<Book> w = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "test.ser");
+			w.writeList(data);
+			ReportWriter<Book> w_report = new ReportWriter<Book>(FileNameDeclrations.REPORT_FILE_EXTENSION, FileNameDeclrations.REPORT_FILE_PREFIX, FileNameDeclrations.REPORT_PATH);
+			w_report.writeToFile(b1);
+			
+			//BookFileReader r = new BookFileReader(FileNameDeclrations.DB_PATH, "\\db_7.bin");
+			Reader <Book> r = new Reader<Book>(FileNameDeclrations.DB_PATH,  "test.ser");
+			ArrayList<Book> read = r.readToList();
+			int i = 0;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		String myWord = myDoc.getContent();
-		
-		writer.println(myWord);
-		writer.close();  
-	} 
-     
+        System.out.println("done"); 
+    } 
 }

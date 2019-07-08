@@ -1,8 +1,9 @@
 package Book;
+import java.io.Serializable;
 import java.util.Date;
 import Entities.Borrower;
 
-public class HoldRequest 
+public class HoldRequest implements Serializable
 {
 
 	private Borrower m_borrower;
@@ -14,6 +15,10 @@ public class HoldRequest
 	{
 		m_borrower = borrower;
 		m_request_date = request_date;
+	}
+	
+	public Borrower getBorrower() {
+		return this.m_borrower;
 	}
 
 }

@@ -1,6 +1,8 @@
 package Entities;
 
-public class Librarian extends Staff 
+import java.io.Serializable;
+
+public class Librarian extends Staff implements Serializable
 {
 
 	public Librarian(String id, String name,
@@ -10,6 +12,13 @@ public class Librarian extends Staff
 	{
 		super(id, name, address, email, phone_no, password, salary);
 		
+		
+	}
+
+	@Override
+	public String entityReportEntry() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
