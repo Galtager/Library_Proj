@@ -5,13 +5,28 @@ import java.util.List;
 
 import Book.Book;
 import Collections.BookCollection;
+import Collections.UserCollection;
 import Entities.Borrower;
+import Entities.User;
 
 public class LibraryActionsImpl //implements ILibraryAction 
 {
 
-	// instance to library db
-	private static BookCollection m_libDB = new BookCollection();
+	// instance to books db
+	private static BookCollection m_books_DB = new BookCollection();
+	
+	// instance to users db
+	private static UserCollection m_users_DB = new UserCollection();
+	
+	
+	
+	//@Override
+	public static List<User> getAllUsers() 
+	{
+		return m_users_DB.getAllUsers();
+	}
+	
+	
 	
 	
 	// Loan or return a book
@@ -19,39 +34,39 @@ public class LibraryActionsImpl //implements ILibraryAction
 	public static boolean issueBook(Book book, Borrower borrower) 
 	{
 		// TODO Auto-generated method stub
-		return !m_libDB.IssueBook(book.getBookID(), borrower);
+		return !m_books_DB.IssueBook(book.getBookID(), borrower);
 		
 	}
 
 	//@Override
 	public static void insertBook(String title, String genre, String author, String publisher, Date publishing_date) 
 	{
-		m_libDB.addBook(new Book(title, genre, author, publisher, publishing_date));
+		m_books_DB.addBook(new Book(title, genre, author, publisher, publishing_date));
 	}
 	
 	//@Override
 	public static void deleteBook(int ID) 
 	{
-		m_libDB.deleteBook(ID);
+		m_books_DB.deleteBook(ID);
 	}
 	
 	//@Override
 	public static Book getBook(int bookId) 
 	{
-		return m_libDB.getBook(bookId);
+		return m_books_DB.getBook(bookId);
 	}
 
 	//@Override
 	public static List<Book> getAllBooks() 
 	{
-		return m_libDB.getAllBooks();
+		return m_books_DB.getAllBooks();
 	}
 
 	//@Override
 	public static List<Book> getIssuedBooks()
 	{
 		// TODO Auto-generated method stub
-		return m_libDB.GetIssuedBooks();
+		return m_books_DB.GetIssuedBooks();
 	}
 	
 	public static List<Book> filterBookList(String filterBy, String value){

@@ -38,6 +38,11 @@ public class UserCollection {
 		
 	}
 	
+	public List<User> getAllUsers()
+	{
+		return s_db;
+	}
+	
 	/**
 	Try login to system
 	@param username - the user ID

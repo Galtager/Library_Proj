@@ -27,6 +27,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Book.Book;
+import Entities.User;
 import Library.LibraryActionsImpl;
 
 import javax.swing.ScrollPaneConstants;
@@ -51,6 +52,7 @@ public class MainMenu {
 	private InsertBooks ib;
 	private LibraryActionsImpl libActions = new LibraryActionsImpl();
 	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
+	private ArrayList<User> users = (ArrayList<User>) libActions.getAllUsers();
 
 	static private JComboBox books_sort_combobox;
 	
@@ -151,43 +153,15 @@ public class MainMenu {
 		student_table.setBackground(new Color(255, 255, 255));
 		student_table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-					"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"
+					"ID", "Name", "Address", "Email", "Phone"
 			}
 		));
+		
+		DefaultTableModel usersModel = (DefaultTableModel) student_table.getModel();
+		buildUsersTable(users, usersModel);
+		
 		JScrollPane clients_scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		clients_scroll.setBounds(37, 55, 1079, 305);
 		
@@ -1006,6 +980,27 @@ public class MainMenu {
 	}
 	
 	
+	
+	/*******************************************************************************************************************************************/
+
+	/**    INTERNAL USERS DISPLAY ACTIONS
+	
+	/*******************************************************************************************************************************************/
+	
+	private void buildUsersTable(ArrayList<User> users, DefaultTableModel model) {
+		Object rowData[]= new Object[5];
+		model.setRowCount(0);
+	
+		for(int i = 0; i < users.size(); i++) {
+			rowData[0] = users.get(i).getID();
+			rowData[1] = users.get(i).getName();
+			rowData[2] = users.get(i).getAddress();
+			rowData[3] = users.get(i).getEmail();
+			rowData[4] = users.get(i).getPhoneNumber();
+			
+			model.addRow(rowData);
+		}
+	}
 	
 	/*******************************************************************************************************************************************/
 
