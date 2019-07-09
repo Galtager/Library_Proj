@@ -23,6 +23,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
@@ -32,6 +37,9 @@ import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 import com.toedter.calendar.JDateChooser;
+
+import Book.Book;
+import Library.LibraryActionsImpl;
 
 public class InsertBooks {
 
@@ -44,6 +52,8 @@ public class InsertBooks {
 	private JButton clear_button;
 	private JButton save_button;
 	private JButton close_button;
+	
+	LibraryActionsImpl lib = new LibraryActionsImpl();
 
 	/**
 	 * Launch the application.
@@ -70,12 +80,10 @@ public class InsertBooks {
 		panel.setBackground(new Color(204, 204, 255));
 		
 		close_button = new JButton("Close");
-		close_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		
 		save_button = new JButton("Save");
+
 		
 		clear_button = new JButton("Clear");
 		GroupLayout groupLayout = new GroupLayout(frmInsertBooks.getContentPane());
@@ -195,11 +203,48 @@ public class InsertBooks {
         panel.add(comments_scrollBar);
         
         JDateChooser release_date_chooser = new JDateChooser();
+        release_date_chooser.setDate(new Date());
         release_date_chooser.setBounds(120, 111, 142, 19);
         panel.add(release_date_chooser);
         
         frmInsertBooks.getContentPane().setLayout(groupLayout);
 		
+        /*----------------------------------- EVENTS -------------------------------------*/
+        
+		save_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String title = name_txt.getText();
+				String genre = genre_txt.getText();
+				String author = author_txt.getText();
+				String publisher = publisher_txt.getText();
+				Date publishingDate = release_date_chooser.getDate();
+				
+				Book newBook = new Book(title, genre, author, publisher, publishingDate);
+				lib.addBook(newBook);
+				frmInsertBooks.dispose();
+				
+			}
+		});
 		
-	}
+		close_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmInsertBooks.dispose();
+			}
+		});
+		
+		clear_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				name_txt.setText("");
+				genre_txt.setText("");
+				author_txt.setText("");
+				publisher_txt.setText("");
+				release_date_chooser.setDate(new Date());
+			}
+		});
+	
+}
 }

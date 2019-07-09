@@ -1,9 +1,12 @@
 package Collections;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import Book.Book;
@@ -38,9 +41,9 @@ public class BookCollection
 			this.s_books = this.m_reader.readToList();
 		}
 		
-		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "blaaa", new Date(System.currentTimeMillis())));
-		s_books.add(new Book("bla1", "bla1", "bla bla", "blaaa", new Date(System.currentTimeMillis())));
-		s_books.add(new Book("bla2", "bla2", "bla bla", "blaaa", new Date(System.currentTimeMillis())));
+		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "blaaa", new Date()));
+		s_books.add(new Book("bla1", "bla1", "bla bla", "blaaa", new Date()));
+		s_books.add(new Book("bla2", "bla2", "bla bla", "blaaa", new Date()));
 	}
 	
 	// get book by bookId
@@ -52,20 +55,18 @@ public class BookCollection
 				.orElse(null);
 	}
 	
-	public Book getBooksByTitle(String title) 
+	public static List<Book> getBooksByTitle(String title) 
 	{
 		return s_books.stream()
 				.filter(book -> book.getTitle().contains(title))
-				.findAny()
-				.orElse(null);
+				.collect(Collectors.toList());
 	}
 	
-	public Book getBooksByGenre(String genre) 
+	public static List<Book> getBooksByGenre(String genre) 
 	{
 		return s_books.stream()
 				.filter(book -> book.getGenre().contains(genre))
-				.findAny()
-				.orElse(null);
+				.collect(Collectors.toList());
 	}
 	
 	public static List<Book> getBooksByAuthor(String author) 
@@ -75,20 +76,18 @@ public class BookCollection
 				.collect(Collectors.toList());
 	}
 	
-	public Book getBooksByPublisher(String publisher) 
+	public static List<Book> getBooksByPublisher(String publisher) 
 	{
 		return s_books.stream()
 				.filter(book -> book.getPublisher().contains(publisher))
-				.findAny()
-				.orElse(null);
+				.collect(Collectors.toList());
 	}
 	
-	public Book getBooksByPublishingDate(Date publishDate) 
+	public static List<Book> getBooksByPublishingDate(Date publishDate) 
 	{
 		return s_books.stream()
 				.filter(book -> book.getPublishingDate().compareTo(publishDate) == 0)
-				.findAny()
-				.orElse(null);
+				.collect(Collectors.toList());
 	}
 	
 	public List<Book> getAllBooks()
@@ -96,9 +95,10 @@ public class BookCollection
 		return s_books;
 	}
 	
-	public boolean addBook(Book b) 
+	public static void addBook(Book b) 
 	{
-		return s_books.add(b);
+		s_books.add(b);
+		int i = 0;
 	}
 	
 	public boolean deleteBook(int bookId) 
@@ -107,9 +107,11 @@ public class BookCollection
 		return s_books.remove(bookToRemove);
 	}
 	
-	public boolean IssueBook(int bookId, Borrower b)
+	public boolean IssueBook(int bookId)
 	{
 		Book bookToReturn = getBook(bookId);
+		if(bookToReturn == null)
+			return false;
 		bookToReturn.setBorrower(bookToReturn.getNextBorrower());
 		
 		// check for another indication if the book is available!
@@ -129,6 +131,32 @@ public class BookCollection
 	public static List<Book> filterBookList(String filter, String value){
 		if(filter.compareTo("Author") == 0) {
 			return getBooksByAuthor(value);
+		}
+		
+		if(filter.compareTo("Genre") == 0) {
+			return getBooksByGenre(value);
+		}
+		
+		if(filter.compareTo("Publisher") == 0) {
+			return getBooksByPublisher(value);
+		}
+		
+		if(filter.compareTo("Title") == 0) {
+			return getBooksByTitle(value);
+		}
+		
+		if(filter.compareTo("Release Date") == 0) {
+			java.util.Calendar cal = java.util.Calendar.getInstance();
+			SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd/MM/yyyy/hh:mm:ss");
+			Date parsedDate;
+			try {
+				parsedDate = formatter.parse(value);
+				return getBooksByPublishingDate(parsedDate);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return null;

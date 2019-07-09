@@ -7,10 +7,15 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -49,6 +54,8 @@ public class MainMenu {
 	private InsertBooks ib;
 	private LibraryActionsImpl libActions = new LibraryActionsImpl();
 	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
+	
+	
 	
 	private JTextField books_textfield;
 	private ClientSearch client_search_form;
@@ -733,6 +740,55 @@ public class MainMenu {
 			}
 			}});
 		
+		ib.frmInsertBooks.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				DefaultTableModel booksModel = (DefaultTableModel) books_table.getModel();
+				books = (ArrayList<Book>) libActions.getAllBooks();
+				
+				buildBooksTable(books, booksModel);
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 		
 		JButton books_delete_button = new JButton("Delete");
 		books_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -780,6 +836,15 @@ public class MainMenu {
 		return_book_button.setBounds(494, 161, 102, 45);
 		return_panel.add(return_book_button);
 		
+		return_book_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int bookId =Integer.parseInt(book_code_text.getText());
+				libActions.issueBook(bookId);
+			}
+		});
+		
 		JLabel book_code_lable = new JLabel("Book Code:");
 		book_code_lable.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		book_code_lable.setBounds(343, 127, 102, 20);
@@ -807,6 +872,8 @@ public class MainMenu {
 		exit_button.setBackground(Color.LIGHT_GRAY);
 		exit_button.setBounds(10, 11, 100, 127);
 		frmLibrary.getContentPane().add(exit_button);
+		
+
 		
 		JButton search_button = new JButton("Search");
 		search_button.setVerticalTextPosition(SwingConstants.BOTTOM);

@@ -15,10 +15,10 @@ public class LibraryActionsImpl //implements ILibraryAction
 	
 	// Loan or return a book
 	//@Override
-	public static boolean issueBook(Book book, Borrower borrower) 
+	public static boolean issueBook(int bookId) 
 	{
 		// TODO Auto-generated method stub
-		return !m_libDB.IssueBook(book.getBookID(), borrower);
+		return !m_libDB.IssueBook(bookId);
 		
 	}
 
@@ -42,8 +42,17 @@ public class LibraryActionsImpl //implements ILibraryAction
 		return m_libDB.GetIssuedBooks();
 	}
 	
+	
 	public static List<Book> filterBookList(String filterBy, String value){
 		 return BookCollection.filterBookList(filterBy, value);
 	} 
+	
+	public static void addBook(Book b) {
+		m_libDB.addBook(b);
+	}
+	
+	public static void deleteBook(int bookId) {
+		m_libDB.deleteBook(bookId);
+	}
 
 }

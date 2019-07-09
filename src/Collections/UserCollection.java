@@ -9,6 +9,7 @@ import Entities.*;
 import FileHandler.FileNameDeclrations;
 import FileHandler.Reader.Reader;
 import FileHandler.Writer.DBWriter;
+import FileHandler.Writer.IEntryToString;
 import FileHandler.Writer.ReportWriter;
 import FileHandler.UserReportTemplates.*;
 

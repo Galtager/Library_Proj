@@ -14,5 +14,7 @@ public class UserActions {
 	public static User checkIfUserExists(String username, String password) {
 		return m_collection.checkCredentials(username, password);
 	}
+	
+	
 
 }
