@@ -758,12 +758,12 @@ public class MainMenu {
 				try {
 					int book_id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
 					libActions.deleteBook(book_id);
-					
-					buildBooksTable(books, booksModel);
 				}
 				catch (Exception e) {
 					// Do nothing
 				}
+				
+				buildBooksTable(books, booksModel);
 			}
 		});
 		
