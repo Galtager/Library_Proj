@@ -156,19 +156,6 @@ public class InsertBooks {
 		publisher_txt.setColumns(10);
 		publisher_txt.setBounds(120, 90, 96, 20);
 		panel.add(publisher_txt);
-		
-		JLabel comments_lbl = new JLabel("Comments:");
-		comments_lbl.setVerticalAlignment(SwingConstants.TOP);
-		comments_lbl.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		comments_lbl.setBounds(10, 161, 106, 101);
-		panel.add(comments_lbl);
-		
-        JTextArea textArea = new JTextArea(0,0);
-		JScrollPane comments_scrollBar = new JScrollPane(textArea,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		comments_scrollBar.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		comments_scrollBar.setSize(242, 100);
-		comments_scrollBar.setLocation(120, 163);
-        panel.add(comments_scrollBar);
         
         JDateChooser release_date_chooser = new JDateChooser();
         release_date_chooser.setBounds(120, 111, 142, 19);

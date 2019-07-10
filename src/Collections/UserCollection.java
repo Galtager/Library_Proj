@@ -27,7 +27,7 @@ public class UserCollection {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		}
+	}
 
 	
 	private void initCollection() throws ClassNotFoundException, IOException {
@@ -37,6 +37,11 @@ public class UserCollection {
 		this.s_db.add(new Manager("0", "root", "----", "----", "----", "0", 0));
 		this.s_db.add(new Borrower("6454", "lidor hadjaj", "my address", "my email", "my phone", "6752"));
 		this.s_db.add(new Borrower("6454", "my asulin", "her address", "her email", "her phone", "12345"));
+	}
+	
+	public boolean addUser(User a) 
+	{
+		return s_db.add(a);
 	}
 	
 	public User getUser(String userId) 

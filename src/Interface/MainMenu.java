@@ -168,7 +168,7 @@ public class MainMenu {
 			new Object[][] {
 			},
 			new String[] {
-					"ID", "Name", "Address", "Email", "Phone", "Utilization"
+					"ID", "Name", "Address", "Email", "Phone", "Utilization", "Ending Date"
 			}
 		));
 		
@@ -243,7 +243,7 @@ public class MainMenu {
 				catch (Exception e) {
 					// Do nothing
 				}
-				
+				users = (ArrayList<User>) libActions.getAllUsers();
 				buildUsersTable(users, usersModel);
 			}
 		});
@@ -797,6 +797,7 @@ public class MainMenu {
 					// Do nothing
 				}
 				
+				books = (ArrayList<Book>) libActions.getAllBooks();
 				buildBooksTable(books, booksModel);
 			}
 		});
@@ -1027,7 +1028,7 @@ public class MainMenu {
 	/*******************************************************************************************************************************************/
 	
 	private void buildUsersTable(ArrayList<User> users, DefaultTableModel model) {
-		Object rowData[]= new Object[6];
+		Object rowData[]= new Object[7];
 		model.setRowCount(0);
 		
 
@@ -1051,6 +1052,7 @@ public class MainMenu {
 				rowData[3] = users.get(i).getEmail();
 				rowData[4] = users.get(i).getPhoneNumber();
 				rowData[5] = ((Borrower) users.get(i)).getIssuedBooksCount();
+				rowData[6] = ((Borrower) users.get(i)).getSubscriptionEndingDate().toString();
 				model.addRow(rowData);
 			}
 		}

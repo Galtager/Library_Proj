@@ -2,6 +2,8 @@ package Entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import Book.Book;
 import Book.HoldRequest;
@@ -13,6 +15,8 @@ public class Borrower extends User implements Serializable, IEntryToString
 
 	private ArrayList<Book> m_issued_books;
 	private ArrayList<HoldRequest> m_hold_requests;
+	
+	private Date m_subscription_ending_date;
 
 	public Borrower(String id, String name,
 					String address, String email,
@@ -22,8 +26,14 @@ public class Borrower extends User implements Serializable, IEntryToString
 		
 		m_issued_books = new ArrayList<>();
 		m_hold_requests = new ArrayList<>();
+		
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.YEAR, 1);
+		
+		m_subscription_ending_date = c.getTime();;
 	}
-	
+
 	/***************   Setters   ***************/
 	
 	public static void maxBooksIssued(int max_books_issued) 
@@ -65,13 +75,17 @@ public class Borrower extends User implements Serializable, IEntryToString
 		return this.s_max_books_issued;
 	}
 	
+	
+	public Date getSubscriptionEndingDate() {
+		return m_subscription_ending_date;
+	}
+	
 	public int getIssuedBooksCount() {
 		return this.m_issued_books.size();
 	}
 
 	@Override
 	public String entityReportEntry() {
-		// TODO Auto-generated method stub
 		String str = "";
 		str += this.getID() + ",";
 		str += this.getName() + ",";

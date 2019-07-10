@@ -23,6 +23,14 @@ public class LibraryActionsImpl //implements ILibraryAction
 	/***********************************************************************/
 
 	//@Override
+	public static void insertUser(String id, String name,
+								 String address, String email,
+								 String phone_no, String password) 
+	{
+		m_users_DB.addUser(new Borrower(id, name, address, email, phone_no, password));
+	}
+	
+	//@Override
 	public static List<User> getAllUsers() 
 	{
 		return m_users_DB.getAllUsers();
@@ -31,7 +39,7 @@ public class LibraryActionsImpl //implements ILibraryAction
 	//@Override
 	public static void deleteUser(String ID) 
 	{
-		m_users_DB.deleteUser(ID);
+		boolean a = m_users_DB.deleteUser(ID);
 	}
 	
 	//@Override
