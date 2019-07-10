@@ -1,5 +1,6 @@
 package Collections;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,18 +20,22 @@ public class BookCollection
 	private static ArrayList<Book> s_books = new ArrayList<Book>();
 	private DBWriter<Book> m_dbWriter;
 	private Reader<Book> m_reader;
-	private ReportWriter<Book> m_reportWriter;
+	private static ReportWriter<Book> m_reportWriter;
 	
 	public BookCollection(){
 		try {
 			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
 			this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			this.m_reportWriter = new ReportWriter<Book>(FileNameDeclrations.REPORT_PATH,  "BookReport.csv");
+			this.m_reportWriter = new ReportWriter<Book>();
 			LoadBooks();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	public static void exportToCSV(File f ) 
+	{
+		m_reportWriter.writeListToFile(s_books, f);
 	}
 	
 	public void LoadBooks() throws ClassNotFoundException, IOException 
@@ -149,13 +154,5 @@ public class BookCollection
 	public void writeList(ArrayList<Book> data) {
 		this.m_dbWriter.writeList(data);
 	}
-	
-	public void writeReport(ArrayList<Book> data, String fileName) throws IOException {
-		this.m_reportWriter.changeFile(fileName);
-		this.m_reportWriter.writeListToFile(data);
-	}
-	
-
-	
 	
 }

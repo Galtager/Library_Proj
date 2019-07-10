@@ -20,32 +20,11 @@ public class ReportWriter<E extends IEntryToString>
 	
 	private BufferedWriter m_bw = null;
 	private File m_report;
-	private String m_path = System.getProperty("user.dir");
 	private final String m_default_seperator = ",";
-	private final String m_file_extension;
-	private final String m_file_name;
-
 	
-	
-	
-	public ReportWriter(String path, String fileName) throws IOException
+	private void initBufferedWriter(File f) throws IOException 
 	{
-		this.m_file_extension = ".csv";
-		this.m_file_name = fileName;
-		this.m_path += path;
-		initBufferedWriter(generateFileName());
-		
-
-		
-	}
-	
-	public void changeFile(String fileName) throws IOException{
-		initBufferedWriter(fileName);
-	}
-	
-	private void initBufferedWriter(String fileName) throws IOException 
-	{
-		m_report = new File(m_path, fileName);
+		m_report = f;
 		m_report.createNewFile();
 		
 		m_bw = new BufferedWriter(new FileWriter(m_report));
@@ -65,18 +44,9 @@ public class ReportWriter<E extends IEntryToString>
 		m_bw.write("\n");
 	}
 	
-	
 	private void writeEntry(E entity) throws IOException 
 	{
 		m_bw.write(entity.entityReportEntry() + "\n");
-	}
-	
-	private String generateFileName() 
-	{
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		
-		return this.m_file_name + cal.get(Calendar.DAY_OF_MONTH);
 	}
 	
 	public void writeToFile(E entity) 
@@ -98,10 +68,11 @@ public class ReportWriter<E extends IEntryToString>
 	}
 	
 	
-	public void writeListToFile(List<E> entities) 
+	public void writeListToFile(List<E> entities, File f) 
 	{
 		try 
 		{
+			initBufferedWriter(f);
 			writeHeaders(entities.get(0));
 			entities.stream().forEach(entity -> {
 				try 
@@ -141,11 +112,4 @@ public class ReportWriter<E extends IEntryToString>
 			e.printStackTrace();
 		}
 	}
-	
-
-	
-	
-	
-	
-
 }

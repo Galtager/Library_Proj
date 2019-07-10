@@ -1,4 +1,5 @@
 package Collections;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,20 +16,31 @@ import FileHandler.UserReportTemplates.*;
 public class UserCollection {
 	private static ArrayList<User> s_db = new ArrayList<User>();
 	private DBWriter<User> m_dbWriter;
-	private ReportWriter<User> m_reportWriter;
+	private static ReportWriter<Person> m_reportWriter;
 	private Reader<User> m_reader;
 	
 	public UserCollection() {
 		try {
 			this.m_dbWriter = new DBWriter<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
 			this.m_reader = new Reader<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
-			this.m_reportWriter = new ReportWriter<User>(FileNameDeclrations.REPORT_PATH, "userReport.csv");
+			this.m_reportWriter = new ReportWriter<Person>();
 			initCollection();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public static void exportToCSV(File f) 
+	{
+		List<Person> temp = new ArrayList<>();
+		for(User u : s_db)
+		{
+			temp.add(new Person(u.getID(), u.getName(),
+					u.getAddress(), u.getEmail(),
+					u.getPhoneNumber()));
+		}
+		m_reportWriter.writeListToFile(temp, f);
+	}
 	
 	private void initCollection() throws ClassNotFoundException, IOException {
 		if(m_reader.getReaderState()) {
@@ -150,12 +162,6 @@ public class UserCollection {
 	
 	public void writeList(ArrayList<User> data) {
 		this.m_dbWriter.writeList(data);
-	}
-	
-	public void writeReport(String reportName, List<User> data) throws IOException {
-		this.m_reportWriter.changeFile(reportName);
-		this.m_reportWriter.writeListToFile(data);
-		
 	}
 	
 	private UserUtilization adjustUserToUtilizationReport(User u) {

@@ -21,7 +21,7 @@ public class Book implements IEntryToString, Serializable {
 	private int m_book_ID;
 	@IPropertyWriter(FieldName="Title")
 	private String m_title;
-	@IPropertyWriter(FieldName="Gener")
+	@IPropertyWriter(FieldName="Genre")
 	private String m_genre;
 	@IPropertyWriter(FieldName="Author")
 	private String m_author;

@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,9 +35,12 @@ import Library.LibraryActionsImpl;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.SystemColor;
 import javax.swing.border.EtchedBorder;
@@ -278,6 +282,20 @@ public class MainMenu {
 		student_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		JButton client_excel_button = new JButton("Excel");
+		client_excel_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser file=new JFileChooser();
+				file.setCurrentDirectory(new File ("user.dir"));
+		          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.csv", "csv");
+		          file.addChoosableFileFilter(filter);
+		          int result = file.showSaveDialog(null);
+		          if(result == JFileChooser.APPROVE_OPTION)
+		          {
+		        	  File f = file.getSelectedFile();
+		        	  libActions.exportUsersToCSV(f);
+		          }
+			}
+		});
 		client_excel_button.setBounds(639, 398, 60, 45);
 		client_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
@@ -729,6 +747,20 @@ public class MainMenu {
 		books_panel.add(books_report_button);
 		
 		JButton books_excel_button = new JButton("Excel");
+		books_excel_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser file=new JFileChooser();
+				file.setCurrentDirectory(new File ("user.dir"));
+		          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.csv", "csv");
+		          file.addChoosableFileFilter(filter);
+		          int result = file.showSaveDialog(null);
+		          if(result == JFileChooser.APPROVE_OPTION)
+		          {
+		        	  File f = file.getSelectedFile();
+		        	  libActions.exportBooksToCSV(f);
+		          }
+			}
+		});
 		books_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		books_excel_button.setBounds(639, 398, 60, 45);
 		books_panel.add(books_excel_button);

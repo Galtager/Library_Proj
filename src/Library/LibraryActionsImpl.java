@@ -1,5 +1,6 @@
 package Library;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,11 @@ public class LibraryActionsImpl //implements ILibraryAction
 	//@Override
 	public static List<User> filterUsersList(String filterBy, String value){
 		 return UserCollection.filterUserList(filterBy, value);
+	} 
+	
+	//@Override
+	public static void exportUsersToCSV(File f){
+		 UserCollection.exportToCSV(f) ;
 	} 
 	
 	/***********************************************************************/
@@ -95,6 +101,11 @@ public class LibraryActionsImpl //implements ILibraryAction
 	//@Override
 	public static List<Book> filterBookList(String filterBy, String value){
 		 return BookCollection.filterBookList(filterBy, value);
+	} 
+	
+	//@Override
+	public static void exportBooksToCSV(File f){
+		BookCollection.exportToCSV(f) ;
 	} 
 
 }

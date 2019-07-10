@@ -2,12 +2,20 @@ package Entities;
 
 import java.io.Serializable;
 
-public abstract class Person implements Serializable
+import FileHandler.Writer.IEntryToString;
+import FileHandler.Writer.IPropertyWriter;
+
+public class Person implements Serializable, IEntryToString
 {   
-    protected String m_id;         
+	@IPropertyWriter(FieldName="ID")
+    protected String m_id;  
+	@IPropertyWriter(FieldName="Name")
     protected String m_name;    
+	@IPropertyWriter(FieldName="Address")
     protected String m_address;  
+	@IPropertyWriter(FieldName="Email")
     protected String m_email;  
+	@IPropertyWriter(FieldName="Phone")
     protected String m_phone_no;  
 
     public Person(String id, String name,
@@ -20,6 +28,18 @@ public abstract class Person implements Serializable
         m_email = email;
         m_phone_no = phone_no;
     }        
+    
+	@Override
+	public String entityReportEntry() {
+		String entry = "";
+		entry += this.m_id + ",";
+		entry += this.m_name + ",";
+		entry += this.m_address + ",";
+		entry += this.m_email + ",";
+		entry += this.m_phone_no + ",";
+
+		return entry;
+	}
     
     // Printing Info of a Person
     public void printInfo()
