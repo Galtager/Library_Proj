@@ -178,9 +178,9 @@ public class InsertBooks {
 		save_button = new JButton("Save");
 		save_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(genre_txt.getText() == "" || 
-					author_txt.getText() == "" ||
-					publisher_txt.getText() == "" ||
+				if(genre_txt.getText().equals("") || 
+					author_txt.getText().equals("") ||
+					publisher_txt.getText().equals("") ||
 					release_date_chooser.getDate() == null)
 				{
 					Component frame = null;

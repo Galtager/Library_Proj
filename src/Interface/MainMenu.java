@@ -754,11 +754,16 @@ public class MainMenu {
 		JButton books_delete_button = new JButton("Delete");
 		books_delete_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				int book_id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
-				libActions.deleteBook(book_id);
 				
-				buildBooksTable(books, booksModel);
+				try {
+					int book_id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
+					libActions.deleteBook(book_id);
+					
+					buildBooksTable(books, booksModel);
+				}
+				catch (Exception e) {
+					// Do nothing
+				}
 			}
 		});
 		

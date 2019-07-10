@@ -22,7 +22,7 @@ import word.w2004.elements.Paragraph;
    FileName : "HelloWorld.java". */
 class Main 
 { 
-    // Your program begins with a call to main(). 
+  /*  // Your program begins with a call to main(). 
     // Prints "Hello, World" to the terminal window. 
     public static void main(String args[]) throws ClassNotFoundException 
     { 
@@ -50,5 +50,5 @@ class Main
 			e.printStackTrace();
 		}
         System.out.println("done"); 
-    } 
+    } */
 }
