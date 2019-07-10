@@ -34,13 +34,28 @@ public class UserCollection {
 		if(m_reader.getReaderState()) {
 			this.s_db = this.m_reader.readToList();
 		}
-		this.s_db.add(new Borrower("0", "root", "----", "----", "----", "0"));
-		
+		this.s_db.add(new Manager("0", "root", "----", "----", "----", "0", 0));
+		this.s_db.add(new Borrower("6454", "lidor hadjaj", "my address", "my email", "my phone", "6752"));
+		this.s_db.add(new Borrower("6454", "my asulin", "her address", "her email", "her phone", "12345"));
+	}
+	
+	public User getUser(String userId) 
+	{
+		return s_db.stream()
+				.filter(user -> userId.trim().equals(user.getID()))
+				.findAny()
+				.orElse(null);
 	}
 	
 	public List<User> getAllUsers()
 	{
 		return s_db;
+	}
+	
+	public Boolean deleteUser(String ID)
+	{
+		User userToRemove = getUser(ID);
+		return s_db.remove(userToRemove);
 	}
 	
 	/**

@@ -27,6 +27,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Book.Book;
+import Entities.Borrower;
 import Entities.User;
 import Library.LibraryActionsImpl;
 
@@ -155,7 +156,7 @@ public class MainMenu {
 			new Object[][] {
 			},
 			new String[] {
-					"ID", "Name", "Address", "Email", "Phone"
+					"ID", "Name", "Address", "Email", "Phone", "Utilization"
 			}
 		));
 		
@@ -213,6 +214,19 @@ public class MainMenu {
 		});
 		
 		JButton client_delete_button = new JButton("Delete");
+		client_delete_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String client_id = (String) student_table.getValueAt(student_table.getSelectedRow(), 0);
+					libActions.deleteUser(client_id);
+				}
+				catch (Exception e) {
+					// Do nothing
+				}
+				
+				buildUsersTable(users, usersModel);
+			}
+		});
 		client_delete_button.setBounds(850, 398, 102, 45);
 		client_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
@@ -993,17 +1007,21 @@ public class MainMenu {
 	/*******************************************************************************************************************************************/
 	
 	private void buildUsersTable(ArrayList<User> users, DefaultTableModel model) {
-		Object rowData[]= new Object[5];
+		Object rowData[]= new Object[6];
 		model.setRowCount(0);
 	
 		for(int i = 0; i < users.size(); i++) {
-			rowData[0] = users.get(i).getID();
-			rowData[1] = users.get(i).getName();
-			rowData[2] = users.get(i).getAddress();
-			rowData[3] = users.get(i).getEmail();
-			rowData[4] = users.get(i).getPhoneNumber();
-			
-			model.addRow(rowData);
+			// Only show borrowers
+			if(users.get(i) instanceof Borrower)
+			{
+				rowData[0] = users.get(i).getID();
+				rowData[1] = users.get(i).getName();
+				rowData[2] = users.get(i).getAddress();
+				rowData[3] = users.get(i).getEmail();
+				rowData[4] = users.get(i).getPhoneNumber();
+				rowData[5] = ((Borrower) users.get(i)).getIssuedBooksCount();
+				model.addRow(rowData);
+			}
 		}
 	}
 	

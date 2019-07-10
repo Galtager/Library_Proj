@@ -18,15 +18,25 @@ public class LibraryActionsImpl //implements ILibraryAction
 	// instance to users db
 	private static UserCollection m_users_DB = new UserCollection();
 	
-	
-	
+	/***********************************************************************/
+    				/*            USERS OPERATIONS            */
+	/***********************************************************************/
+
 	//@Override
 	public static List<User> getAllUsers() 
 	{
 		return m_users_DB.getAllUsers();
 	}
 	
+	//@Override
+	public static void deleteUser(String ID) 
+	{
+		m_users_DB.deleteUser(ID);
+	}
 	
+	/***********************************************************************/
+	               /*            BOOKS OPERATIONS            */
+	/***********************************************************************/
 	
 	
 	// Loan or return a book
