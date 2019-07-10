@@ -84,15 +84,15 @@ public class UserCollection {
 		return data;
 	}
 	
-	public List<User> GetUserByCity(String city)
+	public static List<User> GetUserByAdress(String address)
 	{
 		return s_db.stream()
-				.filter(user ->user.getAddress().contains(city))
+				.filter(user ->user.getAddress().contains(address))
 				.collect(Collectors.toList());
 
 	}
 	
-	public List<User> GetUserByName(String name)
+	public static List<User> GetUserByName(String name)
 	{
 		return s_db.stream()
 				.filter(user ->user.getName().contains(name))
@@ -100,8 +100,45 @@ public class UserCollection {
 
 	}
 	
-	
-	
+	private static List<User> GetUserByPhone(String value) {
+		return s_db.stream()
+				.filter(user ->user.getPhoneNumber().contains(value))
+				.collect(Collectors.toList());
+	}
+
+
+	private static List<User> GetUserByEmail(String value) {
+		return s_db.stream()
+				.filter(user ->user.getEmail().contains(value))
+				.collect(Collectors.toList());
+	}
+
+	private static List<User> GetUserByID(String value) {
+		return s_db.stream()
+				.filter(user ->user.getID().contains(value))
+				.collect(Collectors.toList());
+	}
+
+	public static List<User> filterUserList(String filter, String value) {
+		if(filter.compareTo("Name") == 0) {
+			return GetUserByName(value);
+		}
+		else if(filter.compareTo("Address") == 0) {
+			return GetUserByAdress(value);
+		}
+		else if(filter.compareTo("ID") == 0) {
+			return GetUserByID(value);
+		}
+		else if(filter.compareTo("Email") == 0) {
+			return GetUserByEmail(value);
+		}
+		else if(filter.compareTo("Phone") == 0) {
+			return GetUserByPhone(value);
+		}
+		
+		return null;
+	}
+
 	public void writeObject(User u) {
 		this.m_dbWriter.writeObject(u);
 	}
@@ -123,7 +160,5 @@ public class UserCollection {
 		
 		return null;
 	}
-	
-	
 
 }

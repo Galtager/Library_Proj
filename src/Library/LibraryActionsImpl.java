@@ -34,6 +34,11 @@ public class LibraryActionsImpl //implements ILibraryAction
 		m_users_DB.deleteUser(ID);
 	}
 	
+	//@Override
+	public static List<User> filterUsersList(String filterBy, String value){
+		 return UserCollection.filterUserList(filterBy, value);
+	} 
+	
 	/***********************************************************************/
 	               /*            BOOKS OPERATIONS            */
 	/***********************************************************************/
@@ -79,6 +84,7 @@ public class LibraryActionsImpl //implements ILibraryAction
 		return m_books_DB.GetIssuedBooks();
 	}
 	
+	//@Override
 	public static List<Book> filterBookList(String filterBy, String value){
 		 return BookCollection.filterBookList(filterBy, value);
 	} 

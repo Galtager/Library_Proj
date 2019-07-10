@@ -57,6 +57,18 @@ public class MainMenu {
 
 	static private JComboBox books_sort_combobox;
 	
+	static private JComboBox client_filter_comboBox;
+	
+	static private JComboBox client_sort_comboBox;
+	
+	public static JComboBox getClient_sort_comboBox() {
+		return client_sort_comboBox;
+	}
+
+	public static JComboBox getClient_filter_comboBox() {
+		return client_filter_comboBox;
+	}
+
 	public static JComboBox getBooks_sort_combobox() {
 		return books_sort_combobox;
 	}
@@ -160,32 +172,40 @@ public class MainMenu {
 			}
 		));
 		
-		DefaultTableModel usersModel = (DefaultTableModel) student_table.getModel();
-		buildUsersTable(users, usersModel);
 		
-		JScrollPane clients_scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		clients_scroll.setBounds(37, 55, 1079, 305);
+		client_sort_comboBox = new JComboBox();
+		client_sort_comboBox.setBounds(568, 25, 97, 20);
+		client_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
+		
+		client_filter_comboBox = new JComboBox();
+		client_filter_comboBox.setBounds(800, 26, 116, 18);
+		client_filter_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		client_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Name", "ID", "Address", "Email", "Phone"}));
 		
 		client_search_txt = new JTextField();
 		client_search_txt.setBounds(675, 25, 115, 20);
 		client_search_txt.setColumns(10);
 		
-		JComboBox client_filter_comboBox = new JComboBox();
-		client_filter_comboBox.setBounds(800, 26, 116, 18);
-		client_filter_comboBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		client_filter_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Last Name", "First Name", "ID", "City", "Payment", "Utilization ", "Ending Date"}));
+		DefaultTableModel usersModel = (DefaultTableModel) student_table.getModel();
+		buildUsersTable(users, usersModel);
 		
+		JScrollPane clients_scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		clients_scroll.setBounds(37, 55, 1079, 305);
+
+
 		JLabel client_search_lbl = new JLabel(":Search\r\n");
 		client_search_lbl.setBounds(926, 28, 71, 14);
 		client_search_lbl.setBackground(Color.WHITE);
-		
-		JComboBox client_sort_comboBox = new JComboBox();
-		client_sort_comboBox.setBounds(568, 25, 97, 20);
-		client_sort_comboBox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
-		
+
 		JButton client_search_button = new JButton("Search");
 		client_search_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel booksModel = (DefaultTableModel) student_table.getModel();
+				String filterBy = String.valueOf(client_filter_comboBox.getSelectedItem());
+				String value = client_search_txt.getText();
+				users = (ArrayList<User>) LibraryActionsImpl.filterUsersList(filterBy, value);
+				
+				buildUsersTable(users, usersModel);
 			}
 		});
 		client_search_button.setBounds(455, 24, 103, 23);
@@ -1009,6 +1029,17 @@ public class MainMenu {
 	private void buildUsersTable(ArrayList<User> users, DefaultTableModel model) {
 		Object rowData[]= new Object[6];
 		model.setRowCount(0);
+		
+
+		if(String.valueOf(client_sort_comboBox.getSelectedItem()).trim().equals("Ascending"))
+		{
+			Collections.sort(users, new SortAscendingUser());
+		}
+		else
+		{
+			Collections.sort(users, new SortDescendingUser());
+		}
+		
 	
 		for(int i = 0; i < users.size(); i++) {
 			// Only show borrowers
@@ -1026,6 +1057,72 @@ public class MainMenu {
 	}
 	
 	/*******************************************************************************************************************************************/
+	
+	class SortAscendingUser implements Comparator<User> 
+	{ 
+	    public int compare(User a, User b) 
+	    { 
+	    	if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Name"))
+	    	{
+	    		 return a.getName().compareTo(b.getName()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("ID"))
+	    	{
+	    		 return a.getID().compareTo(b.getID()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Address"))
+	    	{
+	    		 return a.getAddress().compareTo(b.getAddress()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Email"))
+	    	{
+	    		 return a.getEmail().compareTo(b.getEmail()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Phone"))
+	    	{
+	    		 return a.getPhoneNumber().compareTo(b.getPhoneNumber());
+	    	}
+	    	else
+	    	{
+	    		return 0;
+	    	}
+	    }
+	} 
+	
+	/*******************************************************************************************************************************************/
+	
+	class SortDescendingUser implements Comparator<User> 
+	{ 
+		public int compare(User a, User b) 
+	    { 
+	    	if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Name"))
+	    	{
+	    		 return b.getName().compareTo(a.getName()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("ID"))
+	    	{
+	    		 return b.getID().compareTo(a.getID()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Address"))
+	    	{
+	    		 return b.getAddress().compareTo(a.getAddress()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Email"))
+	    	{
+	    		 return b.getEmail().compareTo(a.getEmail()); 
+	    	}
+	    	else if(String.valueOf(client_filter_comboBox.getSelectedItem()).trim().equals("Phone"))
+	    	{
+	    		 return b.getPhoneNumber().compareTo(a.getPhoneNumber());
+	    	}
+	    	else
+	    	{
+	    		return 0;
+	    	}
+	    }
+	} 
+	
+	/*******************************************************************************************************************************************/
 
 	/**    INTERNAL BOOKS DISPLAY ACTIONS
 	
@@ -1037,11 +1134,11 @@ public class MainMenu {
 
 		if(String.valueOf(books_sort_combobox.getSelectedItem()).trim().equals("Ascending"))
 		{
-			Collections.sort(books, new SortAscending());
+			Collections.sort(books, new SortAscendingBook());
 		}
 		else
 		{
-			Collections.sort(books, new SortDescending());
+			Collections.sort(books, new SortDescendingBook());
 		}
 		
 		
@@ -1059,7 +1156,7 @@ public class MainMenu {
 	
 	/*******************************************************************************************************************************************/
 	
-	class SortAscending implements Comparator<Book> 
+	class SortAscendingBook implements Comparator<Book> 
 	{ 
 	    public int compare(Book a, Book b) 
 	    { 
@@ -1092,7 +1189,7 @@ public class MainMenu {
 	
 	/*******************************************************************************************************************************************/
 	
-	class SortDescending implements Comparator<Book> 
+	class SortDescendingBook implements Comparator<Book> 
 	{ 
 	    public int compare(Book a, Book b) 
 	    { 
