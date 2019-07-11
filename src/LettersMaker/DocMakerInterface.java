@@ -34,9 +34,8 @@ public interface DocMakerInterface {
     		try
     		{
     			doc.addEle(Paragraph
-		                .with(Image.from_FULL_LOCAL_PATHL(
-		                                Utils.getAppRoot()
-		                                        + Globals.s_global_logo_path).setHeight("40").setWidth("80").create()
+		                .with(Image.from_FULL_LOCAL_PATHL(Globals.s_global_logo_path.trim().replace("\\", "/")).
+		                		setHeight("40").setWidth("80").create()
 		                                .getContent()));
     		}
     		catch (Exception e) {
