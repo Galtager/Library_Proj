@@ -107,5 +107,9 @@ public class LibraryActionsImpl //implements ILibraryAction
 	public static void exportBooksToCSV(File f){
 		BookCollection.exportToCSV(f) ;
 	} 
+	
+	public static void updateBook(Book b) {
+		m_books_DB.updateBook(b);
+	}
 
 }
