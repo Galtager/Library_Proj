@@ -89,6 +89,10 @@ public class Borrower extends User implements Serializable, IEntryToString
 	}
 	
 	
+	public ArrayList<Book> getIssuedBooks() {
+		return this.m_issued_books;
+	}
+	
 	public Date getSubscriptionEndingDate() {
 		return m_subscription_ending_date;
 	}

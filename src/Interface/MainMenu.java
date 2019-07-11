@@ -94,8 +94,7 @@ public class MainMenu {
 	private ClientSearch client_search_form;
 	private JTable books_table;
 	private JTextField book_code_return_text;
-	private JTable table_1;
-	private JTable table_2;
+	private JTable titles_loaned;
 	private JTable table_3;
 	private JTextField student_ID_borrow_textfield;
 	private JTextField student_name_borrow_textfield;
@@ -325,103 +324,22 @@ public class MainMenu {
 		cards.add(borrow_panel, "name_64416355333680");
 		
 
-		table_1 = new JTable();
-		table_1.setForeground(new Color(0, 0, 0));
-		table_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		table_1.setBackground(new Color(255, 255, 255));
-		table_1.setModel(new DefaultTableModel(
+		titles_loaned = new JTable();
+		titles_loaned.setForeground(new Color(0, 0, 0));
+		titles_loaned.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		titles_loaned.setBackground(new Color(255, 255, 255));
+		titles_loaned.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-					"Titles loaned"
+					"ID", "Name", "Author", "Genre", "Publisher", "Release Date"
 			}
 		));
 
-		JScrollPane scrollPane_titlesloaned = new JScrollPane(table_1,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_titlesloaned.setBounds(15, 26, 670, 134);
-		scrollPane_titlesloaned.setViewportView(table_1);
+		JScrollPane scrollPane_titlesloaned = new JScrollPane(titles_loaned,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_titlesloaned.setBounds(15, 37, 670, 134);
+		scrollPane_titlesloaned.setViewportView(titles_loaned);
 		borrow_panel.add(scrollPane_titlesloaned);
-
-		table_2 = new JTable();
-		table_2.setForeground(new Color(0, 0, 0));
-		table_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		table_2.setBackground(new Color(255, 255, 255));
-		table_2.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-					"History of lateness"
-			}
-		));
-		
-		JScrollPane scrollPane_History = new JScrollPane(table_2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_History.setBounds(15, 161, 670, 134);
-		scrollPane_History.setViewportView(table_2);
-		borrow_panel.add(scrollPane_History);
 		
 		table_3 = new JTable();
 		table_3.setForeground(new Color(0, 0, 0));
@@ -531,6 +449,12 @@ public class MainMenu {
 		title_borrow_textfield.setColumns(10);
 		title_borrow_textfield.setBackground(new Color(153, 153, 204));
 		
+		JLabel client_borrowed_lable = new JLabel("Borrowed book for client:");
+		client_borrowed_lable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		client_borrowed_lable.setBackground(new Color(224, 255, 255));
+		client_borrowed_lable.setBounds(15, 11, 214, 23);
+		borrow_panel.add(client_borrowed_lable);
+		
 		JLabel lblTitleName = new JLabel("Title Name");
 		lblTitleName.setBounds(0, 134, 103, 24);
 		panel_borrow1.add(lblTitleName);
@@ -565,6 +489,7 @@ public class MainMenu {
 					}
 					else
 					{
+						buildBooksTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
 				        JOptionPane.showMessageDialog(null, "Book borrowed!", "Info", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
@@ -593,7 +518,11 @@ public class MainMenu {
 					{						
 						temp_borrower_user = temp.get(0);
 						student_name_borrow_textfield.setText(temp.get(0).getName());
-						student_utilization_borrow_textfield.setText(Integer.toString(((Borrower) (temp.get(0))).getIssuedBooksCount()));	
+						student_utilization_borrow_textfield.setText(Integer.toString(((Borrower) (temp.get(0))).getIssuedBooksCount()));
+						((Borrower)temp_borrower_user).getIssuedBooks();
+						
+						client_borrowed_lable.setText("Borrowed book for client:" + " " + temp_borrower_user.getID());
+						buildBooksTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
 					}
 
 			}
@@ -624,8 +553,6 @@ public class MainMenu {
 		book_search_borrow.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
 		book_search_borrow.setBounds(1005, 122, 26, 25);
 		borrow_panel.add(book_search_borrow);
-		
-		
 				
 		JPanel books_panel = new JPanel();
 		books_panel.setLayout(null);
