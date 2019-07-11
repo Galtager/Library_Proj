@@ -22,6 +22,9 @@ public class Book implements IEntryToString, Serializable {
 		BOOK_ID, TITLE, GENER, AUTHOR, PUBLISHER, PUBLISHING_DATE, HOLD_REQUESTS, CURRENT_BORROWER
 	};
 
+	@IPropertyWriter(WriteToReport=false)
+	private static final long serialVersionUID = 3962597590432442915L;
+	
 	@IPropertyWriter(FieldName="BookID")
 	private int m_book_ID;
 	@IPropertyWriter(FieldName="Title")
@@ -128,6 +131,13 @@ public class Book implements IEntryToString, Serializable {
 		this.m_final_return_date = c.getTime();
 		this.m_current_borrower = b;
 	}
+	
+	
+	public void setTitle(String val) { this.m_title = val;}
+	public void setAuthor (String val) {this.m_author = val;}
+	public void setGenre (String val) {this.m_genre = val;}
+	public void setPublisher (String val) {this.m_publisher = val;}
+	public void setPublishDate (Date val ) { this.m_publishing_date = val;}
 
 	/*************** Functionality ***************/
 

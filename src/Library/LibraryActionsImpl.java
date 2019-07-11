@@ -53,6 +53,10 @@ public class LibraryActionsImpl //implements ILibraryAction
 		 UserCollection.exportToCSV(f) ;
 	} 
 	
+	public void updateUser(String id, String name, String addr, String email, String phone, Date endDate) {
+		m_users_DB.updateUser(id, name, addr, email, phone, endDate);
+	}
+	
 	/***********************************************************************/
 	               /*            BOOKS OPERATIONS            */
 	/***********************************************************************/
@@ -98,8 +102,8 @@ public class LibraryActionsImpl //implements ILibraryAction
 		BookCollection.exportToCSV(f) ;
 	} 
 	
-	public static void updateBook(Book b) {
-		m_books_DB.updateBook(b);
+	public static void updateBook(int id, String title, String genre, String author, String publisher, Date publishDate) {
+		m_books_DB.updateBook(id, title, genre, author, publisher, publishDate);
 	}
 
 }

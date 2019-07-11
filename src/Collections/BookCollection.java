@@ -29,7 +29,7 @@ public class BookCollection
 			this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
 			LoadBooks();
 			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			m_dbWriter.writeList(getAsList());
+			m_dbWriter.writeList(s_books);
 			this.m_reportWriter = new ReportWriter<Book>();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -105,7 +105,7 @@ public class BookCollection
 	public boolean addBook(Book b) 
 	{
 		s_books.add(b);
-		this.m_dbWriter.writeList(getAsList());
+		this.m_dbWriter.writeList(s_books);
 		
 		return true;
 	}
@@ -114,15 +114,23 @@ public class BookCollection
 	{
 		Book bookToRemove = getBook(bookId);
 		s_books.remove(bookToRemove);
-		m_dbWriter.writeList(getAsList());
+		m_dbWriter.writeList(s_books);
 		
 		return true;
 		
 	}
 	
-	public boolean updateBook(Book b) {
-		deleteBook(b.getBookID());
+	public boolean updateBook(int id, String title, String genre, String author, String publisher, Date publishDate) {
+		Book b = getBook(id);
+		deleteBook(id);
+		b.setTitle(title);
+		b.setGenre(genre);
+		b.setAuthor(author);
+		b.setPublisher(publisher);
+		b.setPublishDate(publishDate);
+		
 		addBook(b);
+		b = getBook(id);
 		
 		return true;
 	}
@@ -156,10 +164,6 @@ public class BookCollection
 		return null;
 	}
 	
-	
-	public void writeList(ArrayList<Book> data) {
-		this.m_dbWriter.writeList(data);
-	}
 	
 	private static ArrayList<Book> getAsList() {
 		// TODO Auto-generated method stub

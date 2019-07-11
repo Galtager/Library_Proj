@@ -2,6 +2,7 @@ package Collections;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class UserCollection {
 			this.m_reader = new Reader<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
 			initCollection();
 			this.m_dbWriter = new DBWriter<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
-			m_dbWriter.writeList(getAsList());
+			m_dbWriter.writeList(s_db);
 			this.m_reportWriter = new ReportWriter<Person>();
 
 		}catch(Exception e) {
@@ -60,7 +61,7 @@ public class UserCollection {
 	public boolean addUser(User a) 
 	{
 		s_db.add(a);
-		m_dbWriter.writeList(getAsList());
+		m_dbWriter.writeList(s_db);
 		
 		return true;
 	}
@@ -83,17 +84,11 @@ public class UserCollection {
 		User userToRemove = getUser(ID);
 		s_db.remove(userToRemove);
 		
-		m_dbWriter.writeList(getAsList());
+		m_dbWriter.writeList(s_db);
 		
 		return true;
 	}
 	
-	public Boolean updateUser(User u) {
-		deleteUser(u.getID());
-		addUser(u);
-		
-		return true;
-	}
 	
 	/**
 	Try login to system
@@ -178,7 +173,7 @@ public class UserCollection {
 	}
 	
 	public void writeList(ArrayList<User> data) {
-		this.m_dbWriter.writeList(data);
+		this.m_dbWriter.writeList(s_db);
 	}
 	
 	private UserUtilization adjustUserToUtilizationReport(User u) {
@@ -195,6 +190,23 @@ public class UserCollection {
 		temp.addAll(s_db);
 		
 		return temp;
+	}
+	
+	public Boolean updateUser(String id, String name, String addr, String email, String phone, Date endDate) {
+		User u = getUser(id);
+		deleteUser(id);
+		
+		if(u instanceof Borrower) {
+			u.setName(name);
+			u.setAddress(addr);
+			u.setEmail(email);
+			u.setPhone(phone);
+			((Borrower)u).setEndDate(endDate);
+		}
+		
+		addUser(u);
+		
+		return true;
 	}
 	
 }
