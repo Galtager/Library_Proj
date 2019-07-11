@@ -95,7 +95,6 @@ public class MainMenu {
 	private JTable books_table;
 	private JTextField book_code_return_text;
 	private JTable titles_loaned;
-	private JTable table_3;
 	private JTextField student_ID_borrow_textfield;
 	private JTextField student_name_borrow_textfield;
 	private JTextField student_utilization_borrow_textfield;
@@ -337,61 +336,12 @@ public class MainMenu {
 		));
 
 		JScrollPane scrollPane_titlesloaned = new JScrollPane(titles_loaned,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_titlesloaned.setBounds(15, 37, 670, 134);
+		scrollPane_titlesloaned.setBounds(15, 37, 670, 383);
 		scrollPane_titlesloaned.setViewportView(titles_loaned);
 		borrow_panel.add(scrollPane_titlesloaned);
 		
-		table_3 = new JTable();
-		table_3.setForeground(new Color(0, 0, 0));
-		table_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		table_3.setBackground(new Color(255, 255, 255));
-		table_3.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-					"Renewals"
-			}
-		));
-		
-		JScrollPane scrollPane_Renewals = new JScrollPane(table_3,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_Renewals.setBounds(15, 296, 670, 134);
-		scrollPane_Renewals.setViewportView(table_3);
-		borrow_panel.add(scrollPane_Renewals);
-		
 		JPanel panel_borrow1 = new JPanel();
-		panel_borrow1.setBounds(700, 16, 302, 220);
+		panel_borrow1.setBounds(695, 47, 302, 220);
 		panel_borrow1.setBackground(new Color(204, 204, 255)); 
 		borrow_panel.add(panel_borrow1);
 		panel_borrow1.setLayout(null);
@@ -500,7 +450,7 @@ public class MainMenu {
 				}
 			}
 		});
-		internal_borrow_button.setBounds(781, 259, 91, 29);
+		internal_borrow_button.setBounds(788, 319, 91, 29);
 		borrow_panel.add(internal_borrow_button);
 		
 		
@@ -528,7 +478,7 @@ public class MainMenu {
 			}
 		});
 		stuent_search_borrow.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
-		stuent_search_borrow.setBounds(1005, 16, 26, 25);
+		stuent_search_borrow.setBounds(1005, 50, 26, 25);
 		borrow_panel.add(stuent_search_borrow);
 		
 		JButton book_search_borrow = new JButton("");
@@ -551,7 +501,7 @@ public class MainMenu {
 			}
 		});
 		book_search_borrow.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
-		book_search_borrow.setBounds(1005, 122, 26, 25);
+		book_search_borrow.setBounds(1005, 155, 26, 25);
 		borrow_panel.add(book_search_borrow);
 				
 		JPanel books_panel = new JPanel();
@@ -730,6 +680,7 @@ public class MainMenu {
 						if(b != null)
 						{
 							b.unassignBook(a);
+							buildBooksTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
 					        JOptionPane.showMessageDialog(null, "Book free!", "Error", JOptionPane.INFORMATION_MESSAGE);
 
 						}
