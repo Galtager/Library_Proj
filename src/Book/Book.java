@@ -5,12 +5,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import Entities.Borrower;
 import FileHandler.Reader.IEntityParser;
 import FileHandler.Writer.IEntryToString;
 import FileHandler.Writer.IPropertyWriter;
+import Misc.Globals;
 
 public class Book implements IEntryToString, Serializable {
 	enum PropertyIndex {
@@ -29,6 +31,8 @@ public class Book implements IEntryToString, Serializable {
 	private String m_publisher;
 	@IPropertyWriter(FieldName="Publishsing Date")
 	private Date m_publishing_date;
+	
+	private Date m_final_return_date;
 	
 	@IPropertyWriter(FieldName = "Hold Request", WriteToReport=false)
 	private ArrayList<HoldRequest> m_hold_requests;
@@ -50,6 +54,7 @@ public class Book implements IEntryToString, Serializable {
 
 		m_hold_requests = new ArrayList<>();
 		m_current_borrower = null;
+		m_final_return_date = null;
 	}
 	
 	public Book (int id,String title, String genre, String author, String publisher, Date m_publishing_date) {
@@ -89,12 +94,21 @@ public class Book implements IEntryToString, Serializable {
 	public String getPublisher() {
 		return m_publisher;
 	}
+	
+	public Date getReturnDate() {
+		return this.m_final_return_date;
+	}
 
 	public static int getCurrentIdNumber() {
 		return s_current_ID_number;
 	}
 
 	public void setBorrower(Borrower b) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.DAY_OF_MONTH, Globals.days_per_borrow);
+		
+		this.m_final_return_date = c.getTime();
 		this.m_current_borrower = b;
 	}
 

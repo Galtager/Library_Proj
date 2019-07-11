@@ -27,12 +27,16 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.xml.transform.Templates;
 
 import Book.Book;
 import Entities.Borrower;
 import Entities.User;
+import LettersMaker.DelayLetter;
+import LettersMaker.ExpireMaker;
 import Entities.Borrower.book_error_code;
 import Library.LibraryActionsImpl;
 
@@ -42,6 +46,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.JTextField;
+import javax.swing.Renderer;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -307,6 +312,51 @@ public class MainMenu {
 		client_panel.add(client_edit_button);
 		client_panel.add(clients_scroll);
 		
+		JButton btnCreateLetterOf = new JButton("Create Letter Of Expiration");
+		btnCreateLetterOf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser file=new JFileChooser();
+				file.setCurrentDirectory(new File ("user.dir"));
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("*.doc", "doc");
+				file.addChoosableFileFilter(filter);
+				  
+				List<User> temp = null;
+				
+				try
+				{
+					String client_id = (String) student_table.getValueAt(student_table.getSelectedRow(), 0);
+					temp = users.stream().filter(user -> user.getID().equals(client_id)).
+							collect(Collectors.toList());
+				
+				}
+				catch(Exception e1) 
+				{
+				    JOptionPane.showMessageDialog(null, "Select row!", "Info", JOptionPane.ERROR_MESSAGE);
+					    return;
+				}
+				  
+				  int result = file.showSaveDialog(null);
+				  if(result == JFileChooser.APPROVE_OPTION)
+				  {
+					  	File f = file.getSelectedFile();
+						
+						if(temp.size() != 1)
+						{
+					        JOptionPane.showMessageDialog(null, "Error occured", "Info", JOptionPane.ERROR_MESSAGE);
+						}
+						else
+						{
+							ExpireMaker em = new ExpireMaker();
+							em.generate((Borrower) temp.get(0), f);
+							JOptionPane.showMessageDialog(null, "Letter created!", "Info", JOptionPane.INFORMATION_MESSAGE);
+						}
+				  }
+			}
+		});
+		btnCreateLetterOf.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCreateLetterOf.setBounds(455, 398, 173, 45);
+		client_panel.add(btnCreateLetterOf);
+		
 		JPanel borrow_panel = new JPanel();
 		borrow_panel.setLayout(null);
 		borrow_panel.setFocusTraversalKeysEnabled(false);
@@ -323,7 +373,7 @@ public class MainMenu {
 			new Object[][] {
 			},
 			new String[] {
-					"ID", "Name", "Author", "Genre", "Publisher", "Release Date"
+					"ID", "Name", "Author", "Genre", "Publisher", "Release Date", "Final return date"
 			}
 		));
 
@@ -431,7 +481,7 @@ public class MainMenu {
 					}
 					else
 					{
-						buildBooksTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
+						buildBorrowTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
 				        JOptionPane.showMessageDialog(null, "Book borrowed!", "Info", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
@@ -442,7 +492,7 @@ public class MainMenu {
 				}
 			}
 		});
-		internal_borrow_button.setBounds(788, 319, 91, 29);
+		internal_borrow_button.setBounds(705, 278, 91, 29);
 		borrow_panel.add(internal_borrow_button);
 		
 		
@@ -464,7 +514,7 @@ public class MainMenu {
 						((Borrower)temp_borrower_user).getIssuedBooks();
 						
 						client_borrowed_lable.setText("Borrowed book for client:" + " " + temp_borrower_user.getID());
-						buildBooksTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
+						buildBorrowTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
 					}
 
 			}
@@ -495,6 +545,50 @@ public class MainMenu {
 		book_search_borrow.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
 		book_search_borrow.setBounds(1005, 155, 26, 25);
 		borrow_panel.add(book_search_borrow);
+		
+		JButton btnGenerateDelayLetter = new JButton("Generate Delay Letter");
+		btnGenerateDelayLetter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser file=new JFileChooser();
+				file.setCurrentDirectory(new File ("user.dir"));
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("*.doc", "doc");
+				file.addChoosableFileFilter(filter);
+				  
+				List<User> temp = null;
+				
+				try
+				{
+					temp = users.stream().filter(user -> user.getID().equals(student_ID_borrow_textfield.getText())).
+							collect(Collectors.toList());
+				
+				}
+				catch(Exception e1) 
+				{
+				    JOptionPane.showMessageDialog(null, "Select row!", "Info", JOptionPane.ERROR_MESSAGE);
+					    return;
+				}
+				  
+				  int result = file.showSaveDialog(null);
+				  if(result == JFileChooser.APPROVE_OPTION)
+				  {
+					  	File f = file.getSelectedFile();
+						
+						if(temp.size() != 1)
+						{
+					        JOptionPane.showMessageDialog(null, "Error occured", "Info", JOptionPane.ERROR_MESSAGE);
+						}
+						else
+						{
+							DelayLetter dl = new DelayLetter();
+							dl.generate((Borrower) temp.get(0), f);
+							JOptionPane.showMessageDialog(null, "Letter created!", "Info", JOptionPane.INFORMATION_MESSAGE);
+						}
+				  }
+			}
+				
+		});
+		btnGenerateDelayLetter.setBounds(815, 278, 182, 29);
+		borrow_panel.add(btnGenerateDelayLetter);
 				
 		JPanel books_panel = new JPanel();
 		books_panel.setLayout(null);
@@ -970,6 +1064,35 @@ public class MainMenu {
 			rowData[3] = books.get(i).getGenre();
 			rowData[4] = books.get(i).getPublisher();
 			rowData[5] = books.get(i).getPublishingDate();
+			
+			model.addRow(rowData);
+		}
+	}
+	
+	/*******************************************************************************************************************************************/
+	
+	private void buildBorrowTable(ArrayList<Book> books, DefaultTableModel model) {
+		Object rowData[]= new Object[7];
+		model.setRowCount(0);
+
+		if(String.valueOf(books_sort_combobox.getSelectedItem()).trim().equals("Ascending"))
+		{
+			Collections.sort(books, new SortAscendingBook());
+		}
+		else
+		{
+			Collections.sort(books, new SortDescendingBook());
+		}
+		
+		
+		for(int i = 0; i < books.size(); i++) {
+			rowData[0] = books.get(i).getBookID();
+			rowData[1] = books.get(i).getTitle();
+			rowData[2] = books.get(i).getAuthor();
+			rowData[3] = books.get(i).getGenre();
+			rowData[4] = books.get(i).getPublisher();
+			rowData[5] = books.get(i).getPublishingDate();
+			rowData[6] = books.get(i).getReturnDate();
 			
 			model.addRow(rowData);
 		}

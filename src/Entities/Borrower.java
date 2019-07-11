@@ -37,7 +37,7 @@ public class Borrower extends User implements Serializable, IEntryToString
 		c.setTime(new Date());
 		c.add(Calendar.YEAR, 1);
 		
-		m_subscription_ending_date = c.getTime();;
+		m_subscription_ending_date = c.getTime();
 	}
 
 	/***************   Setters   ***************/

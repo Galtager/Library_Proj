@@ -1,5 +1,7 @@
 package LettersMaker;
 
+import java.io.File;
+
 import Entities.Borrower;
 import word.api.interfaces.IDocument;
 import word.w2004.Document2004;
@@ -9,7 +11,8 @@ import word.w2004.elements.Paragraph;
 
 public class DelayLetter implements DocMakerInterface
 {
-	public void generate(Borrower b)
+	@Override
+	public void generate(Borrower b, File f)
 	{
     	IDocument doc = new Document2004();
     	
@@ -28,7 +31,7 @@ public class DelayLetter implements DocMakerInterface
                 .with("You didn't return your book in time." )
                 .create());
         
-        write(doc);
+        write(doc, f);
  
 	}
 

@@ -19,7 +19,7 @@ public interface DocMakerInterface {
 	 * Generates a Word document with the 
 	 * properties of the given borrower
 	 */
-	abstract public void generate(Borrower b);
+	abstract public void generate(Borrower b, File f);
 	
 	/**************************************************************/
 	
@@ -51,11 +51,11 @@ public interface DocMakerInterface {
 	/**
 	 * Write the generated document to a Word file
 	 */
-	default void write(IDocument doc)
+	default void write(IDocument doc, File f)
 	{
         try
         {
-			File file_obj = new File(Globals.s_default_output_path + "/default_doc.doc");
+			File file_obj = f;
 			
 			PrintWriter writer = new PrintWriter(file_obj);
 

@@ -1,6 +1,8 @@
 package LettersMaker;
 
 
+import java.io.File;
+
 import Entities.Borrower;
 import word.api.interfaces.IDocument;
 import word.w2004.Document2004;
@@ -10,14 +12,15 @@ import word.w2004.elements.Paragraph;
 
 public class ExpireMaker implements DocMakerInterface
 {
-	public void generate(Borrower b)
+	@Override
+	public void generate(Borrower b, File f)
 	{
     	IDocument doc = new Document2004();
     	
     	addLogo(doc);
     	
     	/** title **/
-    	doc.addEle(Heading1.with("Letter of dealy").create());
+    	doc.addEle(Heading1.with("Letter of expiration").create());
     	doc.addEle(BreakLine.times(2).create());
     	
     	/** paragraph **/
@@ -26,11 +29,10 @@ public class ExpireMaker implements DocMakerInterface
                 .create());
         
         doc.addEle(Paragraph
-                .with("Your subscription will end on" + "temp")
+                .with("Your subscription will end on: " + b.getSubscriptionEndingDate().toString())
                 .create());
         
         
-        write(doc);
+        write(doc, f);
 	}
-
 }
