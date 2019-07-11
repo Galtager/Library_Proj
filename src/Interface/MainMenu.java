@@ -63,6 +63,10 @@ public class MainMenu {
 	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
 	private ArrayList<User> users = (ArrayList<User>) libActions.getAllUsers();
 	
+	private CardLayout card_layout;
+	JPanel cards;
+
+	
 	private Book temp_borrow_book;
 	private User temp_borrower_user;
 
@@ -101,14 +105,18 @@ public class MainMenu {
 	private JTextField genre_borrow_textfield;
 	private JTextField title_borrow_textfield;
 	private JTextField title_code_borrow_textfield;
-
+	private User current_user;
 
 	/**
 	 * Create the application.
 	 */
-	public MainMenu() {
+	public MainMenu(User logged)
+	{
+		current_user = logged;
 		initialize();
-		}
+		
+		card_layout.show(cards, "name_867170013027560");
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -145,14 +153,19 @@ public class MainMenu {
 		exit_button.setVerticalAlignment(SwingConstants.TOP);
 		exit_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+
+                Component frame = null;
+				int result = JOptionPane.showConfirmDialog(frame, "Are you sure you want to close the application?", "Please Confirm",JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION)
+                	System.exit(0);
+				
 			}
 		});
 		
-		JPanel cards = new JPanel();
+		cards = new JPanel();
 		cards.setBounds(0, 149, 1112, 459);
 		frmLibrary.getContentPane().add(cards);
-		CardLayout card_layout = new CardLayout(0, 0); 
+		card_layout = new CardLayout(0, 0); 
 		cards.setLayout(card_layout);
 		
 		JPanel client_panel = new JPanel();
@@ -217,15 +230,6 @@ public class MainMenu {
 		});
 		student_search_button.setBounds(455, 24, 103, 23);
 		
-		JLabel client_num_lbl = new JLabel("Num of Clients:");
-		client_num_lbl.setBounds(27, 26, 116, 18);
-		client_num_lbl.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		client_num_lbl.setFocusCycleRoot(true);
-		client_num_lbl.setBackground(SystemColor.inactiveCaptionText);
-		
-		JButton client_information_button = new JButton("?\r\n");
-		client_information_button.setBounds(44, 369, 55, 23);
-		
 		JButton client_edit_button = new JButton("Edit");
 		client_edit_button.setBounds(962, 398, 60, 45);
 		client_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -266,10 +270,6 @@ public class MainMenu {
 				}
 			}
 		});
-		
-		JButton client_card_button = new JButton("Card");
-		client_card_button.setBounds(709, 398, 60, 45);
-		client_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		JButton student_card_button = new JButton("Card");
 		student_card_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -295,21 +295,13 @@ public class MainMenu {
 		});
 		client_excel_button.setBounds(639, 398, 60, 45);
 		client_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		
-		JButton client_report_button = new JButton("Report");
-		client_report_button.setBounds(552, 398, 77, 45);
-		client_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		client_panel.setLayout(null);
-		client_panel.add(client_num_lbl);
 		client_panel.add(client_search_button);
 		client_panel.add(client_sort_comboBox);
 		client_panel.add(client_search_txt);
 		client_panel.add(client_filter_comboBox);
 		client_panel.add(client_search_lbl);
-		client_panel.add(client_information_button);
-		client_panel.add(client_report_button);
 		client_panel.add(client_excel_button);
-		client_panel.add(client_card_button);
 		client_panel.add(client_insert_button);
 		client_panel.add(client_delete_button);
 		client_panel.add(client_edit_button);
@@ -511,13 +503,6 @@ public class MainMenu {
 		books_panel.setBackground(new Color(204, 204, 255));
 		cards.add(books_panel, "name_867170013027560");
 		
-		JLabel num_of_books_lable = new JLabel("Num of Books:");
-		num_of_books_lable.setFocusCycleRoot(true);
-		num_of_books_lable.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		num_of_books_lable.setBackground(Color.BLACK);
-		num_of_books_lable.setBounds(27, 26, 116, 18);
-		books_panel.add(num_of_books_lable);
-		
 		books_sort_combobox = new JComboBox();
 		books_sort_combobox.setModel(new DefaultComboBoxModel(new String[] {"Ascending ", "Descending"}));
 		books_sort_combobox.setSelectedIndex(0);
@@ -557,11 +542,6 @@ public class MainMenu {
 		books_search_label.setBounds(926, 28, 71, 14);
 		books_panel.add(books_search_label);
 		
-		JButton books_report_button = new JButton("Report");
-		books_report_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		books_report_button.setBounds(552, 398, 77, 45);
-		books_panel.add(books_report_button);
-		
 		JButton books_excel_button = new JButton("Excel");
 		books_excel_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -580,11 +560,6 @@ public class MainMenu {
 		books_excel_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		books_excel_button.setBounds(639, 398, 60, 45);
 		books_panel.add(books_excel_button);
-		
-		JButton books_card_button = new JButton("Card");
-		books_card_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		books_card_button.setBounds(709, 398, 60, 45);
-		books_panel.add(books_card_button);
 		
 		JButton books_insert_button = new JButton("Insert");
 		books_insert_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -727,7 +702,14 @@ public class MainMenu {
 		JButton clients_button = new JButton("Clients");
 		clients_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card_layout.show(cards, "name_531361761719609");
+				if(current_user instanceof Borrower)
+				{
+			        JOptionPane.showMessageDialog(null, "Can not be accessed by borrowers!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					card_layout.show(cards, "name_531361761719609");
+				}
 			}
 		});
 		clients_button.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -754,7 +736,14 @@ public class MainMenu {
 		JButton borrow_button = new JButton("Borrow");
 		borrow_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card_layout.show(cards, "name_64416355333680");
+				if(current_user instanceof Borrower)
+				{
+			        JOptionPane.showMessageDialog(null, "Can not be accessed by borrowers!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					card_layout.show(cards, "name_64416355333680");
+				}
 			}
 		});
 		borrow_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/\u200F\u200Fsvg-red-circle-left-arrow-icon-1 - \u05E2\u05D5\u05EA\u05E7.png")));
@@ -768,7 +757,14 @@ public class MainMenu {
 		JButton return_button = new JButton("Return");
 		return_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				card_layout.show(cards, "name_1009959647905836");
+				if(current_user instanceof Borrower)
+				{
+			        JOptionPane.showMessageDialog(null, "Can not be accessed by borrowers!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					card_layout.show(cards, "name_1009959647905836");
+				}
 			}
 		});
 		return_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/svg-red-circle-left-arrow-icon-1.png")));
@@ -822,60 +818,22 @@ public class MainMenu {
 				}		
 			}
 		});
-		
-		JButton jb_LibraryInformation = new JButton("Library Information    F1");
-		jb_LibraryInformation.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(jb_LibraryInformation);
-		
-		JButton btnWaitFormFor = new JButton("Wait form for title      F5");
-		btnWaitFormFor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(btnWaitFormFor);
 		jm_Options.add(jb_Settings);
-		
-		JButton btnBackUpTo = new JButton("Back up to a folder     F2");
-		btnBackUpTo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(btnBackUpTo);
-		
-		JButton btnUsers = new JButton("Users                         F3");
-		btnUsers.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(btnUsers);
-		
-		JButton btnSwitchUser = new JButton("Switch user                F4");
-		btnSwitchUser.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(btnSwitchUser);
-		
-		JButton btnImportExcelLists = new JButton("Import Excel Lists       F9");
-		btnImportExcelLists.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(btnImportExcelLists);
-		
-		JButton btnExit = new JButton("Exit                     Ctrl+Q");
-		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                frmLibrary.dispose();
-                }
-        });
-		
-		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Options.add(btnExit);
-		
-		JMenu jm_Edit = new JMenu("Edit");
-		jm_Edit.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		menuBar.add(jm_Edit);
-		
-		JButton btnEditTitleDetails = new JButton("Edit title details                F7");
-		btnEditTitleDetails.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Edit.add(btnEditTitleDetails);
-		
-		JButton btnEditStudentInforamtion = new JButton("Edit student inforamtion   F8");
-		btnEditStudentInforamtion.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		jm_Edit.add(btnEditStudentInforamtion);
 		
 		JMenu jm_Help = new JMenu("Help");
 		jm_Help.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(jm_Help);
 		
 		JButton btnAbout = new JButton("About");
+		btnAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        JOptionPane.showMessageDialog(null, 
+		        		"This library application made by May, Gal, Sapir and Lidor.", 
+		        		"Info",
+		        		JOptionPane.INFORMATION_MESSAGE);
+
+			}
+		});
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jm_Help.add(btnAbout);
 	}

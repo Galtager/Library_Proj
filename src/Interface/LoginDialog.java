@@ -92,7 +92,7 @@ public class LoginDialog extends JDialog {
 							EventQueue.invokeLater(new Runnable() {
 								public void run() {
 									try {
-										MainMenu window = new MainMenu();
+										MainMenu window = new MainMenu(logged);
 										window.frmLibrary.setVisible(true);
 									} catch (Exception e) {
 										e.printStackTrace();
