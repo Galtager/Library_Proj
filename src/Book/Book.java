@@ -32,15 +32,15 @@ public class Book implements IEntryToString, Serializable {
 	@IPropertyWriter(FieldName="Publishsing Date")
 	private Date m_publishing_date;
 	
-	private Date m_final_return_date;
-	
-	@IPropertyWriter(FieldName = "Hold Request", WriteToReport=false)
-	private ArrayList<HoldRequest> m_hold_requests;
 	@IPropertyWriter(FieldName = "Current Borrower ID", WriteToReport=false)
 	private Borrower m_current_borrower;
 
 	@IPropertyWriter(WriteToReport=false)
 	static private int s_current_ID_number = 0;
+	
+	private Date m_final_return_date;
+	private Date m_final_date_till_hold_expires;
+	private Borrower m_hold_requester;
 
 	public Book(String title, String genre, String author, String publisher, Date publishing_date) {
 		s_current_ID_number++;
@@ -52,9 +52,10 @@ public class Book implements IEntryToString, Serializable {
 		m_publisher = publisher;
 		m_publishing_date = publishing_date;
 
-		m_hold_requests = new ArrayList<>();
 		m_current_borrower = null;
 		m_final_return_date = null;
+		
+		m_hold_requester = null;
 	}
 	
 	public Book (int id,String title, String genre, String author, String publisher, Date m_publishing_date) {
@@ -114,23 +115,15 @@ public class Book implements IEntryToString, Serializable {
 
 	/*************** Functionality ***************/
 
-	public void addHoldRequrest(Borrower borrower) {
-		m_hold_requests.add(new HoldRequest(borrower, new Date()));
-	}
-	
-	public Borrower getNextBorrower() {
-		if(m_hold_requests.isEmpty()){
-			return null;
-		}
-		else {
-			HoldRequest holder = m_hold_requests.get(0);
-			m_hold_requests.remove(holder);
-			return holder.getBorrower();
-		}
+	public void addHoldRequrest(Borrower borrower)
+	{
+		m_hold_requester = borrower;
 	}
 
-	public boolean isAvailable() {
-		return (m_current_borrower == null);
+	public boolean isAvailable(Borrower borrower) 
+	{
+		boolean result = (m_current_borrower == null && (m_hold_requester == null || m_hold_requester == borrower)); 
+		return result;
 	}
 
 	@Override
@@ -160,6 +153,10 @@ public class Book implements IEntryToString, Serializable {
 		}
 		
 		return new Book(args[PropertyIndex.TITLE.ordinal()], args[PropertyIndex.GENER.ordinal()], args[PropertyIndex.AUTHOR.ordinal()], args[PropertyIndex.PUBLISHER.ordinal()], publishingDate);
+	}
+
+	public boolean isHoldRequested() {
+		return (m_hold_requester != null);
 	}
 
 }

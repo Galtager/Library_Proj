@@ -56,7 +56,7 @@ public class Borrower extends User implements Serializable, IEntryToString
 			System.out.println("Exceeds amount of books per borrower!");
 			return book_error_code.exceeds_amount_of_books_per_borrower;
 		}
-		else if(!book.isAvailable())
+		else if(!book.isAvailable(this))
 		{
 			System.out.println("Book unavailable");
 			return book_error_code.book_unavailable;

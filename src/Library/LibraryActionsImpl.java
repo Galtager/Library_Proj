@@ -56,16 +56,6 @@ public class LibraryActionsImpl //implements ILibraryAction
 	/***********************************************************************/
 	               /*            BOOKS OPERATIONS            */
 	/***********************************************************************/
-	
-	
-	// Loan or return a book
-	//@Override
-	public static boolean issueBook(Book book, Borrower borrower) 
-	{
-		// TODO Auto-generated method stub
-		return !m_books_DB.IssueBook(book.getBookID(), borrower);
-		
-	}
 
 	//@Override
 	public static void insertBook(String title, String genre, String author, String publisher, Date publishing_date) 

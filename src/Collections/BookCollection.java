@@ -108,16 +108,6 @@ public class BookCollection
 		return s_books.remove(bookToRemove);
 	}
 	
-	public boolean IssueBook(int bookId, Borrower b)
-	{
-		Book bookToReturn = getBook(bookId);
-		bookToReturn.setBorrower(bookToReturn.getNextBorrower());
-		
-		// check for another indication if the book is available!
-		return bookToReturn.isAvailable();
-		
-	}
-	
 	
 	public List<Book> GetIssuedBooks()
 	{

@@ -470,6 +470,12 @@ public class MainMenu {
 			public void actionPerformed(ActionEvent arg0) {
 				if(temp_borrower_user != null && temp_borrow_book != null)
 				{
+					if(temp_borrow_book.getCurrentBorrower() == temp_borrower_user)
+					{
+						 JOptionPane.showMessageDialog(null, "This user alreay owns this book!", "Info", JOptionPane.INFORMATION_MESSAGE);
+						 return;
+					}
+					
 					book_error_code ec = ((Borrower) temp_borrower_user).assignBook(temp_borrow_book); 
 					if(ec == book_error_code.exceeds_amount_of_books_per_borrower)
 					{
@@ -477,7 +483,19 @@ public class MainMenu {
 					}
 					else if(ec == book_error_code.book_unavailable)
 					{
-				        JOptionPane.showMessageDialog(null, "Book unavailable!", "Error", JOptionPane.ERROR_MESSAGE);
+						if(!temp_borrow_book.isHoldRequested())
+						{
+							int dialogButton = JOptionPane.YES_NO_OPTION;
+							int dialogResult = JOptionPane.showConfirmDialog (null, "Book unavailable, create hold request?" ,"Warning",dialogButton);
+							if(dialogResult == JOptionPane.YES_OPTION)
+							{
+								temp_borrow_book.addHoldRequrest((Borrower)temp_borrower_user);
+							}
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Sorry already borrowd and hold requested!", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 					else
 					{
