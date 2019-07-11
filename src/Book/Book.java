@@ -44,8 +44,7 @@ public class Book implements IEntryToString, Serializable {
 	
 	@IPropertyWriter(WriteToReport = false)
 	private static Set<Integer> generated_id = new LinkedHashSet<Integer>();
-	
-	private Date m_final_return_date;
+
 	private Date m_final_date_till_hold_expires;
 	private Borrower m_hold_requester;
 
@@ -65,17 +64,6 @@ public class Book implements IEntryToString, Serializable {
 		m_hold_requester = null;
 	}
 	
-	public Book (int id,String title, String genre, String author, String publisher, Date m_publishing_date) {
-		this.m_book_ID = id;
-		m_title = title;
-		m_genre = genre;
-		m_author = author;
-		m_publisher = publisher;
-		
-		m_hold_requests = new ArrayList<>();
-		m_current_borrower = null;
-		m_final_return_date = null;
-	}
 	
 	private int getNextId() {
 		Random rng = new Random(); 

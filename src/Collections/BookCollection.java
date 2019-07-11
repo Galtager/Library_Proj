@@ -44,6 +44,9 @@ public class BookCollection
 		if(m_reader.getReaderState()) {
 			this.s_books = this.m_reader.readToList();
 		}
+		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "pub1", new Date(System.currentTimeMillis())));
+		s_books.add(new Book("bla1", "bla1", "bla bla", "pub2", new Date(System.currentTimeMillis())));
+		s_books.add(new Book("bla2", "bla2", "bla bla", "pub3", new Date(System.currentTimeMillis())));
 	}
 	
 	// get book by bookId
