@@ -2,7 +2,9 @@ package Collections;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import Book.Book;
@@ -14,17 +16,19 @@ import FileHandler.Writer.ReportWriter;
 import FileHandler.UserReportTemplates.*;
 
 public class UserCollection {
-	private static ArrayList<User> s_db = new ArrayList<User>();
+	private static Set<User> s_db = new LinkedHashSet<User>();
 	private DBWriter<User> m_dbWriter;
 	private static ReportWriter<Person> m_reportWriter;
 	private Reader<User> m_reader;
 	
 	public UserCollection() {
 		try {
-			this.m_dbWriter = new DBWriter<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
 			this.m_reader = new Reader<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
-			this.m_reportWriter = new ReportWriter<Person>();
 			initCollection();
+			this.m_dbWriter = new DBWriter<User>(FileNameDeclrations.DB_PATH, "db_users.ser");
+			m_dbWriter.writeList(getAsList());
+			this.m_reportWriter = new ReportWriter<Person>();
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -44,17 +48,21 @@ public class UserCollection {
 	
 	private void initCollection() throws ClassNotFoundException, IOException {
 		if(m_reader.getReaderState()) {
-			this.s_db = this.m_reader.readToList();
+			this.s_db = this.m_reader.readToSet();
 		}
 		this.s_db.add(new Manager("0", "root", "----", "----", "----", "0", 0));
+		/*
 		this.s_db.add(new Borrower("6452", "semek", "her address", "her email", "her phone", "12345"));
 		this.s_db.add(new Borrower("6453", "lidor hadjaj", "my address", "my email", "my phone", "6752"));
-		this.s_db.add(new Borrower("6454", "may asulin", "her address", "her email", "her phone", "12345"));
+		this.s_db.add(new Borrower("6454", "may asulin", "her address", "her email", "her phone", "12345"));*/
 	}
 	
 	public boolean addUser(User a) 
 	{
-		return s_db.add(a);
+		s_db.add(a);
+		m_dbWriter.writeList(getAsList());
+		
+		return true;
 	}
 	
 	public User getUser(String userId) 
@@ -67,13 +75,24 @@ public class UserCollection {
 	
 	public List<User> getAllUsers()
 	{
-		return s_db;
+		return getAsList();
 	}
 	
 	public Boolean deleteUser(String ID)
 	{
 		User userToRemove = getUser(ID);
-		return s_db.remove(userToRemove);
+		s_db.remove(userToRemove);
+		
+		m_dbWriter.writeList(getAsList());
+		
+		return true;
+	}
+	
+	public Boolean updateUser(User u) {
+		deleteUser(u.getID());
+		addUser(u);
+		
+		return true;
 	}
 	
 	/**
@@ -91,8 +110,9 @@ public class UserCollection {
 	
 	public List<UserUtilization> getUsersUtilization(){
 		List<UserUtilization> data = new ArrayList<UserUtilization>();
-		for(int i = 0; i <= this.s_db.size(); i++) {
-			User u = s_db.get(i);
+		User[] temp = (User[]) s_db.toArray();
+		for(int i = 0; i <= temp.length; i++) {
+			User u = temp[i];
 			UserUtilization userUtilization;
 			if((userUtilization = this.adjustUserToUtilizationReport(u)) != null) {
 				data.add(userUtilization);
@@ -169,4 +189,12 @@ public class UserCollection {
 		return null;
 	}
 
+	private static ArrayList<User> getAsList() {
+		// TODO Auto-generated method stub
+		ArrayList<User> temp = new ArrayList<>();
+		temp.addAll(s_db);
+		
+		return temp;
+	}
+	
 }

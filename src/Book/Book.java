@@ -45,13 +45,17 @@ public class Book implements IEntryToString, Serializable {
 	@IPropertyWriter(WriteToReport = false)
 	private static Set<Integer> generated_id = new LinkedHashSet<Integer>();
 
+	@IPropertyWriter(WriteToReport = false)
 	private Date m_final_date_till_hold_expires;
+	@IPropertyWriter(WriteToReport = false)
 	private Borrower m_hold_requester;
+	@IPropertyWriter(WriteToReport = false)
+	private static Random s_id_range = new Random();
 
 	public Book(String title, String genre, String author, String publisher, Date publishing_date) {
 		s_current_ID_number++;
 
-		m_book_ID = s_current_ID_number;
+		m_book_ID = getNextId();
 		m_title = title;
 		m_genre = genre;
 		m_author = author;
@@ -66,15 +70,17 @@ public class Book implements IEntryToString, Serializable {
 	
 	
 	private int getNextId() {
-		Random rng = new Random(); 
+		 
+		if(s_current_ID_number == 0)
+			return (int) System.currentTimeMillis();
 		while (generated_id.size() < s_current_ID_number)
 		{
-		    Integer next = rng.nextInt(Integer.MAX_VALUE) + 1;
+		    Integer next = s_id_range.nextInt(Integer.MAX_VALUE) + 1;
 		    generated_id.add(next);
 		    return next;
 		}
 		
-		return 0;
+		return (int) System.currentTimeMillis();
 	}
 	/*************** Getters ***************/
 

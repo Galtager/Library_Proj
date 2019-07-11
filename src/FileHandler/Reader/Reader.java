@@ -10,7 +10,9 @@ import java.io.ObjectInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Reader<E>  {
 	protected final String m_path;
@@ -45,6 +47,17 @@ public class Reader<E>  {
 	public ArrayList<E> readToList() throws IOException, ClassNotFoundException{
 		openStreams();
 		ArrayList<E> data = new ArrayList<E>();
+		while (this.fileIn.available() > 0) {
+			data.add(this.readObject());
+		}
+		
+		closeStreams();
+		return data;
+	}
+	
+	public Set<E> readToSet() throws IOException, ClassNotFoundException{
+		openStreams();
+		Set<E> data = new LinkedHashSet<E>();
 		while (this.fileIn.available() > 0) {
 			data.add(this.readObject());
 		}

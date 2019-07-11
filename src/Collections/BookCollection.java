@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import Book.Book;
@@ -17,7 +19,7 @@ import FileHandler.Writer.ReportWriter;
 
 public class BookCollection 
 {
-	private static ArrayList<Book> s_books = new ArrayList<Book>();
+	private static Set<Book> s_books = new LinkedHashSet<Book>();
 	private DBWriter<Book> m_dbWriter;
 	private Reader<Book> m_reader;
 	private static ReportWriter<Book> m_reportWriter;
@@ -27,26 +29,28 @@ public class BookCollection
 			this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
 			LoadBooks();
 			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			m_dbWriter.writeList(s_books);
+			m_dbWriter.writeList(getAsList());
 			this.m_reportWriter = new ReportWriter<Book>();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+
 	public static void exportToCSV(File f ) 
 	{
-		m_reportWriter.writeListToFile(s_books, f);
+		m_reportWriter.writeListToFile(getAsList(), f);
 	}
 	
 	public void LoadBooks() throws ClassNotFoundException, IOException 
 	{
 		if(m_reader.getReaderState()) {
-			this.s_books = this.m_reader.readToList();
+			this.s_books = this.m_reader.readToSet();
 		}
+		/*
 		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "pub1", new Date(System.currentTimeMillis())));
 		s_books.add(new Book("bla1", "bla1", "bla bla", "pub2", new Date(System.currentTimeMillis())));
-		s_books.add(new Book("bla2", "bla2", "bla bla", "pub3", new Date(System.currentTimeMillis())));
+		s_books.add(new Book("bla2", "bla2", "bla bla", "pub3", new Date(System.currentTimeMillis())));*/
 	}
 	
 	// get book by bookId
@@ -95,13 +99,13 @@ public class BookCollection
 	
 	public List<Book> getAllBooks()
 	{
-		return s_books;
+		return getAsList();
 	}
 	
 	public boolean addBook(Book b) 
 	{
 		s_books.add(b);
-		this.m_dbWriter.writeList(s_books);
+		this.m_dbWriter.writeList(getAsList());
 		
 		return true;
 	}
@@ -110,7 +114,7 @@ public class BookCollection
 	{
 		Book bookToRemove = getBook(bookId);
 		s_books.remove(bookToRemove);
-		m_dbWriter.writeList(s_books);
+		m_dbWriter.writeList(getAsList());
 		
 		return true;
 		
@@ -119,7 +123,6 @@ public class BookCollection
 	public boolean updateBook(Book b) {
 		deleteBook(b.getBookID());
 		addBook(b);
-		m_dbWriter.writeList(s_books);
 		
 		return true;
 	}
@@ -157,5 +160,14 @@ public class BookCollection
 	public void writeList(ArrayList<Book> data) {
 		this.m_dbWriter.writeList(data);
 	}
+	
+	private static ArrayList<Book> getAsList() {
+		// TODO Auto-generated method stub
+		ArrayList<Book> temp = new ArrayList<>();
+		temp.addAll(s_books);
+		
+		return temp;
+	}
+
 	
 }

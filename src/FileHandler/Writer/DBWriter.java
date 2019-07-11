@@ -18,19 +18,25 @@ public class DBWriter <E> {
 		this.m_outputStream = new ObjectOutputStream(m_fileOut);
 	}
 	
-	private void writeObject(E entity) {
-		try {
-			this.m_outputStream.writeObject(entity);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void writeObject(E entity) throws IOException {
+		this.m_outputStream.writeObject(entity);
 	}
 	
 	public void writeList (ArrayList<E> data) {
-		for(E entity : data) {
-			this.writeObject(entity);
+		try {
+			clearFileContent();
+			for(E entity : data) {
+				this.writeObject(entity);
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
+		
+
+	}
+	
+	public void clearFileContent() throws IOException {
+		m_outputStream.write(("").getBytes());
 	}
 	
 	public void closeStreams() {
