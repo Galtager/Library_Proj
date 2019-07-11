@@ -24,10 +24,11 @@ public class BookCollection
 	
 	public BookCollection(){
 		try {
-			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
 			this.m_reader = new Reader<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
-			this.m_reportWriter = new ReportWriter<Book>();
 			LoadBooks();
+			this.m_dbWriter = new DBWriter<Book>(FileNameDeclrations.DB_PATH, "db_books.ser");
+			m_dbWriter.writeList(s_books);
+			this.m_reportWriter = new ReportWriter<Book>();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -43,9 +44,6 @@ public class BookCollection
 		if(m_reader.getReaderState()) {
 			this.s_books = this.m_reader.readToList();
 		}
-		s_books.add(new Book("bla", "bla", "bla bla aaaaaaa", "pub1", new Date(System.currentTimeMillis())));
-		s_books.add(new Book("bla1", "bla1", "bla bla", "pub2", new Date(System.currentTimeMillis())));
-		s_books.add(new Book("bla2", "bla2", "bla bla", "pub3", new Date(System.currentTimeMillis())));
 	}
 	
 	// get book by bookId
@@ -99,13 +97,28 @@ public class BookCollection
 	
 	public boolean addBook(Book b) 
 	{
-		return s_books.add(b);
+		s_books.add(b);
+		this.m_dbWriter.writeList(s_books);
+		
+		return true;
 	}
 	
 	public boolean deleteBook(int bookId) 
 	{
 		Book bookToRemove = getBook(bookId);
-		return s_books.remove(bookToRemove);
+		s_books.remove(bookToRemove);
+		m_dbWriter.writeList(s_books);
+		
+		return true;
+		
+	}
+	
+	public boolean updateBook(Book b) {
+		deleteBook(b.getBookID());
+		addBook(b);
+		m_dbWriter.writeList(s_books);
+		
+		return true;
 	}
 	
 	
@@ -137,9 +150,6 @@ public class BookCollection
 		return null;
 	}
 	
-	public void writeObject(Book b) {
-		this.m_dbWriter.writeObject(b);
-	}
 	
 	public void writeList(ArrayList<Book> data) {
 		this.m_dbWriter.writeList(data);

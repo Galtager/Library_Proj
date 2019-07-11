@@ -18,7 +18,7 @@ public class DBWriter <E> {
 		this.m_outputStream = new ObjectOutputStream(m_fileOut);
 	}
 	
-	public void writeObject(E entity) {
+	private void writeObject(E entity) {
 		try {
 			this.m_outputStream.writeObject(entity);
 		} catch (IOException e) {

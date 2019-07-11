@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.Set;
 
 import Entities.Borrower;
 import FileHandler.Reader.IEntityParser;
@@ -31,12 +34,16 @@ public class Book implements IEntryToString, Serializable {
 	private String m_publisher;
 	@IPropertyWriter(FieldName="Publishsing Date")
 	private Date m_publishing_date;
-	
+	@IPropertyWriter(FieldName="Return Date")
+	private Date m_final_return_date;
 	@IPropertyWriter(FieldName = "Current Borrower ID", WriteToReport=false)
 	private Borrower m_current_borrower;
 
 	@IPropertyWriter(WriteToReport=false)
 	static private int s_current_ID_number = 0;
+	
+	@IPropertyWriter(WriteToReport = false)
+	private static Set<Integer> generated_id = new LinkedHashSet<Integer>();
 	
 	private Date m_final_return_date;
 	private Date m_final_date_till_hold_expires;
@@ -64,8 +71,23 @@ public class Book implements IEntryToString, Serializable {
 		m_genre = genre;
 		m_author = author;
 		m_publisher = publisher;
+		
+		m_hold_requests = new ArrayList<>();
+		m_current_borrower = null;
+		m_final_return_date = null;
 	}
 	
+	private int getNextId() {
+		Random rng = new Random(); 
+		while (generated_id.size() < s_current_ID_number)
+		{
+		    Integer next = rng.nextInt(Integer.MAX_VALUE) + 1;
+		    generated_id.add(next);
+		    return next;
+		}
+		
+		return 0;
+	}
 	/*************** Getters ***************/
 
 	public Date getPublishingDate() {
@@ -140,23 +162,10 @@ public class Book implements IEntryToString, Serializable {
 	}
 
 	
-	private static Book parseString(String entity, String seperator) {
-		String args[] = entity.split(seperator);
-		
-		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
-		Date publishingDate = null;
-		try {
-			publishingDate = format.parse(args[PropertyIndex.PUBLISHING_DATE.ordinal()]);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error parsing publishing date");
-		}
-		
-		return new Book(args[PropertyIndex.TITLE.ordinal()], args[PropertyIndex.GENER.ordinal()], args[PropertyIndex.AUTHOR.ordinal()], args[PropertyIndex.PUBLISHER.ordinal()], publishingDate);
-	}
 
 	public boolean isHoldRequested() {
 		return (m_hold_requester != null);
 	}
+
 
 }
