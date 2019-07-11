@@ -14,6 +14,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -26,10 +28,12 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.transform.Templates;
 
 import Book.Book;
 import Entities.Borrower;
 import Entities.User;
+import Entities.Borrower.book_error_code;
 import Library.LibraryActionsImpl;
 
 import javax.swing.ScrollPaneConstants;
@@ -58,6 +62,9 @@ public class MainMenu {
 	private LibraryActionsImpl libActions = new LibraryActionsImpl();
 	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
 	private ArrayList<User> users = (ArrayList<User>) libActions.getAllUsers();
+	
+	private Book temp_borrow_book;
+	private User temp_borrower_user;
 
 	static private JComboBox books_sort_combobox;
 	
@@ -86,24 +93,16 @@ public class MainMenu {
 	private JTextField books_textfield;
 	private ClientSearch client_search_form;
 	private JTable books_table;
-	private JTextField book_code_text;
+	private JTextField book_code_return_text;
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
-	private JTextField student_code_textfield;
-	private JTextField student_name_textfield;
-	private JTextField student_id_textfield;
-	private JTextField student_limit_titles_textfield;
-	private JTextField student_delays_textfield;
-	private JTextField student_not_returned_textfield;
-	private JTextField student_utilization_textfield;
-	private JTextField student_grade_textfield;
-	private JTextField student_end_date_textfield;
-	private JTextField student_days_textfield;
-	private JTextField student_type_textfield;
-	private JTextField student_category_textfield;
-	private JTextField student_title_name_textfield;
-	private JTextField student_title_code_textfield;
+	private JTextField student_ID_borrow_textfield;
+	private JTextField student_name_borrow_textfield;
+	private JTextField student_utilization_borrow_textfield;
+	private JTextField genre_borrow_textfield;
+	private JTextField title_borrow_textfield;
+	private JTextField title_code_borrow_textfield;
 
 
 	/**
@@ -474,16 +473,16 @@ public class MainMenu {
 		borrow_panel.add(scrollPane_Renewals);
 		
 		JPanel panel_borrow1 = new JPanel();
-		panel_borrow1.setBounds(700, 16, 302, 255);
+		panel_borrow1.setBounds(700, 16, 302, 220);
 		panel_borrow1.setBackground(new Color(204, 204, 255)); 
 		borrow_panel.add(panel_borrow1);
 		panel_borrow1.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Student Code");
-		lblNewLabel_1.setBounds(0, 0, 103, 22);
-		lblNewLabel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblNewLabel_1.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblNewLabel_1);
+		JLabel student_id_label = new JLabel("Student ID");
+		student_id_label.setBounds(0, 0, 103, 22);
+		student_id_label.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
+		student_id_label.setBackground(new Color(224, 255, 255));
+		panel_borrow1.add(student_id_label);
 		
 		JLabel lblStudentName = new JLabel("Student name");
 		lblStudentName.setBounds(0, 38, 103, 24);
@@ -491,200 +490,140 @@ public class MainMenu {
 		lblStudentName.setBackground(new Color(224, 255, 255));
 		panel_borrow1.add(lblStudentName);
 		
-		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(0, 66, 103, 20);
-		lblId.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblId.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblId);
-		
-		JLabel lblLimitTitles = new JLabel("Limit titles");
-		lblLimitTitles.setBounds(0, 92, 103, 23);
-		lblLimitTitles.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblLimitTitles.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblLimitTitles);
-		
-		JLabel lblDelays = new JLabel("Delays");
-		lblDelays.setBounds(0, 120, 103, 23);
-		lblDelays.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblDelays.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblDelays);
-		
-		JLabel lblTitlesNotReturned = new JLabel("Titles not returned");
-		lblTitlesNotReturned.setBounds(0, 147, 144, 23);
-		lblTitlesNotReturned.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblTitlesNotReturned.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblTitlesNotReturned);
-		
-		JLabel lblGrade = new JLabel("Grade");
-		lblGrade.setBounds(0, 204, 103, 23);
-		lblGrade.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblGrade.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblGrade);
-		
 		JLabel lblUtilization = new JLabel("Utilization");
-		lblUtilization.setBounds(0, 176, 103, 23);
+		lblUtilization.setBounds(0, 73, 103, 23);
 		lblUtilization.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
 		lblUtilization.setBackground(new Color(224, 255, 255));
 		panel_borrow1.add(lblUtilization);
 		
-		JLabel lblEndDate = new JLabel("End date");
-		lblEndDate.setBounds(0, 231, 103, 23);
-		lblEndDate.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); 
-		lblEndDate.setBackground(new Color(224, 255, 255));
-		panel_borrow1.add(lblEndDate);
+		student_ID_borrow_textfield = new JTextField();
+		student_ID_borrow_textfield.setBounds(147, -1, 146, 25);
+		panel_borrow1.add(student_ID_borrow_textfield);
+		student_ID_borrow_textfield.setColumns(10);
 		
-		student_code_textfield = new JTextField();
-		student_code_textfield.setBounds(147, -1, 146, 25);
-		panel_borrow1.add(student_code_textfield);
-		student_code_textfield.setColumns(10);
+		student_name_borrow_textfield = new JTextField();
+		student_name_borrow_textfield.setBounds(147, 38, 146, 23);
+		student_name_borrow_textfield.setColumns(10);
+		student_name_borrow_textfield.setBackground(new Color(153, 153, 204));
+		panel_borrow1.add(student_name_borrow_textfield);
 		
-		student_name_textfield = new JTextField();
-		student_name_textfield.setBounds(147, 38, 146, 23);
-		student_name_textfield.setColumns(10);
-		student_name_textfield.setBackground(new Color(153, 153, 204));
-		panel_borrow1.add(student_name_textfield);
-		
-		student_id_textfield = new JTextField();
-		student_id_textfield.setColumns(10);
-		student_id_textfield.setBackground(new Color(153, 153, 204));
-		student_id_textfield.setBounds(147, 66, 146, 23);
-		panel_borrow1.add(student_id_textfield);
-		
-		student_limit_titles_textfield = new JTextField();
-		student_limit_titles_textfield.setColumns(10);
-		student_limit_titles_textfield.setBackground(new Color(153, 153, 204));
-		student_limit_titles_textfield.setBounds(147, 93, 146, 23);
-		panel_borrow1.add(student_limit_titles_textfield);
-		
-		student_delays_textfield = new JTextField();
-		student_delays_textfield.setColumns(10);
-		student_delays_textfield.setBackground(new Color(153, 153, 204));
-		student_delays_textfield.setBounds(147, 121, 146, 23);
-		panel_borrow1.add(student_delays_textfield);
-		
-		student_not_returned_textfield = new JTextField();
-		student_not_returned_textfield.setColumns(10);
-		student_not_returned_textfield.setBackground(new Color(153, 153, 204));
-		student_not_returned_textfield.setBounds(147, 148, 146, 23);
-		panel_borrow1.add(student_not_returned_textfield);
-		
-		student_utilization_textfield = new JTextField();
-		student_utilization_textfield.setColumns(10);
-		student_utilization_textfield.setBackground(new Color(153, 153, 204));
-		student_utilization_textfield.setBounds(147, 175, 146, 23);
-		panel_borrow1.add(student_utilization_textfield);
-		
-		student_grade_textfield = new JTextField();
-		student_grade_textfield.setColumns(10);
-		student_grade_textfield.setBackground(new Color(153, 153, 204));
-		student_grade_textfield.setBounds(147, 203, 146, 23);
-		panel_borrow1.add(student_grade_textfield);
-		
-		student_end_date_textfield = new JTextField();
-		student_end_date_textfield.setColumns(10);
-		student_end_date_textfield.setBackground(new Color(153, 153, 204));
-		student_end_date_textfield.setBounds(147, 230, 146, 23);
-		panel_borrow1.add(student_end_date_textfield);
-		
-		JPanel panel_borrow2 = new JPanel();
-		panel_borrow2.setBackground(new Color(204, 204, 255));
-		panel_borrow2.setBounds(700, 274, 302, 159);
-		borrow_panel.add(panel_borrow2);
-		panel_borrow2.setLayout(null);
-		
-		JLabel lblDaysOfBorrow = new JLabel("Days of borrow");
-		lblDaysOfBorrow.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		lblDaysOfBorrow.setBackground(new Color(224, 255, 255));
-		lblDaysOfBorrow.setBounds(0, 130, 132, 24);
-		panel_borrow2.add(lblDaysOfBorrow);
-		
-		student_days_textfield = new JTextField();
-		student_days_textfield.setColumns(10);
-		student_days_textfield.setBackground(new Color(153, 153, 204));
-		student_days_textfield.setBounds(147, 130, 146, 23);
-		panel_borrow2.add(student_days_textfield);
-		
-		student_type_textfield = new JTextField();
-		student_type_textfield.setColumns(10);
-		student_type_textfield.setBackground(new Color(153, 153, 204));
-		student_type_textfield.setBounds(147, 104, 146, 23);
-		panel_borrow2.add(student_type_textfield);
-		
-		JLabel lblTitleType = new JLabel("Title type");
-		lblTitleType.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		lblTitleType.setBackground(new Color(224, 255, 255));
-		lblTitleType.setBounds(0, 104, 103, 24);
-		panel_borrow2.add(lblTitleType);
-		
-		JLabel lblCategory = new JLabel("Category");
-		lblCategory.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		lblCategory.setBackground(new Color(224, 255, 255));
-		lblCategory.setBounds(0, 75, 103, 24);
-		panel_borrow2.add(lblCategory);
-		
-		student_category_textfield = new JTextField();
-		student_category_textfield.setColumns(10);
-		student_category_textfield.setBackground(new Color(153, 153, 204));
-		student_category_textfield.setBounds(147, 75, 146, 23);
-		panel_borrow2.add(student_category_textfield);
-		
-		JLabel lblTitleName = new JLabel("Title Name");
-		lblTitleName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		lblTitleName.setBackground(new Color(224, 255, 255));
-		lblTitleName.setBounds(0, 46, 103, 24);
-		panel_borrow2.add(lblTitleName);
-		
-		student_title_name_textfield = new JTextField();
-		student_title_name_textfield.setColumns(10);
-		student_title_name_textfield.setBackground(new Color(153, 153, 204));
-		student_title_name_textfield.setBounds(147, 46, 146, 23);
-		panel_borrow2.add(student_title_name_textfield);
+		student_utilization_borrow_textfield = new JTextField();
+		student_utilization_borrow_textfield.setColumns(10);
+		student_utilization_borrow_textfield.setBackground(new Color(153, 153, 204));
+		student_utilization_borrow_textfield.setBounds(147, 73, 146, 23);
+		panel_borrow1.add(student_utilization_borrow_textfield);
 		
 		JLabel lblTitleCode = new JLabel("Title Code");
+		lblTitleCode.setBounds(0, 107, 103, 24);
+		panel_borrow1.add(lblTitleCode);
 		lblTitleCode.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		lblTitleCode.setBackground(new Color(224, 255, 255));
-		lblTitleCode.setBounds(0, 19, 103, 24);
-		panel_borrow2.add(lblTitleCode);
 		
-		student_title_code_textfield = new JTextField();
-		student_title_code_textfield.setColumns(10);
-		student_title_code_textfield.setBackground(new Color(255, 255, 255));
-		student_title_code_textfield.setBounds(147, 19, 146, 23);
-		panel_borrow2.add(student_title_code_textfield);
+		title_code_borrow_textfield = new JTextField();
+		title_code_borrow_textfield.setBounds(147, 107, 146, 23);
+		panel_borrow1.add(title_code_borrow_textfield);
+		title_code_borrow_textfield.setColumns(10);
+		title_code_borrow_textfield.setBackground(new Color(255, 255, 255));
 		
-		JLabel lblNewLabel_2 = new JLabel("To execute borrow CTRL+C");
-		lblNewLabel_2.setBounds(83, 0, 210, 20);
-		panel_borrow2.add(lblNewLabel_2);
+		title_borrow_textfield = new JTextField();
+		title_borrow_textfield.setBounds(147, 134, 146, 23);
+		panel_borrow1.add(title_borrow_textfield);
+		title_borrow_textfield.setColumns(10);
+		title_borrow_textfield.setBackground(new Color(153, 153, 204));
+		
+		JLabel lblTitleName = new JLabel("Title Name");
+		lblTitleName.setBounds(0, 134, 103, 24);
+		panel_borrow1.add(lblTitleName);
+		lblTitleName.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblTitleName.setBackground(new Color(224, 255, 255));
+		
+		JLabel lblCategory = new JLabel("Genre");
+		lblCategory.setBounds(0, 163, 103, 24);
+		panel_borrow1.add(lblCategory);
+		lblCategory.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		lblCategory.setBackground(new Color(224, 255, 255));
+		
+		genre_borrow_textfield = new JTextField();
+		genre_borrow_textfield.setBounds(147, 163, 146, 23);
+		panel_borrow1.add(genre_borrow_textfield);
+		genre_borrow_textfield.setColumns(10);
+		genre_borrow_textfield.setBackground(new Color(153, 153, 204));
 		
 		JButton internal_borrow_button = new JButton("Borrow");
-		internal_borrow_button.setBounds(1006, 257, 91, 29);
-		borrow_panel.add(internal_borrow_button);
-		
-		JButton help_button = new JButton("Help");
-		help_button.setBounds(1006, 325, 91, 29);
-		borrow_panel.add(help_button);
-		
-		JButton report_button = new JButton("Report");
-		report_button.setBounds(1006, 291, 91, 29);
-		borrow_panel.add(report_button);
-		
-		
-		JButton button_search = new JButton("");
-		button_search.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try {
-						if(!client_search_form.frmStudentSearch.isVisible())
-						{
-							client_search_form.frmStudentSearch.setVisible(true);
-						}	
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}	
+		internal_borrow_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(temp_borrower_user != null && temp_borrow_book != null)
+				{
+					book_error_code ec = ((Borrower) temp_borrower_user).assignBook(temp_borrow_book); 
+					if(ec == book_error_code.exceeds_amount_of_books_per_borrower)
+					{
+				        JOptionPane.showMessageDialog(null, "Exceeds amount of books per borrower!", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else if(ec == book_error_code.book_unavailable)
+					{
+				        JOptionPane.showMessageDialog(null, "Book unavailable!", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else
+					{
+				        JOptionPane.showMessageDialog(null, "Book borrowed!", "Info", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else
+				{
+			        JOptionPane.showMessageDialog(null, "Must choose user and book!", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
 			}
 		});
-		button_search.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
-		button_search.setBounds(1005, 16, 26, 25);
-		borrow_panel.add(button_search);
+		internal_borrow_button.setBounds(781, 259, 91, 29);
+		borrow_panel.add(internal_borrow_button);
+		
+		
+		JButton stuent_search_borrow = new JButton("");
+		stuent_search_borrow.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					List<User> temp = users.stream().filter(user -> user.getID().equals(student_ID_borrow_textfield.getText().trim())).
+										collect(Collectors.toList());
+					
+					if(temp.size() != 1)
+					{
+				        JOptionPane.showMessageDialog(null, "User doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else
+					{						
+						temp_borrower_user = temp.get(0);
+						student_name_borrow_textfield.setText(temp.get(0).getName());
+						student_utilization_borrow_textfield.setText(Integer.toString(((Borrower) (temp.get(0))).getIssuedBooksCount()));	
+					}
+
+			}
+		});
+		stuent_search_borrow.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
+		stuent_search_borrow.setBounds(1005, 16, 26, 25);
+		borrow_panel.add(stuent_search_borrow);
+		
+		JButton book_search_borrow = new JButton("");
+		book_search_borrow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				List<Book> temp = books.stream().filter(book -> String.valueOf(book.getBookID()).equals(title_code_borrow_textfield.getText().trim())).
+						collect(Collectors.toList());
+				
+				if(temp.size() != 1)
+				{
+			        JOptionPane.showMessageDialog(null, "Book doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					temp_borrow_book = temp.get(0);
+					title_borrow_textfield.setText(temp.get(0).getTitle());
+					genre_borrow_textfield.setText(temp.get(0).getGenre());
+				}
+				
+			}
+		});
+		book_search_borrow.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/binoculars.png")));
+		book_search_borrow.setBounds(1005, 122, 26, 25);
+		borrow_panel.add(book_search_borrow);
 		
 		
 				
@@ -846,6 +785,35 @@ public class MainMenu {
 		cards.add(return_panel, "name_1009959647905836");
 		
 		JButton return_book_button = new JButton("Return");
+		return_book_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(book_code_return_text.getText() != null)
+				{
+					List<Book> temp = books.stream().filter(book -> String.valueOf(book.getBookID()).equals(book_code_return_text.getText().trim())).
+							collect(Collectors.toList());
+
+					if(temp.size() != 1)
+					{
+				        JOptionPane.showMessageDialog(null, "Book doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else
+					{
+						Book a = temp.get(0);
+						Borrower b = a.getCurrentBorrower();
+						if(b != null)
+						{
+							b.unassignBook(a);
+					        JOptionPane.showMessageDialog(null, "Book free!", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+						}
+						else
+						{
+					        JOptionPane.showMessageDialog(null, "This book belong to no one!", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}
+			}
+		});
 		return_book_button.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		return_book_button.setBounds(494, 161, 102, 45);
 		return_panel.add(return_book_button);
@@ -855,7 +823,7 @@ public class MainMenu {
 		book_code_lable.setBounds(343, 127, 102, 20);
 		return_panel.add(book_code_lable);
 		
-		book_code_text = new JTextField() {
+		book_code_return_text = new JTextField() {
 			 public void processKeyEvent(KeyEvent ev) {
 				    char c = ev.getKeyChar();
 				    try {
@@ -870,21 +838,13 @@ public class MainMenu {
 				    }
 				  }
 		};
-		book_code_text.setBounds(441, 130, 229, 20);
-		return_panel.add(book_code_text);
-		book_code_text.setColumns(10);
+		book_code_return_text.setBounds(441, 130, 229, 20);
+		return_panel.add(book_code_return_text);
+		book_code_return_text.setColumns(10);
 		exit_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/red-delete-button-png-5.png")));
 		exit_button.setBackground(Color.LIGHT_GRAY);
 		exit_button.setBounds(10, 11, 100, 127);
 		frmLibrary.getContentPane().add(exit_button);
-		
-		JButton search_button = new JButton("Search");
-		search_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		search_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		search_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/search-icon-clip-art_299613.png")));
-		search_button.setBackground(Color.LIGHT_GRAY);
-		search_button.setBounds(974, 11, 100, 127);
-		frmLibrary.getContentPane().add(search_button);
 		
 		JButton clients_button = new JButton("Clients");
 		clients_button.addActionListener(new ActionListener() {
@@ -896,7 +856,7 @@ public class MainMenu {
 		clients_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		clients_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/-human-male-man-people-person-profile-red-user-icon--icon--23.png")));
 		clients_button.setBackground(Color.LIGHT_GRAY);
-		clients_button.setBounds(864, 11, 100, 127);
+		clients_button.setBounds(996, 11, 100, 127);
 		frmLibrary.getContentPane().add(clients_button);
 		
 		JButton books_button = new JButton("Books");
@@ -910,7 +870,7 @@ public class MainMenu {
 		books_button.setVerticalAlignment(SwingConstants.TOP);
 		books_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/books-icon--circle-iconset--martz90-18.png")));
 		books_button.setBackground(Color.LIGHT_GRAY);
-		books_button.setBounds(754, 11, 100, 127);
+		books_button.setBounds(886, 11, 100, 127);
 		frmLibrary.getContentPane().add(books_button);
 		
 		JButton borrow_button = new JButton("Borrow");
@@ -924,7 +884,7 @@ public class MainMenu {
 		borrow_button.setVerticalAlignment(SwingConstants.TOP);
 		borrow_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		borrow_button.setBackground(Color.LIGHT_GRAY);
-		borrow_button.setBounds(644, 11, 100, 127);
+		borrow_button.setBounds(776, 11, 100, 127);
 		frmLibrary.getContentPane().add(borrow_button);
 		
 		JButton return_button = new JButton("Return");
@@ -938,17 +898,8 @@ public class MainMenu {
 		return_button.setVerticalTextPosition(SwingConstants.BOTTOM);
 		return_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		return_button.setBackground(Color.LIGHT_GRAY);
-		return_button.setBounds(534, 11, 100, 127);
+		return_button.setBounds(666, 11, 100, 127);
 		frmLibrary.getContentPane().add(return_button);
-		
-		JButton home_button = new JButton("Return");
-		home_button.setIcon(new ImageIcon(MainMenu.class.getResource("/Interface/ndldl-th.png")));
-		home_button.setVerticalTextPosition(SwingConstants.BOTTOM);
-		home_button.setVerticalAlignment(SwingConstants.TOP);
-		home_button.setHorizontalTextPosition(SwingConstants.CENTER);
-		home_button.setBackground(Color.LIGHT_GRAY);
-		home_button.setBounds(424, 11, 100, 127);
-		frmLibrary.getContentPane().add(home_button);
 		
 		JButton lock_button = new JButton("Lock");
 		lock_button.addActionListener(new ActionListener() {
@@ -968,7 +919,7 @@ public class MainMenu {
 		lock_button.setVerticalAlignment(SwingConstants.TOP);
 		lock_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		lock_button.setBackground(Color.LIGHT_GRAY);
-		lock_button.setBounds(314, 11, 100, 127);
+		lock_button.setBounds(120, 11, 100, 127);
 		frmLibrary.getContentPane().add(lock_button);
 		
 		JMenuBar menuBar = new JMenuBar();

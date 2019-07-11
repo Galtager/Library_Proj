@@ -11,6 +11,12 @@ import FileHandler.Writer.IEntryToString;
 
 public class Borrower extends User implements Serializable, IEntryToString
 {
+	public enum book_error_code {
+		  book_unavailable,
+		  exceeds_amount_of_books_per_borrower,
+		  ok
+		}
+	
 	static private int s_max_books_issued = 1;
 
 	private ArrayList<Book> m_issued_books;
@@ -43,31 +49,38 @@ public class Borrower extends User implements Serializable, IEntryToString
 	
 	/***************   Functionality   ***************/
 
-	public void assignBook(Book book)
+	public book_error_code assignBook(Book book)
 	{
 		if(m_issued_books.size() > s_max_books_issued)
 		{
 			System.out.println("Exceeds amount of books per borrower!");
+			return book_error_code.exceeds_amount_of_books_per_borrower;
 		}
 		else if(!book.isAvailable())
 		{
 			System.out.println("Book unavailable");
+			return book_error_code.book_unavailable;
 		}
 		else
 		{
-			m_issued_books.add(book);	 
+			book.setBorrower(this);
+			m_issued_books.add(book);
+			return book_error_code.ok;
 		}
 	}
 	
-	public void unassignBook(Book book)
+	public book_error_code unassignBook(Book book)
 	{
 		if(m_issued_books.contains(book))
 		{
+			book.setBorrower(null);
 			m_issued_books.remove(book);
+			return book_error_code.ok;
 		}
 		else
 		{
-			System.out.println("Exceeds amount of books per borrower!"); 
+			System.out.println("This book doesnt exist for this borrower"); 
+			return book_error_code.book_unavailable;
 		}
 	}
 	
