@@ -524,7 +524,7 @@ public class MainMenu {
 					{
 				        JOptionPane.showMessageDialog(null, "User doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
 					}
-					else
+					else if(temp.get(0) instanceof Borrower)
 					{						
 						temp_borrower_user = temp.get(0);
 						student_name_borrow_textfield.setText(temp.get(0).getName());
@@ -533,6 +533,10 @@ public class MainMenu {
 						
 						client_borrowed_lable.setText("Borrowed book for client:" + " " + temp_borrower_user.getID());
 						buildBorrowTable(((Borrower)temp_borrower_user).getIssuedBooks(), ((DefaultTableModel) titles_loaned.getModel()));
+					}
+					else
+					{
+				        JOptionPane.showMessageDialog(null, "You can't watch this kind of user!", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 			}
