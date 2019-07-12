@@ -59,8 +59,8 @@ public class MainMenu {
 	private ClientRegistration cr;
 	private InsertBooks ib;
 	private LibraryActionsImpl libActions = new LibraryActionsImpl();
-	private ArrayList<Book> books = (ArrayList<Book>) libActions.getAllBooks();
-	private ArrayList<User> users = (ArrayList<User>) libActions.getAllUsers();
+	private ArrayList<Book> books = (ArrayList<Book>) LibraryActionsImpl.getAllBooks();
+	private ArrayList<User> users = (ArrayList<User>) LibraryActionsImpl.getAllUsers();
 	
 	private CardLayout card_layout;
 	JPanel cards;
@@ -374,7 +374,7 @@ public class MainMenu {
 		JPanel borrow_panel = new JPanel();
 		borrow_panel.setLayout(null);
 		borrow_panel.setFocusTraversalKeysEnabled(false);
-		borrow_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "borrow", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		borrow_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Borrow", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		borrow_panel.setBackground(new Color(204, 204, 255));
 		cards.add(borrow_panel, "name_64416355333680");
 		
@@ -629,7 +629,7 @@ public class MainMenu {
 		JPanel books_panel = new JPanel();
 		books_panel.setLayout(null);
 		books_panel.setFocusTraversalKeysEnabled(false);
-		books_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		books_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Books", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		books_panel.setBackground(new Color(204, 204, 255));
 		cards.add(books_panel, "name_867170013027560");
 		
@@ -697,6 +697,13 @@ public class MainMenu {
 		books_panel.add(books_insert_button);
 		books_insert_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(current_user instanceof Borrower)
+				{
+			        JOptionPane.showMessageDialog(null, "Can not be accessed by borrowers!", "Error", JOptionPane.ERROR_MESSAGE);
+			        return;
+				}
+				
 				try {
 					if(!ib.frmInsertBooks.isVisible())
 					{
@@ -738,6 +745,12 @@ public class MainMenu {
 		books_delete_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				if(current_user instanceof Borrower)
+				{
+			        JOptionPane.showMessageDialog(null, "Can not be accessed by borrowers!", "Error", JOptionPane.ERROR_MESSAGE);
+			        return;
+				}
+				
 				try {
 					int book_id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
 					libActions.deleteBook(book_id);
@@ -763,6 +776,12 @@ public class MainMenu {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(current_user instanceof Borrower)
+				{
+			        JOptionPane.showMessageDialog(null, "Can not be accessed by borrowers!", "Error", JOptionPane.ERROR_MESSAGE);
+			        return;
+				}
+				
 				try {
 					int id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
 					String title = (String)books_table.getValueAt(books_table.getSelectedRow(), 1);
@@ -771,7 +790,7 @@ public class MainMenu {
 					String publisher = (String)books_table.getValueAt(books_table.getSelectedRow(), 4);
 					Date publishDate = (Date)books_table.getValueAt(books_table.getSelectedRow(), 5);
 					
-					libActions.updateBook(id, title, genre, author, publisher, publishDate);
+					LibraryActionsImpl.updateBook(id, title, genre, author, publisher, publishDate);
 					
 					
 				}
@@ -779,7 +798,7 @@ public class MainMenu {
 					// Do nothing
 				}
 				
-				books = (ArrayList<Book>) libActions.getAllBooks();
+				books = (ArrayList<Book>) LibraryActionsImpl.getAllBooks();
 				buildBooksTable(books, booksModel);
 				
 			}
@@ -790,7 +809,7 @@ public class MainMenu {
 		JPanel return_panel = new JPanel();
 		return_panel.setLayout(null);
 		return_panel.setFocusTraversalKeysEnabled(false);
-		return_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Client", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		return_panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Return", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		return_panel.setBackground(new Color(204, 204, 255));
 		cards.add(return_panel, "name_1009959647905836");
 		
