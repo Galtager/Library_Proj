@@ -4,7 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import word.api.interfaces.IDocument;
 import word.utils.TestUtils;
 import word.w2004.elements.HyperLink;
 

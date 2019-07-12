@@ -3,7 +3,6 @@ package Collections;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import Book.Book;
-import Entities.Borrower;
 import FileHandler.FileNameDeclrations;
 import FileHandler.Reader.Reader;
 import FileHandler.Writer.DBWriter;

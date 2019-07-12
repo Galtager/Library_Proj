@@ -10,7 +10,7 @@ import Collections.UserCollection;
 import Entities.Borrower;
 import Entities.User;
 
-public class LibraryActionsImpl //implements ILibraryAction 
+public class LibraryActionsImpl
 {
 
 	// instance to books db
@@ -40,7 +40,7 @@ public class LibraryActionsImpl //implements ILibraryAction
 	//@Override
 	public static void deleteUser(String ID) 
 	{
-		boolean a = m_users_DB.deleteUser(ID);
+		m_users_DB.deleteUser(ID);
 	}
 	
 	//@Override

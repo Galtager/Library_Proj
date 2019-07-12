@@ -3,13 +3,10 @@ package LettersMaker;
 import java.awt.Component;
 import java.io.File;
 import java.io.PrintWriter;
-
 import javax.swing.JOptionPane;
-
 import Entities.Borrower;
 import Misc.Globals;
 import word.api.interfaces.IDocument;
-import word.utils.Utils;
 import word.w2004.elements.Image;
 import word.w2004.elements.Paragraph;
 

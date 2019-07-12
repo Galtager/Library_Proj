@@ -1,10 +1,6 @@
 package Book;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -12,7 +8,6 @@ import java.util.Random;
 import java.util.Set;
 
 import Entities.Borrower;
-import FileHandler.Reader.IEntityParser;
 import FileHandler.Writer.IEntryToString;
 import FileHandler.Writer.IPropertyWriter;
 import Misc.Globals;

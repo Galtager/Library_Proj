@@ -1,13 +1,10 @@
 package Interface;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import java.awt.Rectangle;
-import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -17,24 +14,11 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
-import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import java.awt.ComponentOrientation;
 import javax.swing.UIManager;
 import com.toedter.calendar.JDateChooser;
 

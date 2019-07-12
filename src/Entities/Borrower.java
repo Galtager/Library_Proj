@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import Book.Book;
-import Book.HoldRequest;
 import FileHandler.Writer.IEntryToString;
 
 public class Borrower extends User implements Serializable, IEntryToString
@@ -22,7 +20,6 @@ public class Borrower extends User implements Serializable, IEntryToString
 	static private int s_max_books_issued = 1;
 
 	private ArrayList<Book> m_issued_books;
-	private ArrayList<HoldRequest> m_hold_requests;
 	
 	private Date m_subscription_ending_date;
 
@@ -33,7 +30,6 @@ public class Borrower extends User implements Serializable, IEntryToString
 		super(id, name, address, email, phone_no, password);
 		
 		m_issued_books = new ArrayList<>();
-		m_hold_requests = new ArrayList<>();
 		
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
@@ -90,7 +86,7 @@ public class Borrower extends User implements Serializable, IEntryToString
 	}
 	
 	public int getMaxIssuedBooks() {
-		return this.s_max_books_issued;
+		return Borrower.s_max_books_issued;
 	}
 	
 	
