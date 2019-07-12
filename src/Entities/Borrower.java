@@ -17,6 +17,8 @@ public class Borrower extends User implements Serializable, IEntryToString
 		  ok
 		}
 	
+	private static final long serialVersionUID = -5883461664455534214L;
+	
 	static private int s_max_books_issued = 1;
 
 	private ArrayList<Book> m_issued_books;
@@ -46,6 +48,9 @@ public class Borrower extends User implements Serializable, IEntryToString
 	{
 		s_max_books_issued = max_books_issued;
 	}
+	
+	public void setEndDate(Date val) {this.m_subscription_ending_date = val;}
+	
 	
 	/***************   Functionality   ***************/
 

@@ -11,9 +11,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
@@ -38,6 +41,8 @@ import Entities.User;
 import LettersMaker.DelayLetter;
 import LettersMaker.ExpireMaker;
 import Entities.Borrower.book_error_code;
+import Interface.TableModels.NoIdEditTableModel;
+import Interface.TableModels.NoIdUtilEditTableModel;
 import Library.LibraryActionsImpl;
 
 import javax.swing.ScrollPaneConstants;
@@ -183,7 +188,7 @@ public class MainMenu {
 		student_table.setForeground(new Color(0, 0, 0));
 		student_table.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		student_table.setBackground(new Color(255, 255, 255));
-		student_table.setModel(new DefaultTableModel(
+		student_table.setModel(new NoIdUtilEditTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -205,7 +210,7 @@ public class MainMenu {
 		client_search_txt.setBounds(675, 25, 115, 20);
 		client_search_txt.setColumns(10);
 		
-		DefaultTableModel usersModel = (DefaultTableModel) student_table.getModel();
+		DefaultTableModel usersModel = (NoIdUtilEditTableModel) student_table.getModel();
 		buildUsersTable(users, usersModel);
 		
 		JScrollPane clients_scroll = new JScrollPane(student_table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -219,7 +224,7 @@ public class MainMenu {
 		JButton client_search_button = new JButton("Search");
 		client_search_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel booksModel = (DefaultTableModel) student_table.getModel();
+				DefaultTableModel booksModel = (NoIdUtilEditTableModel) student_table.getModel();
 				String filterBy = String.valueOf(client_filter_comboBox.getSelectedItem());
 				String value = client_search_txt.getText();
 				users = (ArrayList<User>) LibraryActionsImpl.filterUsersList(filterBy, value);
@@ -240,6 +245,26 @@ public class MainMenu {
 		client_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		client_edit_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel clientModel = (NoIdUtilEditTableModel) student_table.getModel();
+				try {
+					String id = (String) student_table.getValueAt(student_table.getSelectedRow(), 0);
+					String name = (String)student_table.getValueAt(student_table.getSelectedRow(), 1);
+					String addr = (String)student_table.getValueAt(student_table.getSelectedRow(), 2);
+					String email = (String)student_table.getValueAt(student_table.getSelectedRow(), 3);
+					String phone = (String)student_table.getValueAt(student_table.getSelectedRow(), 4);
+					Date endDate = (Date)student_table.getValueAt(student_table.getSelectedRow(), 6);
+					
+					libActions.updateUser(id, name, addr, email, phone, endDate);
+					
+					
+				}
+				catch (Exception e1) {
+					// Do nothing
+				}
+				
+				users = (ArrayList<User>) libActions.getAllUsers();
+				buildUsersTable(users, clientModel);
+				
 			}
 		});
 		
@@ -369,7 +394,7 @@ public class MainMenu {
 		titles_loaned.setForeground(new Color(0, 0, 0));
 		titles_loaned.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		titles_loaned.setBackground(new Color(255, 255, 255));
-		titles_loaned.setModel(new DefaultTableModel(
+		titles_loaned.setModel(new NoIdEditTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -694,17 +719,13 @@ public class MainMenu {
 			}
 			}});
 		
-		JButton books_edit_button = new JButton("Edit");
-		books_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		books_edit_button.setBounds(962, 398, 60, 45);
-		books_panel.add(books_edit_button);
 		
 		JScrollPane books_scroll = new JScrollPane((Component) null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		books_scroll.setBounds(27, 58, 1079, 305);
 		books_panel.add(books_scroll);
 		
 		books_table = new JTable();
-		books_table.setModel(new DefaultTableModel(
+		books_table.setModel(new NoIdEditTableModel(
 				new Object[][] {
 				},
 				new String[] {
@@ -743,6 +764,38 @@ public class MainMenu {
 		
 		books_delete_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		books_delete_button.setBounds(850, 398, 102, 45);
+		
+		JButton books_edit_button = new JButton("Edit");
+		books_edit_button.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		books_edit_button.setBounds(962, 398, 60, 45);
+		books_panel.add(books_edit_button);
+		
+		books_edit_button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int id = (int) books_table.getValueAt(books_table.getSelectedRow(), 0);
+					String title = (String)books_table.getValueAt(books_table.getSelectedRow(), 1);
+					String author = (String)books_table.getValueAt(books_table.getSelectedRow(), 2);
+					String genre = (String)books_table.getValueAt(books_table.getSelectedRow(), 3);
+					String publisher = (String)books_table.getValueAt(books_table.getSelectedRow(), 4);
+					Date publishDate = (Date)books_table.getValueAt(books_table.getSelectedRow(), 5);
+					
+					libActions.updateBook(id, title, genre, author, publisher, publishDate);
+					
+					
+				}
+				catch (Exception e1) {
+					// Do nothing
+				}
+				
+				books = (ArrayList<Book>) libActions.getAllBooks();
+				buildBooksTable(books, booksModel);
+				
+			}
+		});
+		
 		books_panel.add(books_delete_button);
 		
 		JPanel return_panel = new JPanel();
@@ -987,7 +1040,7 @@ public class MainMenu {
 				rowData[3] = users.get(i).getEmail();
 				rowData[4] = users.get(i).getPhoneNumber();
 				rowData[5] = ((Borrower) users.get(i)).getIssuedBooksCount();
-				rowData[6] = ((Borrower) users.get(i)).getSubscriptionEndingDate().toString();
+				rowData[6] = ((Borrower) users.get(i)).getSubscriptionEndingDate();
 				model.addRow(rowData);
 			}
 		}
