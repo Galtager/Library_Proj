@@ -973,7 +973,7 @@ public class MainMenu {
 		menuBar.add(jm_Options);
 		
 		
-		JButton jb_Settings = new JButton("Settings                     F6");
+		JButton jb_Settings = new JButton("Settings");
 		jb_Settings.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		jb_Settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

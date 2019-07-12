@@ -32,7 +32,6 @@ public class SystemSettings {
 
 	JFrame frameClass;
 	private JTextField JTextFiel_Path;
-	private JLabel jLable1;
 	byte[] image;
 	String imagepath="";
 	ImageIcon myimage;
@@ -103,7 +102,7 @@ public class SystemSettings {
 		jb_Save1.setBounds(786, 365, 75, 33);
 		jb_Save1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Globals.days_per_borrow = Integer.parseInt(jtf_LoanDaysValue.getText());
+				Globals.days_per_borrow = Integer.parseInt(jtf_LoanDaysValue.getText().replace(",", ""));
 			}
 		});
 		jb_Save1.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -121,41 +120,7 @@ public class SystemSettings {
 		Tab_SystemOptions.add(jtf_LoanDaysValue);
 		Tab_SystemOptions.add(jb_Close1);
 		Tab_SystemOptions.add(jb_Save1);
-		
-		JPanel Tab_DeleteData = new JPanel();
-		Tab_DeleteData.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tabbedPane.addTab("Delete Data", null, Tab_DeleteData, null);
-		Tab_DeleteData.setLayout(null);
-		
-		JCheckBox chckbx_DeleteTitels = new JCheckBox("Deleting titles");
-		chckbx_DeleteTitels.setBounds(192, 135, 407, 33);
-		chckbx_DeleteTitels.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		Tab_DeleteData.add(chckbx_DeleteTitels);
-		
-		JCheckBox chckbx_DelStudAndBorrow = new JCheckBox("Delete students and borrow books");
-		chckbx_DelStudAndBorrow.setBounds(192, 49, 407, 33);
-		chckbx_DelStudAndBorrow.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		Tab_DeleteData.add(chckbx_DelStudAndBorrow);
-		
-		JButton btn_Delete2 = new JButton("Delete");
-		btn_Delete2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btn_Delete2.setBounds(321, 255, 128, 33);
-		Tab_DeleteData.add(btn_Delete2);
-		
-		JButton jb_Save3 = new JButton("Save");
-		jb_Save3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jb_Save3.setBounds(786, 365, 75, 33);
-		Tab_DeleteData.add(jb_Save3);
-		
-		JButton jb_Close3 = new JButton("Close");
-		jb_Close3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		jb_Close3.setBounds(690, 365, 81, 33);
-		jb_Close3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                frameClass.dispose();
-                }
-        });
-		Tab_DeleteData.add(jb_Close3);
+	
 		
 		JPanel Tab_Logo = new JPanel();
 		tabbedPane.addTab("Logo", null, Tab_Logo, null);
